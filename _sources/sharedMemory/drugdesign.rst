@@ -1,15 +1,19 @@
 1.5 Real World Problem - Drug Design
 -------------------------------------
 
-Let's look at a larger example. An important problem in the biological sciences is that of drug design. The goal is to find small molecules, called ligands, that are good candidates for use as drugs.
+Let's look at a larger example. An important problem in the biological sciences is that of drug design. The goal is to find small molecules, called *ligands*, that are good candidates for use in drugs.
 
-This is a very rough simulation of a program to compute how well a set of short protein *ligands* (each a possible drug) matches a given longer protein string. In the real software programs that do this, the matching is quite sophisticated, targeting possible 'receptor' sites on the protein.
+   **The biology of drug design**
+   
+   The proteins in our bodies have particular shapes that enable them to carry out the processes we need to live.  Each protein consist of a long sequence of biological material, called *amino acids*, that naturally folds into a particular three-dimensional shape, according to the type of that protein.  A disease may arise if something goes wrong with the shape of a type of protein.  Ligands are shorter sequences of amino acids that fold into their own shapes.  If a ligand can be discovered that *binds* (fits) into a target protein in order to change that protein's shape in a beneficial way, then a drug supplying that type of ligand could treat a disease caused by that protein. 
 
-Here is an image illustrating the concept of the ligand (represented by small sticks in center) binding to areas of the protein (represented by ribbon structure):
+   Here is an image illustrating the concept of a ligand (represented by small sticks in center) binding to undesirable region of a protein (represented by ribbon structure):
+   
+   .. image:: images/proteinligand.jpg
 
-.. image:: images/proteinligand.jpg
+   But how can the right ligands be found and formulated into drugs for treating diseases?  Teams of laboratory scientists and medical professionals need years to develop and test new drugs.  Fortunately software simulations can help identify promising ligands for the laboratory scientists to work from, thus greatly reducing time and costs for the design of drugs.   That software assigns a *matching score* to each ligand that indicates how well they are likely to bind with the desired region of a (folded) target protein.   
 
-For the real versions of this code and our simulated case, the longer the ligand or the longer the protein, the longer it takes for the matching and score of the match to complete.
+We will explore some example software that generates short strings, representing ligands, then assigns a score to each ligand according to how well it matches a longer string, representing a protein.  In real drug design work, the scoring algorithms based on molecular biology are much more sophisticated than the example software's simple matching algorithm (described `here <http://selkie.macalester.edu/csinparallel/modules/DrugDesignInParallel/build/html/intro/intro.html#simplified-problem-definition>`_, in case you're interested).  But for both the real software and our example software, the longer the ligand or the longer the protein, the longer it takes for the matching and score of the match to complete.  Also, parallel computing can significantly speed up the computation time for our example software, as it does for real drug design software.  
 
 We have created a default fake protein in the code. This can be changed on the command line.
 
