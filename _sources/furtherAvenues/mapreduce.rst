@@ -55,11 +55,11 @@ By writing the mapper and reducer functions for a MapReduce framework, a program
    reducer
      Receive all key-value pairs ``(`` *"mid"* ``,`` *"r"* ``)`` for a given movie id *mid*, and produce a pair ``(`` *"mid"* ``,`` *"ave"* ``)`` where *ave* is the average value of *r* among all those input pairs.  
 
-Besides providing the mapper and reducer, a MapReduce programmer must also provide configuration options for the framework, e.g., specifying where to find the data set, what type of data that data set contains, where to store the results, perhaps indicating how to split the data set, etc. 
+Besides providing the code for a mapper and a reducer, a MapReduce programmer must also enter configuration options for the framework, e.g., specifying where to find the data set, what type of data that data set contains, where to store the results, perhaps indicating how to split the data set, etc. 
 
-Note that a MapReduce framework also provides an automated sorting of all key-value pairs produced by all mapper calls, after all mapper calls and before any reducer calls.  The framework needs this automated sorting operation, called the *shuffle*, in order to gather all key-value pairs having the same key for calls of the reducer.  For big data jobs requiring thousands of networked computers, shuffling may be a complex intensive computation of its own - another reusable service that a MapReduce framework provides - and that we don't need to program ourselves!
+Note that a MapReduce framework also provides an automated sorting of all key-value pairs produced by the mapper calls, after all mapper calls have completed and before any reducer calls begin.  The framework needs this automated sorting operation, called the *shuffle*, in order to collect all key-value pairs having the same key for calls of the reducer.  For big data jobs requiring thousands of networked computers, shuffling may be a complex intensive computation of its own, another service that a MapReduce framework provides automatically -  and that we don't need to program ourselves!
 
-Finally, a MapReduce framework also implements crucial performance features.  For example, retrieving data from a local disk is much faster than retrieving that data over a network, so a framework insures that mapper calls occur on a computer whose local disks contain their splits, and that reducer calls likewise occur on computers that contain their input data locally.  Only shuffling requires global movement of data over a network, as illustrated in Figure 2.  
+Finally, a MapReduce framework also implements crucial performance features.  For example, retrieving data from a local disk is much faster than retrieving that data over a network, so a framework insures that mapper calls occur on a computer whose local disks contain their input splits, and that reducer calls likewise occur on computers that locally contain the data those reducers need.  Only shuffling requires global movement of data over a network, as illustrated in Figure 2.  
 
 .. figure:: mapreduce_Figure2.png
     :width: 230px
@@ -71,6 +71,26 @@ Finally, a MapReduce framework also implements crucial performance features.  Fo
     Figure 2: How each computer in a cluster breaks up the work and runs
     mappers locally, then shuffles the key-value pair results by key and
     sends the results for each key to other computers who run reducers.
+
+Patterns and fault tolerance
+""""""""""""""""""""""""""""
+
+MapReduce frameworks represent implement several parallel programming patterns.
+
+- The *Data Parallel* pattern, in which multiple portions of data are processed simultaneously on multiple processors (CPUs). This occurs when multiple splits of data are handled by mappers called on different computers.
+
+- The *Map-Reduce* pattern, in which data processing is accomplished using a mapper function and a reducer function as described above.
+
+The Map-Reduce pattern for problem solving was pioneered decades ago in *functional programming* languages such as LISP or Scheme, generally without parallelism. Google adapted the map-reduce programming model to function efficiently on large clusters of computers to process vast amounts of data--for example, Google's selection of the entire web (`Dean and Ghemawat,2004 <http://labs.google.com/papers/mapreduce.html>`_).
+
+Our discussion is based on the MapReduce framework `Hadoop <http://hadoop.apache.org/core/>`_, an open-source implementation of the Apache Foundation, which was started primarily by Yahoo!.  Hadoop is not the only MapReduce framework:  before Hadoop, Google implemented a proprietary framework of their own described in the paper above;  some other implementations are intended for smaller-scale computations that fit on a single computer.
+
+Hadoop's ability to complete a correct computation even when there are crashes is an example of *fault tolerance*.  We already mentioned several fault-tolerance features in Hadoop, including replication of the data set and automated continuation of a large computation.  Other fault-tolerance features include guaranteeing that copies of data splits reside on different computers, and the computational design where all mappers complete before any of the shuffle, and all of the shuffle completes before any reducers begin (this guards against errors due to partially completed stages of computation).  
+
+4.1.2 WebMapReduce, a simplified interface for MapReduce computing
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To get some hands-on experience with MapReduce computing, we will use a web-based interface called *WebMapReduce (WMR)* that makes Hadoop convenient enough for beginning computer science courses to use.
 
 xxxxx
 
