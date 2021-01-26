@@ -12,13 +12,18 @@ In this section, we will describe the MapReduce programming model and explore ho
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A MapReduce framework such as Hadoop provides most of the details of data handling, such as dividing enormous data sets up into *splits* that are small enough for one computer to process, managing the low-level input and output operations, replicating the data to prevent data loss if one or more computers or networks crash, and automatically recovering from such crashes during a big-data computation.  Thus, an application programmer never writes the "main program" for a MapReduce computation, which is unlike other programs in this book.  Instead, the programmer writes two functions that determine how the framework should process the data, called the mapper and the reducer.  
+
 - The *mapper* function operates on the input data and generates *key-value pairs* that represent some information of interest from that input. 
+
   For example, if we are interested in finding all occurrences of words in a data set of web pages, a mapper function might operate on one line of a web page and produce a key-value pair for each word in that line, where the key is that word and the value is the name of that web page, e.g., ``("the", "mysite/index.html")``.    
+
 - The *reducer* function acts on all key-value pairs produced by mappers *that have the same key* and produces other key-value pairs that distill or summarize the interesting information in those input pairs.  
+
   For example, if we're interested in how frequently each word appears in each web page, and the input key-value pairs have the form ``("the", "mysite/index.html")``, then a reducer might produce key-value pairs of the form ``("the mysite/index.html", "28")`` where 28 is the count of input pairs matching that web-page value.  
+
 Figure 1 shows the effects of calling mappers on each line of each split of input data, then calling reducers on the various key-value pairs produced by those mappers.  As this illustration shows, each reducer call handles all the key-value pairs for a particular key.  
 
-.. figure:: Figure1.jpg
+.. figure:: mapreduce_Figure1.jpg
     :width: 720px
     :align: center
     :height: 540px
