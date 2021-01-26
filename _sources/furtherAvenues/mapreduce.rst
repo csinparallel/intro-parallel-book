@@ -21,7 +21,7 @@ A MapReduce framework such as Hadoop provides most of the details of data handli
 
   For example, if we're interested in how frequently each word appears in each web page, and the input key-value pairs have the form ``("the", "mysite/index.html")``, then a reducer might produce key-value pairs of the form ``("the mysite/index.html", "28")`` where 28 is the count of input pairs matching that web-page value.  
 
-Figure 1 shows the effects of calling mappers on each line of each split of input data, then calling reducers on the various key-value pairs produced by those mappers.  As this illustration shows, each reducer call handles all the key-value pairs for a particular key.  
+Figure 1 shows the effects of calling mappers on each line of each split of input data, then calling reducers on the various key-value pairs produced by those mappers.  
 
 .. figure:: mapreduce_Figure1.jpg
     :width: 720px
@@ -30,13 +30,32 @@ Figure 1 shows the effects of calling mappers on each line of each split of inpu
     :alt: alternate text
     :figclass: align-center
 
-    Figure 1: The concept behind how map functions can run in parallel and
-    pass their results to reduce functions, whose results are output in
-    sorted order by the keys created by the reduce function.
+    Figure 1: Illustration of calling a mapper function named ``map()`` many times in parallel and passing the results of those calls to calls of a reducer function named ``reduce()``.
+
+As Figure 1 shows, each reducer call handles all the key-value pairs for a particular key.  For instance, in our example above of counting the frequencies of words within web pages, if the key K1 in the diagram is the word ``"the"`` and the values v1, v2, and v3 are the names of three different web pages such as ``"mysite/index.html"`` and two others, then the top reducer would handle all three of those pairs (plus any other unshown pairs that have the key ``"the"``).
+
+By writing the mapper and reducer functions for a MapReduce framework, a programmer specifies what computation should be performed on a potentially gigantic data set.  This modest two-function programming strategy provides a surprising amount of algorithmic control for big-data computations.  Here are some examples, starting with the word-frequency example above:
+
+# Goal
+    Count frequencies of all words in all web pages in a data set of web pages
+  mapper.
+    Read one line of input from a web page ``*wpname*``, and produce a key-value pair ``(*w*, *wpname*)`` for each word ``*w*`` that appears on that line
+  reducer
+    Receive all key-value pairs ``(*w*, *wpname*)`` for a given word ``*w*``, and produce one key-value pair ``(*w wpname*, *ct*)`` for each web page ``*wpname*``, where ``*ct*`` is the number of input pairs with value ``*wpanme*``.
+# Goal
+    For every word found in a data set of web pages, produce a list of all line numbers of web pages containing that word.
+  mapper
+    Read one line of input from a web page ``*wpname*``, and produce a key-value pair ``(*w*, *ln wpname*)`` for each word ``*w*`` that appears on that line, where ``*ln*`` is the line number that was read within ``*wpname*``
+  reducer
+    Receive all key-value pairs ``(*w*, *ln wpname*)`` for a given word ``*w*``, and produce one key-value pair ``(*w wpname*, *ln:subscript:`1` ln:subscript:`2` ln:subscript:`3` ...*)`` for each web page ``*wpname*``, where ``*ln:subscript:`n` *`` is the ``*n*``th value of ``*ln*`` among input pairs with values ``*ln wpanme*``.
+# Goal
+    Find the average rating for each movie in a data set of movie ratings.
+  mapper
+    Read one movie rating, consisting of an integer movie id ``*mid*``, an integer rating from 0 to 5 ``*r*``, and other information such as reviewer and date.  Produce a pair ``("*mid*", "*r*")``
+  reducer
+    Receive all key-value pairs ``("*mid*", "*r*")`` for a given movie id ``*mid*``, and produce a pair ``("*mid*", "*ave*")`` where ``*ave*`` is the average value of ``*r*`` among all those input pairs.  
 
 
-
-We could also pack more information in the key or value, perhaps adding the line number to the value ``("the", "72 mysite/index.html")``.
 
 provides configuration options (e.g., specifying where to find the data set, where to store the results, perhaps indicating how to split the data, etc.) plus two key 
 
