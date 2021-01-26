@@ -36,28 +36,41 @@ As Figure 1 shows, each reducer call handles all the key-value pairs for a parti
 
 By writing the mapper and reducer functions for a MapReduce framework, a programmer specifies what computation should be performed on a potentially gigantic data set.  This modest two-function programming strategy provides a surprising amount of algorithmic control for big-data computations.  Here are some examples, starting with the word-frequency example above:
 
-# Goal
-    Count frequencies of all words in all web pages in a data set of web pages
-  mapper.
-    Read one line of input from a web page ``*wpname*``, and produce a key-value pair ``(*w*, *wpname*)`` for each word ``*w*`` that appears on that line
-  reducer
-    Receive all key-value pairs ``(*w*, *wpname*)`` for a given word ``*w*``, and produce one key-value pair ``(*w wpname*, *ct*)`` for each web page ``*wpname*``, where ``*ct*`` is the number of input pairs with value ``*wpanme*``.
-# Goal
-    For every word found in a data set of web pages, produce a list of all line numbers of web pages containing that word.
-  mapper
-    Read one line of input from a web page ``*wpname*``, and produce a key-value pair ``(*w*, *ln wpname*)`` for each word ``*w*`` that appears on that line, where ``*ln*`` is the line number that was read within ``*wpname*``
-  reducer
-    Receive all key-value pairs ``(*w*, *ln wpname*)`` for a given word ``*w*``, and produce one key-value pair ``(*w wpname*, *ln:subscript:`1` ln:subscript:`2` ln:subscript:`3` ...*)`` for each web page ``*wpname*``, where ``*ln:subscript:`n` *`` is the ``*n*``th value of ``*ln*`` among input pairs with values ``*ln wpanme*``.
-# Goal
-    Find the average rating for each movie in a data set of movie ratings.
-  mapper
-    Read one movie rating, consisting of an integer movie id ``*mid*``, an integer rating from 0 to 5 ``*r*``, and other information such as reviewer and date.  Produce a pair ``("*mid*", "*r*")``
-  reducer
-    Receive all key-value pairs ``("*mid*", "*r*")`` for a given movie id ``*mid*``, and produce a pair ``("*mid*", "*ave*")`` where ``*ave*`` is the average value of ``*r*`` among all those input pairs.  
+#. Goal
+     Count frequencies of all words in all web pages in a data set of web pages
+   mapper.
+     Read one line of input from a web page *``wpname``*, and produce a key-value pair ``(*w*, *wpname*)`` for each word ``*w*`` that appears on that line
+   reducer
+     Receive all key-value pairs ``(*w*, *wpname*)`` for a given word ``*w*``, and produce one key-value pair ``(*w wpname*, *ct*)`` for each web page ``*wpname*``, where ``*ct*`` is the number of input pairs with value ``*wpanme*``.
+#. Goal
+     For every word found in a data set of web pages, produce a list of all line numbers of web pages containing that word.
+   mapper
+     Read one line of input from a web page ``*wpname*``, and produce a key-value pair ``(*w*, *ln wpname*)`` for each word ``*w*`` that appears on that line, where ``*ln*`` is the line number that was read within ``*wpname*``
+   reducer
+     Receive all key-value pairs ``(*w*, *ln wpname*)`` for a given word ``*w*``, and produce one key-value pair ``(*w wpname*, *ln :subscript:`1` ln :subscript:`2` ln :subscript:`3` ...*)`` for each web page ``*wpname*``, where ``*ln :subscript:`n` *`` is the ``*n*``th value of ``*ln*`` among input pairs with values ``*ln wpname*``.
+#. Goal
+     Find the average rating for each movie in a data set of movie ratings.
+   mapper
+     Read one movie rating, consisting of an integer movie id ``*mid*``, an integer rating ``*r*`` from 0 to 5, and other information such as reviewer and date.  Produce a pair ``("*mid*", "*r*")``
+   reducer
+     Receive all key-value pairs ``("*mid*", "*r*")`` for a given movie id ``*mid*``, and produce a pair ``("*mid*", "*ave*")`` where ``*ave*`` is the average value of ``*r*`` among all those input pairs.  
 
+Besides providing the mapper and reducer, a MapReduce programmer must also provide configuration options for the framework, e.g., specifying where to find the data set, what type of data that data set contains, where to store the results, perhaps indicating how to split the data set, etc. 
 
+Note that a MapReduce framework also provides an automated sorting of all key-value pairs produced by all mapper calls, after all mapper calls and before any reducer calls.  The framework needs this automated sorting operation, called the *shuffle*, in order to gather all key-value pairs having the same key for calls of the reducer.  For big data jobs requiring thousands of networked computers, shuffling may be a complex intensive computation of its own - another reusable service that a MapReduce framework provides - and that we don't need to program ourselves!
 
-provides configuration options (e.g., specifying where to find the data set, where to store the results, perhaps indicating how to split the data, etc.) plus two key 
+Finally, a MapReduce framework also implements crucial performance features.  For example, retrieving data from a local disk is much faster than retrieving that data over a network, so a framework insures that mapper calls occur on a computer whose local disks contain their splits, and that reducer calls likewise occur on computers that contain their input data locally.  Only shuffling requires global movement of data over a network, as illustrated in Figure 2.  
+
+.. figure:: mapreduce_Figure2.png
+    :width: 230px
+    :align: center
+    :height: 150px
+    :alt: alternate text
+    :figclass: align-center
+
+    Figure 2: How each computer in a cluster breaks up the work and runs
+    mappers locally, then shuffles the key-value pair results by key and
+    sends the results for each key to other computers who run reducers.
 
 xxxxx
 
