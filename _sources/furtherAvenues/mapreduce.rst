@@ -53,7 +53,7 @@ By writing the mapper and reducer functions for a MapReduce framework, a program
    mapper
      Read one movie rating, consisting of an integer movie id ``*mid*``, an integer rating ``*r*`` from 0 to 5, and other information such as reviewer and date.  Produce a pair ``("*mid*", "*r*")``
    reducer
-     Receive all key-value pairs ``("*mid*", "*r*")`` for a given movie id ``*mid*``, and produce a pair ``("*mid*", "*ave*")`` where ``*ave*`` is the average value of ``*r*`` among all those input pairs.  
+     Receive all key-value pairs ``(`` *"mid"* ``,`` *"r"* ``)`` for a given movie id *mid*, and produce a pair ``("``*mid*``", "``*ave*``")`` where ``*ave*`` is the average value of *r* among all those input pairs.  
 
 Besides providing the mapper and reducer, a MapReduce programmer must also provide configuration options for the framework, e.g., specifying where to find the data set, what type of data that data set contains, where to store the results, perhaps indicating how to split the data set, etc. 
 
