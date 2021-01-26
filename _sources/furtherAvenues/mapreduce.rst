@@ -39,21 +39,21 @@ By writing the mapper and reducer functions for a MapReduce framework, a program
 #. Goal
      Count frequencies of all words in all web pages in a data set of web pages
    mapper.
-     Read one line of input from a web page *``wpname``*, and produce a key-value pair ``(`` *"w"* ``,`` *"wpname"* ``)`` for each word *w* that appears on that line
+     Read one line of input from a web page *wpname*, and produce a key-value pair ``(`` *"w"* ``,`` *"wpname"* ``)`` for each word *w* that appears on that line
    reducer
-     Receive all key-value pairs ``(`` *"w"* ``,`` *"wpname"* ``)`` for a given word *w*, and produce one key-value pair ``(`` *"w wpname"* ``,`` *"ct"* ``)`` for each web page *wpname*, where *ct* is the number of input pairs with value *wpanme*.
+     Receive all key-value pairs ``(`` *"w"* ``,`` *"wpname"* ``)`` for a given word *w*, and produce one key-value pair ``(`` *"w wpname"* ``,`` *"ct"* ``)`` for each web page *wpname*, where *ct* is the number of input pairs with value *wpname*.
 #. Goal
      For every word found in a data set of web pages, produce a list of all line numbers of web pages containing that word.
    mapper
-     Read one line of input from a web page *wpname*, and produce a key-value pair ``(`` *"w"*, *"ln wpname"* ``)`` for each word *w* that appears on that line, where *ln* is the line number within *wpname* that was read
+     Read one line of input from a web page *wpname*, and produce a key-value pair ``(`` *"w"* ``,`` *"ln wpname"* ``)`` for each word *w* that appears on that line, where *ln* is the line number within *wpname* that was read
    reducer
-     Receive all key-value pairs ``(`` *"w"* ``,`` *"ln wpname"* ``)`` for a given word ``*w*``, and produce one key-value pair ``(`` *"w wpname"* ``,`` *"ln1 ln2 ln3 ..."* ``)`` for each web page *wpname*, where *lnN*`` is the *N*th value of *ln* among input pairs with values *ln wpname*.
+     Receive all key-value pairs ``(`` *"w"* ``,`` *"ln wpname"* ``)`` for a given word ``*w*``, and produce one key-value pair ``(`` *"w wpname"* ``,`` *"ln1 ln2 ln3 ..."* ``)`` for each web page *wpname*, where *lnN* is the *N* th value of *ln* among input pairs with values *ln wpname*
 #. Goal
      Find the average rating for each movie in a data set of movie ratings.
    mapper
      Read one movie rating, consisting of an integer movie id *mid*, an integer rating *r* from 0 to 5, and other information such as reviewer and date.  Produce a pair ``(`` *"mid"* ``,`` *"r"* ``)``
    reducer
-     Receive all key-value pairs ``(`` *"mid"* ``,`` *"r"* ``)`` for a given movie id *mid*, and produce a pair ``(`` *"mid"* ``,`` ``*"ave"* ``)`` where *ave* is the average value of *r* among all those input pairs.  
+     Receive all key-value pairs ``(`` *"mid"* ``,`` *"r"* ``)`` for a given movie id *mid*, and produce a pair ``(`` *"mid"* ``,`` *"ave"* ``)`` where *ave* is the average value of *r* among all those input pairs.  
 
 Besides providing the mapper and reducer, a MapReduce programmer must also provide configuration options for the framework, e.g., specifying where to find the data set, what type of data that data set contains, where to store the results, perhaps indicating how to split the data set, etc. 
 
