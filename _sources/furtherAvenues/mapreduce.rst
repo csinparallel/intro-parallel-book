@@ -9,7 +9,7 @@ Map-Reduce on clusters of thousands of powerful networked  computers, the work c
 In this section, we will describe the MapReduce programming model and explore how to create programs capable of true big-data computations. 
 
 4.1.1 The MapReduce programming strategy
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A MapReduce framework such as Hadoop provides most of the details of data handling, such as dividing enormous data sets up into *splits* that are small enough for one computer to process, managing the low-level input and output operations, replicating the data to prevent data loss if one or more computers or networks crash, and automatically recovering from such crashes during a big-data computation.  Thus, an application programmer never writes the "main program" for a MapReduce computation, which is unlike other programs in this book.  Instead, the programmer writes two functions that determine how the framework should process the data, called the mapper and the reducer.  
 
@@ -172,7 +172,7 @@ lowercase conversion to your mapper code as you work through the example.
 What follows is a plan for the mapper and reducer functions. 
 
 Map-reduce plan
-^^^^^^^^^^^^^^^
+"""""""""""""""
 
 In WMR, mapper functions work simultaneously on lines of input from
 files, where a line ends with a newline charater. The mapper will
@@ -407,6 +407,9 @@ punctuation should also be taken care of.
 If something doesn't work as described here, the following section
 may help with troubleshooting. *Read it next in any case so that you
 know what you can do when you work on your own new examples.*
+
+4.1.3 More about using WMR; exercises
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Using WMR and its test mode
 """""""""""""""""""""""""""
