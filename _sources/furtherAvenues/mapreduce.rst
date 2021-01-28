@@ -38,7 +38,7 @@ By writing the mapper and reducer functions for a MapReduce framework, a program
 
 #. Goal
      Count frequencies of all words in all web pages in a data set of web pages
-   mapper.
+   mapper
      Read one line of input from a web page *wpname*, and produce a key-value pair ``(`` *"w"* ``,`` *"wpname"* ``)`` for each word *w* that appears on that line
    reducer
      Receive all key-value pairs ``(`` *"w"* ``,`` *"wpname"* ``)`` for a given word *w*, and produce one key-value pair ``(`` *"w wpname"* ``,`` *"ct"* ``)`` for each web page *wpname*, where *ct* is the number of input pairs with value *wpname*.
@@ -81,9 +81,9 @@ MapReduce frameworks represent implement several parallel programming patterns.
 
 - The *Map-Reduce* pattern, in which data processing is accomplished using a mapper function and a reducer function as described above.
 
-The Map-Reduce pattern for problem solving was pioneered decades ago in *functional programming* languages such as LISP or Scheme, generally without parallelism. Google adapted the map-reduce programming model to function efficiently on large clusters of computers to process vast amounts of data--for example, Google's selection of the entire web (`Dean and Ghemawat,2004 <http://labs.google.com/papers/mapreduce.html>`_).
+The Map-Reduce pattern for problem solving was pioneered decades ago in *functional programming* languages such as LISP or Scheme, generally without parallelism. Google adapted the map-reduce programming model to function efficiently on large clusters of computers to process vast amounts of data--for example, Google's selection of the entire web (`Dean and Ghemawat,2004 <https://www.usenix.org/legacy/events/osdi04/tech/full_papers/dean/dean.pdf>`_).
 
-Our discussion is based on the MapReduce framework `Hadoop <http://hadoop.apache.org/core/>`_, an open-source implementation of the Apache Foundation, which was started primarily by Yahoo!.  Hadoop is not the only MapReduce framework:  before Hadoop, Google implemented a proprietary framework of their own described in the paper above;  some other implementations are intended for smaller-scale computations that fit on a single computer.
+Our discussion is based on the MapReduce framework `Hadoop <https://hadoop.apache.org>`_, an open-source implementation of the Apache Foundation, which was started primarily by Yahoo!.  Hadoop is not the only MapReduce framework:  before Hadoop, Google implemented a proprietary framework of their own described in the paper above;  some other implementations are intended for smaller-scale computations that fit on a single computer.
 
 Hadoop's ability to complete a correct computation even when there are crashes is an example of *fault tolerance*.  We already mentioned several fault-tolerance features in Hadoop, including replication of the data set and automated continuation of a large computation.  Other fault-tolerance features include guaranteeing that copies of data splits reside on different computers, and the computational design where all mappers complete before any of the shuffle, and all of the shuffle completes before any reducers begin (this guards against errors due to partially completed stages of computation).  
 
@@ -469,6 +469,7 @@ programs,and what to do if something goes wrong with your WMR job.
     :linenos:
     :language: python
 
+_`identity mappers and reducers`
 Here are identity mappers and reducers for some languages.
 
 ========    ===========================================================    =============================================================
@@ -519,8 +520,8 @@ Java        :download:`idmapper.java <code/id-identity/idmapper.java>`     :down
                computing, so it cannot handle large data.
 
 
-Next Steps
-""""""""""
+Exercises:  Next Steps
+""""""""""""""""""""""
 
 
 #. In WMR, you can choose to use your own input data files. Try
@@ -546,48 +547,85 @@ Next Steps
    | /shared/gutenberg/CompleteShakespeare.txt
    | /shared/gutenberg/AnnaKarenina.txt
 
-   These books have many lines of text with 'newline' chacters at the
+   These books have many lines of text with 'newline' characters at the
    end of each line. Each of you mapper functions works on one line.
    Try one of these.
 
-#. Next, you should try a collection of many books, each of which
-   has no newline characters in them. In this case, each mapper 'task'
-   in Hadoop will work on one whole book (your dictionary of words per
-   mapper will be for the whole book, and the mappers will be running
-   on many books at one time). In the Hadoop file system inside WMR we
-   have these datasets available for this:
+Exercises:  Creating a search index
+"""""""""""""""""""""""""""""""""""
 
-       =====================================    ================
-       'Cluster path' to enter in WMR           Number of books
-       =====================================    ================
-       /shared/gutenberg/all\_nonl/group10      2018
-       /shared/gutenberg/all\_nonl/group11      294
-       /shared/gutenberg/all\_nonl/group6       830
-       /shared/gutenberg/all\_nonl/group8       541
-       =====================================    ================
+These exercises return to our original motivating example for MapReduce, namely creating a search engine.  A web-search engine must perform three processes.
 
-   While using many books, it will be useful for you to experiment
-   with the different datasets so that you can get a sense for how
-   much a system like Hadoop can process.
+- Assemble a data set of web pages, typically obtained by *web crawling*, which collects all the web pages encountered by following all hyperlinks within all web pages for the websites to include in a search.
 
-   To do this, it will also be useful for you to save your
-   configuration so that you can use it again with a different number
-   of reducer tasks. Once you have entered your mapper and reducer
-   code, picked the Python3 language, and given your job a descriptive
-   name, choose the `'Save'` button at the bottom of the WMR panel.
-   This will now be a `'Saved Configuration'` that you can retrieve
-   using the link on the left in the WMR page.
+- Create a *search index* from that data set, with an index entry for every occurrence of every word in each web page.  An index entry would include a word together with the web page where that word was found, the location of of that occurence of the word within that web page, and perhaps other context information for that occurrence.
 
-   Try using the smallest set first (group11). Do not enter anything
-   in the map tasks box- notice that the system will choose the same
-   number of mappers as the number of books (this will show up once
-   you submit the job). Also do not enter anything for the number of
-   reduce tasks. With that many books, when the job completes you will
-   see there are many pages of output, and some interesting 'words'.
-   For the 294 books in group11, note how you obtain several pages of
-   results. You will also notice that the stripping of punctuation
-   isn't perfect. If you wish to try improving this you could, but it
-   is not necessary.
+- Implement a search algorithm, which responds to a *search query* from a user by producing an ordered list of web pages relevant to that query, using the search index and factors such as prominence of a web page or other indicators of relevance to that query.
+
+MapReduce could be used in each of these three stages.
+
+- For web crawling, a mapper could extract all destination pages of hyperlinks in each web page, and a reducer could produce a list of those destination pages, so the system could determine destination pages that are not already in the data set.
+
+- MapReduce programming could create a search index from a given set of pages, as described below.
+
+- For the search algorithm, MapReduce computations could produce various measures of relevance, for ordering the search results.  For example, one measure of prominence of a web page is to count the number of times that page occurs as a destination of a hyperlink among all web pages in the data set, which could be performed by following a MapReduce computation similar to the web-crawler with a MapReduce count operation similar to the word count example.
+
+The exercises below explore how to create a search index.  To simplify the problem, we will index Gutenberg books instead of web pages, which avoids having to deal with HTML or other web-page format code that should not appear in the index.  However, the same MapReduce algorithm ideas could work with web pages for producing a search index.
+
+We will use book names and line numbers to represent location of a word within a book.  This will adding names and line numbers to the lines of each book we process.  For example, in the version :download:`mobydick.txt_ln  <mobydick.txt_ln>` of mobydick.txt with line numbers, the first line of Chapter 1 appears as
+
+  ``mobydick 507 Call me Ishmael.  Some years ago--never mind how long``
+
+since that appears on the 507th line of that book file.  
+
+
+#. Create a simple search index by writing a mapper and a reducer described as follows:
+   
+   mapper
+     For each line of input (with name and line number prepended) in a book, produce a key-value pair ``(`` *"w"* ``,`` *"book ln"* ``)`` for each word *w* that appears on that line, where *book* is the name of that book and *ln* is the line number for that line.
+   reducer
+     Identity reducer:  emit each key-value pair that a reducer receives.
+
+   Your mapper should first obtain the value *book ln* from its line, consisting of all characters in that line before the second space.  Then, it should enter a loop that finds each word *w* in that line *after that second space* and emit a pair with that word *w* as the key and *book ln* as the value.
+
+   For the reducer, you can use the `identity reducer`_ provided for your language.
+
+   Before applying your code to an entire book, test it with some small data, e.g., these two lines:
+
+   ::
+      
+      try 1 This is the first line
+      try 2 This is another line``
+
+   The expected output for this input is
+
+   ::
+      another try 2
+      first try 1
+      is try 1
+      is try 2
+      line try 1
+      line try 2
+      the try 1
+      This try 1
+      This try 2
+      
+   Note:  The keys should appear in sorted order in the test output, but the values might not be sorted.  For example,
+
+     `` line try 2``
+
+   might appear before
+
+      `` line try 1``
+
+   in the test output.
+
+ ------
+ obtain some gutenberg books with all lines prefixed by book ID and linenum
+
+ produce (word, id linenum charnum line), sorted by id/linenum/charnum in reducer
+
+#. A multicycle problem?  A numerical problem like movie ratings?
 
 
 Additional Notes
@@ -620,9 +658,8 @@ is why the key is split in the mapper shown above.
 
 
 
-
 xxxxx
-
+*
 Talk about web-search in particular, and introduce the notion of the cloud.
 
 Give students an overview of the MapReduce paradigm, and then explain how they can access/play with it. 
