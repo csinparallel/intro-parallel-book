@@ -653,10 +653,7 @@ since that line appears as the 507th line of that book file.
 
      You can examine the output of a successful WMR job by scrolling in the ``Job Succeeded`` page.
 
-     Alternatively, you can retrieve the output from a job named *jobname* by downloading from the data path ``/user/wmr/out/`` |jobname| ``/000000/``
-
-.. |jobname| *jobname*
-   :trim:
+     Alternatively, you can retrieve the output from a job named ``jobname`` by downloading from the data path ``/user/wmr/out/jobname/000000/`` .
 
 #. Now use your mapper and reducer to create a search index for multiple books.  The example data set ``/shared/gutenberg/loc_set1`` contains the following prefixed Project Gutenberg books.
    
@@ -699,12 +696,14 @@ is why the key is split in the mapper shown above.
 
 
 
-xxxxx
-*
-Talk about web-search in particular, and introduce the notion of the cloud.
+(Suzanne's outline:
+  *
+  Talk about web-search in particular, and introduce the notion of the cloud.
 
-Give students an overview of the MapReduce paradigm, and then explain how they can access/play with it. 
+  Give students an overview of the MapReduce paradigm, and then explain how they can access/play with it. 
 
-Talk about WebMapReduce, and give them a link to play with. 
+  Talk about WebMapReduce, and give them a link to play with. 
 
-Also talk about Amazon EC2 clusters, and how they can run their own MapReduce jobs on those.
+  Also talk about Amazon EC2 clusters, and how they can run their own MapReduce jobs on those.
+
+  )
