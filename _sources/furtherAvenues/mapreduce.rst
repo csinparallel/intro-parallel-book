@@ -147,14 +147,14 @@ then the output should be:
 
 ::
 
-    Blue 2
-    One 1
-    Red 1
-    Two 2
-    fish, 2
-    Fish, 2
-    fish. 1
-    Fish. 1
+    Blue    2
+    One     1
+    Red     1
+    Two     2
+    fish,   2
+    Fish,   2
+    fish.   1
+    Fish.	1
 
 As this output indicates, we did not make any attempt to trim
 punctuation characters in this first example. Nor did we consider that
@@ -164,10 +164,12 @@ practice using WebMapReduce with the initial functions described
 below. However, you can consider adding punctuation removal and 
 lowercase conversion to your mapper code as you work through the example.
 
-.. Note::
+.. Notes::
 
-  The WebMapReduce system will sort the words
+  - The WebMapReduce system will sort the words
   according to the ASCII codes of the characters within words.
+
+  - As we shall see, the word and its count will be separated by a TAB character in WebMapReduce output.
 
 What follows is a plan for the mapper and reducer functions. 
 
@@ -204,7 +206,7 @@ given word *w*, then produce the key-value pair (*w*, *sum*).
 
 In this example, we can envision a reducer for each distinct word found
 by the three mappers, where the reducer gets a list of single counts 
-per occurance of the word that a mapper found, loking like this:
+per occurance of the word that a mapper found, looking like this:
 
 ::
 
@@ -604,8 +606,8 @@ since that line appears as the 507th line of that book file.
 
    ::
       
-      try 1 chr(9) This is the first line
-      try 2 chr(9633) This is another line``
+      try 1   This is the first line
+      try 2   This is another line``
 
    The expected output for that input is
 
