@@ -554,7 +554,7 @@ is why the key is split in the mapper shown above.
 ^^^^^^^^^^^^^^^^^^^
 
 
-Next Steps with word counting
+A. Next Steps with word counting
 """""""""""""""""""""""""""""
 
 
@@ -585,7 +585,7 @@ Next Steps with word counting
    end of each line. Each of you mapper functions works on one line.
    Try one of these.
 
-Creating a search index
+B. Creating a search index
 """""""""""""""""""""""
 
 Consider our original motivating example for MapReduce, namely creating a search engine.  A web-search engine must perform three processes.
@@ -695,8 +695,8 @@ since that line appears as the 507th line of that book file.
 
 --------
 
-(Suzanne's outline:
-  *
+Suzanne's outline:
+
   Talk about web-search in particular, and introduce the notion of the cloud.
 
   Give students an overview of the MapReduce paradigm, and then explain how they can access/play with it. 
@@ -705,4 +705,3 @@ since that line appears as the 507th line of that book file.
 
   Also talk about Amazon EC2 clusters, and how they can run their own MapReduce jobs on those.
 
-  )
