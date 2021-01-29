@@ -596,57 +596,77 @@ We will use book names and line numbers to represent location of a word within a
 since that line appears as the 507th line of that book file.  
 
 
-#. Create a simple search index by writing a mapper and a reducer described as follows:
+#. Create and test a simple search index by writing a mapper and a reducer described as follows:
    
    mapper
      For each line of input (with name and line number prepended) in a book, produce a key-value pair (*"w"*, *"book ln"*) for each word *w* that appears on that line, where *book* is the name of that book and *ln* is the line number for that line.
    reducer
      Identity reducer:  emit each key-value pair that a reducer receives.
 
-   Your mapper should first obtain the value *book ln* from its line, consisting of all characters in that line before the second space.  Then, it should enter a loop that finds each word *w* in that line *after that second space* and emit a pair with that word *w* as the key and *book ln* as the value.
-
-   For the reducer, you can use the `identity reducer`__  provided for your language.
+   Notes:
    
-   __ `identity mappers and reducers`_
+   - Your mapper should first obtain the value *book ln* from its line, consisting of all characters in that line before the second space.  Then, it should enter a loop that finds each word *w* in that line *after that second space* and emit a pair with that word *w* as the key and *book ln* as the value.
 
-   Before applying your code to an entire book, use the Test interface to check it with some small data, e.g., these two lines:
+   - For the reducer, you can use the `identity reducer`__  provided for your language.
+   
+     __ `identity mappers and reducers`_
 
-   ::
+   - Instead of applying your code to an entire book, use the Test interface to check it with some small data, e.g., these two lines:
+
+     ::
       
       try 1   This is the first line
       try 2   This is another line``
 
-   The expected output for that input is
+     The expected output for that input is
 
-   ::
+     ::
       
-      another try 2
-      first try 1
-      is try 1
-      is try 2
-      line try 1
-      line try 2
+      another try     2
+      first try       1
+      is try  1
+      is try  2
+      line try        1
+      line try        2
       the try 1
-      This try 1
-      This try 2
+      This try        1
+      This try        2
       
-   Note:  The keys should appear in sorted order in the test output, but the values might not be sorted.  For example,
+   - The keys should appear in sorted order in the test output, but the values might not be sorted.  For example,
 
-     ``line try 2``
+       ``line try        2``
 
-   might appear before
+     might appear before
 
-      ``line try 1``
+       ``line try        1``
 
-   in the test output.
+     in the test output.
 
- xxxxx
- 
- obtain some gutenberg books with all lines prefixed by book ID and linenum
+#. Now try your mapper and reducer from the previous problem with the Project Gutenberg book :download:`mobydick.txt_loc  <mobydick.txt_loc>`.
 
- produce (word, id linenum charnum line), sorted by id/linenum/charnum in reducer
+   Here are some ideas for partially checking the results.
 
-#. A multicycle problem?  A numerical problem like movie ratings?
+   - Choose a word *w* that appears in the output of your word-count code on ``mobydick.txt`` (*without* the file-name and line-number prefixes).  Then verify that the word count for *w* agrees with the number of lines for *w* in your search-index output.  Repeat this verification for multiple words.
+   - Choose a word *w* with a small word count in ``mobydick.txt``, and check the your search-index results manually for that word.  This will involve searching for that word in the file ``mobydick.txt_loc``, perhaps using an editor.  
+
+   Note:
+
+     You can examine the output of a successful WMR job by scrolling in the ``Job Succeeded`` page.
+
+     Alternatively, you can retrieve the output from a job named *jobname* by downloading from the data path ``/user/wmr/out/`` |jobname| ``/000000/``
+
+.. |jobname| *jobname*
+   :trim:
+
+#. Now use your mapper and reducer to create a search index for multiple books.  The example data set ``/shared/gutenberg/loc_set1`` contains the following prefixed Project Gutenberg books.
+   
+   - /shared/gutenberg/loc/MobyDick.txt_loc (same as ``mobydick.txt_loc`` above)
+   - /shared/gutenberg/loc/WarAndPeace.txt_loc
+   - /shared/gutenberg/loc/CompleteShakespeare.txt_loc
+   - /shared/gutenberg/loc/AnnaKarenina.txt_loc
+
+
+#. A multicycle problem, such as sorting the index?  A numerical problem like movie ratings? Develop code for handling HTML for web crawling and page rank??
 
 
 Additional Notes
