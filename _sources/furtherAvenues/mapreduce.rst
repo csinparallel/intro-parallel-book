@@ -471,7 +471,8 @@ programs,and what to do if something goes wrong with your WMR job.
     :linenos:
     :language: python
 
-_`identity mappers and reducers`
+.. _`identity mappers and reducers`
+
 Here are identity mappers and reducers for some languages.
 
 ========    ===========================================================    =============================================================
@@ -604,7 +605,9 @@ since that line appears as the 507th line of that book file.
 
    Your mapper should first obtain the value *book ln* from its line, consisting of all characters in that line before the second space.  Then, it should enter a loop that finds each word *w* in that line *after that second space* and emit a pair with that word *w* as the key and *book ln* as the value.
 
-   For the reducer, you can use the `identity reducer`_  provided for your language.
+   For the reducer, you can use the `identity reducer`__  provided for your language.
+   
+   __ `identity mappers and reducers`_
 
    Before applying your code to an entire book, use the Test interface to check it with some small data, e.g., these two lines:
 
