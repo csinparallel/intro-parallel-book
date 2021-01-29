@@ -113,7 +113,7 @@ WMR <http://webmapreduce.sourceforge.net/docs/using/index.html>`_.
 For this activity, you should be able to follow along with the
 instructions below and determine how to use WMR.
 
-An example of map-reduce computing with WMR: counting words
+4.1.2.1 An example of map-reduce computing with WMR: counting words
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 To program with map-reduce, you must first decide how to use
@@ -348,7 +348,7 @@ output from the mapper. This time, only one pair is emitted,
 consisting of the word being counted and ``sum``, which holds the
 number of times that word appeared in *all* of the original data.
 
-Running the example code on WebMapReduce
+4.1.2.2 Running the example code on WebMapReduce
 """"""""""""""""""""""""""""""""""""""""
 
 To run WMR with this combination of data, mapper, and reducer,
@@ -520,8 +520,8 @@ Java        :download:`idmapper.java <code/id-identity/idmapper.java>`     :down
                computing, so it cannot handle large data.
 
 
-Exercises:  Next Steps
-""""""""""""""""""""""
+Exercises:  Next Steps with word counting
+"""""""""""""""""""""""""""""""""""""""""
 
 
 #. In WMR, you can choose to use your own input data files. Try
@@ -554,7 +554,7 @@ Exercises:  Next Steps
 Exercises:  Creating a search index
 """""""""""""""""""""""""""""""""""
 
-These exercises return to our original motivating example for MapReduce, namely creating a search engine.  A web-search engine must perform three processes.
+Consider our original motivating example for MapReduce, namely creating a search engine.  A web-search engine must perform three processes.
 
 - Assemble a data set of web pages, typically obtained by *web crawling*, which collects all the web pages encountered by following all hyperlinks within all web pages for the websites to include in a search.
 
@@ -564,19 +564,29 @@ These exercises return to our original motivating example for MapReduce, namely 
 
 MapReduce could be used in each of these three stages.
 
-- For web crawling, a mapper could extract all destination pages of hyperlinks in each web page, and a reducer could produce a list of those destination pages, so the system could determine destination pages that are not already in the data set.
+- For web crawling, the following MapReduce operation could assemble a list of pages to retrieve.
+  
+  mapper
+    Extract all destination pages of hyperlinks in each web page in the data set so far, and produce a key-value pair ``(`` *"dest"* ``,`` *"page"* ``)`` for each hyperlink, where *dest* is the destination of that hyperlink and *page* is the web page containing that hyperlink.
+  reducer
+    For the reducer call handling all key-value pairs ``(`` *"dest"* ``,`` *"page"* ``)``, produce a single key-value pair ``(`` *"dest"* ``, "" )`` . 
 
 - MapReduce programming could create a search index from a given set of pages, as described below.
 
-- For the search algorithm, MapReduce computations could produce various measures of relevance, for ordering the search results.  For example, one measure of prominence of a web page is to count the number of times that page occurs as a destination of a hyperlink among all web pages in the data set, which could be performed by following a MapReduce computation similar to the web-crawler with a MapReduce count operation similar to the word count example.
+- For the search algorithm, MapReduce computations could produce measures of relevance for ordering the search results.  For example, one indicator of relevance of a page is the number of times that page occurs *as a destination of a hyperlink* among all web pages in the data set.  This indicator assumes that more important websites will likely be destinations of hyperlinks from other website - this was key assumption of Google's original search algorithm, called ``PageRank <https://en.wikipedia.org/wiki/PageRank>``_.  To compute that indicator, we could use this MapReduce operation.
+  
+  mapper
+    Same mapper as indicated for web crawling above.
+  reducer
+    Receive all key-value pairs ``(`` *"dest"* ``,`` *"page"* ``)`` for a particular destination web page *dest*, and produce a single key-value pair ``(`` *"dest"* ``,`` *"ct"* ``)`` where *ct* is the count of key-value pairs received for *dest*.  
 
-The exercises below explore how to create a search index.  To simplify the problem, we will index Gutenberg books instead of web pages, which avoids having to deal with HTML or other web-page format code that should not appear in the index.  However, the same MapReduce algorithm ideas could work with web pages for producing a search index.
+Actually programming the three processes for a web-search engine requires software parsing web pages in order to separate the word contents of a page from the formatting instructions (e.g., HTML markup), and retrieving the destination pages of hyperlinks.  Rather than delve into that web-page parsing software here, we will instead explore how to create a search index *for text files* such as Project Gutenberg books in the following exercises.  The same MapReduce algorithm ideas could produce a search index for web pages, if we had parsing software.  
 
-We will use book names and line numbers to represent location of a word within a book.  This will adding names and line numbers to the lines of each book we process.  For example, in the version :download:`mobydick.txt_ln  <mobydick.txt_ln>` of mobydick.txt with line numbers, the first line of Chapter 1 appears as
+We will use book names and line numbers to represent location of a word within a book.  This will require adding names and line numbers to the lines of each book we process.  For example, in the version :download:`mobydick.txt_ln  <mobydick.txt_ln>` of mobydick.txt with line numbers, the first line of Chapter 1 appears as
 
   ``mobydick 507 Call me Ishmael.  Some years ago--never mind how long``
 
-since that appears on the 507th line of that book file.  
+since that line appears as the 507th line of that book file.  
 
 
 #. Create a simple search index by writing a mapper and a reducer described as follows:
@@ -590,16 +600,17 @@ since that appears on the 507th line of that book file.
 
    For the reducer, you can use the `identity reducer`_ provided for your language.
 
-   Before applying your code to an entire book, test it with some small data, e.g., these two lines:
+   Before applying your code to an entire book, use the Test interface to check it with some small data, e.g., these two lines:
 
    ::
       
-      try 1 This is the first line
-      try 2 This is another line``
+      try 1 chr(9) This is the first line
+      try 2 chr(9633) This is another line``
 
-   The expected output for this input is
+   The expected output for that input is
 
    ::
+      
       another try 2
       first try 1
       is try 1
@@ -612,11 +623,11 @@ since that appears on the 507th line of that book file.
       
    Note:  The keys should appear in sorted order in the test output, but the values might not be sorted.  For example,
 
-     `` line try 2``
+     ``line try 2``
 
    might appear before
 
-      `` line try 1``
+      ``line try 1``
 
    in the test output.
 
