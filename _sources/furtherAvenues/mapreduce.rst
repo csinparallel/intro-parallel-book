@@ -471,7 +471,7 @@ programs,and what to do if something goes wrong with your WMR job.
     :linenos:
     :language: python
 
-.. _`identity mappers and reducers`
+.. _`identity mappers and reducers`:
 
 Here are identity mappers and reducers for some languages.
 
