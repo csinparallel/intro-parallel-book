@@ -523,6 +523,33 @@ Java        :download:`idmapper.java <code/id-identity/idmapper.java>`     :down
                computing, so it cannot handle large data.
 
 
+Additional Notes
+""""""""""""""""
+
+It is possible that input data files to mappers may be treated
+differently than as described in the above example. For example, a
+mapper function might be used as a second pass by operating on the
+reducer results from a previous map-reduce cycle. Or the data may
+be formatted differently than a text file from a novel or poem.
+These notes pertain to those cases.
+
+In WMR, each line of data is treated as a key-value pair of
+strings, where the key consists of all characters before the first
+``TAB`` character in that line, and the value consists of all
+characters after that first ``TAB`` character. Each call of
+``mapper()`` operates on one line and that function's two arguments
+are the key and value from that line.
+
+If there are multiple ``TAB`` characters in a line, all ``TAB``
+characters after the first remain as part of the ``value`` argument
+of ``mapper()``.
+
+If there are *no* ``TAB`` characters in a data line (as is the case
+with all of our fish lines above), an empty string is created for
+the value and the entire line's content is treated as the key. This
+is why the key is split in the mapper shown above.
+
+
 4.1.4 WMR Exercises
 ^^^^^^^^^^^^^^^^^^^
 
@@ -653,7 +680,7 @@ since that line appears as the 507th line of that book file.
 
      You can examine the output of a successful WMR job by scrolling in the ``Job Succeeded`` page.
 
-     Alternatively, you can retrieve the output from a job named ``jobname`` by downloading from the data path ``/user/wmr/out/jobname/000000/`` .
+     Alternatively, you can retrieve the output from a job named ``jobname`` by downloading from the data path ``/user/wmr/out/jobname/000000/`` within WMR.
 
 #. Now use your mapper and reducer to create a search index for multiple books.  The example data set ``/shared/gutenberg/loc_set1`` contains the following prefixed Project Gutenberg books.
    
@@ -663,38 +690,10 @@ since that line appears as the 507th line of that book file.
    - /shared/gutenberg/loc/AnnaKarenina.txt_loc
 
 
-#. A multicycle problem, such as sorting the index?  A numerical problem like movie ratings? Develop code for handling HTML for web crawling and page rank??
+#. [A multicycle problem, such as sorting the index?  A numerical problem like movie ratings? Develop code for handling HTML for web crawling and page rank??]
 
 
-Additional Notes
-""""""""""""""""
-
-It is possible that input data files to mappers may be treated
-differently than as described in the above example. For example, a
-mapper function might be used as a second pass by operating on the
-reducer results from a previous map-reduce cycle. Or the data may
-be formatted differently than a text file from a novel or poem.
-These notes pertain to those cases.
-
-In WMR, each line of data is treated as a key-value pair of
-strings, where the key consists of all characters before the first
-``TAB`` character in that line, and the value consists of all
-characters after that first ``TAB`` character. Each call of
-``mapper()`` operates on one line and that function's two arguments
-are the key and value from that line.
-
-If there are multiple ``TAB`` characters in a line, all ``TAB``
-characters after the first remain as part of the ``value`` argument
-of ``mapper()``.
-
-If there are *no* ``TAB`` characters in a data line (as is the case
-with all of our fish lines above), an empty string is created for
-the value and the entire line's content is treated as the key. This
-is why the key is split in the mapper shown above.
-
-
-
-
+--------
 
 (Suzanne's outline:
   *
