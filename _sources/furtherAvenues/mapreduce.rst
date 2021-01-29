@@ -15,11 +15,11 @@ A MapReduce framework such as Hadoop provides most of the details of data handli
 
 - The *mapper* function operates on the input data and generates *key-value pairs* that represent some information of interest from that input. 
 
-  For example, if we are interested in finding all occurrences of words in a data set of web pages, a mapper function might operate on one line of a web page and produce a key-value pair for each word in that line, where the key is that word and the value is the name of that web page, e.g., ``("the", "mysite/index.html")``.    
+  For example, if we are interested in finding all occurrences of words in a data set of web pages, a mapper function might operate on one line of a web page and produce a key-value pair for each word in that line, where the key is that word and the value is the name of that web page, e.g., ("the", "mysite/index.html").    
 
 - The *reducer* function acts on all key-value pairs produced by mappers *that have the same key* and produces other key-value pairs that distill or summarize the interesting information in those input pairs.  
 
-  For example, if we're interested in how frequently each word appears in each web page, and the input key-value pairs have the form ``("the", "mysite/index.html")``, then a reducer might produce key-value pairs of the form ``("the mysite/index.html", "28")`` where 28 is the count of input pairs matching that web-page value.  
+  For example, if we're interested in how frequently each word appears in each web page, and the input key-value pairs have the form ("the", "mysite/index.html"), then a reducer might produce key-value pairs of the form ("the mysite/index.html", "28") where 28 is the count of input pairs matching that web-page value.  
 
 Figure 1 shows the effects of calling mappers on each line of each split of input data, then calling reducers on the various key-value pairs produced by those mappers.  
 
@@ -39,21 +39,21 @@ By writing the mapper and reducer functions for a MapReduce framework, a program
 #. Goal
      Count frequencies of all words in all web pages in a data set of web pages
    mapper
-     Read one line of input from a web page *wpname*, and produce a key-value pair ``(`` *"w"* ``,`` *"wpname"* ``)`` for each word *w* that appears on that line
+     Read one line of input from a web page *wpname*, and produce a key-value pair ( *"w"*, *"wpname"*) for each word *w* that appears on that line
    reducer
-     Receive all key-value pairs ``(`` *"w"* ``,`` *"wpname"* ``)`` for a given word *w*, and produce one key-value pair ``(`` *"w wpname"* ``,`` *"ct"* ``)`` for each web page *wpname*, where *ct* is the number of input pairs with value *wpname*.
+     Receive all key-value pairs (*"w"*, *"wpname"*) for a given word *w*, and produce one key-value pair (*"w wpname"*, *"ct"*) for each web page *wpname*, where *ct* is the number of input pairs with value *wpname*.
 #. Goal
      For every word found in a data set of web pages, produce a list of all line numbers of web pages containing that word.
    mapper
-     Read one line of input from a web page *wpname*, and produce a key-value pair ``(`` *"w"* ``,`` *"ln wpname"* ``)`` for each word *w* that appears on that line, where *ln* is the line number within *wpname* that was read
+     Read one line of input from a web page *wpname*, and produce a key-value pair (*"w"*, *"ln wpname"*) for each word *w* that appears on that line, where *ln* is the line number within *wpname* that was read
    reducer
-     Receive all key-value pairs ``(`` *"w"* ``,`` *"ln wpname"* ``)`` for a given word ``*w*``, and produce one key-value pair ``(`` *"w wpname"* ``,`` *"ln1 ln2 ln3 ..."* ``)`` for each web page *wpname*, where *lnN* is the *N* th value of *ln* among input pairs with values *ln wpname*
+     Receive all key-value pairs (*"w"*, *"ln wpname"*) for a given word *w*, and produce one key-value pair (*"w wpname"*, *"ln1 ln2 ln3 ..."*) for each web page *wpname*, where *lnN* is the *N* th value of *ln* among input pairs with values *ln wpname*
 #. Goal
      Find the average rating for each movie in a data set of movie ratings.
    mapper
-     Read one movie rating, consisting of an integer movie id *mid*, an integer rating *r* from 0 to 5, and other information such as reviewer and date.  Produce a pair ``(`` *"mid"* ``,`` *"r"* ``)``
+     Read one movie rating, consisting of an integer movie id *mid*, an integer rating *r* from 0 to 5, and other information such as reviewer and date.  Produce a pair (*"mid"*, *"r"*)
    reducer
-     Receive all key-value pairs ``(`` *"mid"* ``,`` *"r"* ``)`` for a given movie id *mid*, and produce a pair ``(`` *"mid"* ``,`` *"ave"* ``)`` where *ave* is the average value of *r* among all those input pairs.  
+     Receive all key-value pairs (*"mid"*, *"r"*) for a given movie id *mid*, and produce a pair (*"mid"*, *"ave"*) where *ave* is the average value of *r* among all those input pairs.  
 
 Besides providing the code for a mapper and a reducer, a MapReduce programmer must also enter configuration options for the framework, e.g., specifying where to find the data set, what type of data that data set contains, where to store the results, perhaps indicating how to split the data set, etc. 
 
@@ -154,7 +154,7 @@ then the output should be:
     fish,   2
     Fish,   2
     fish.   1
-    Fish.	1
+    Fish.   1
 
 As this output indicates, we did not make any attempt to trim
 punctuation characters in this first example. Nor did we consider that
@@ -169,7 +169,7 @@ lowercase conversion to your mapper code as you work through the example.
   - The WebMapReduce system will sort the words
   according to the ASCII codes of the characters within words.
 
-  - As we shall see, the word and its count will be separated by a TAB character in WebMapReduce output.
+  - As we shall see, each word and its count will be separated by a ``TAB`` character in WebMapReduce output.
 
 What follows is a plan for the mapper and reducer functions. 
 
@@ -186,23 +186,23 @@ could emit the following combined output:
 
 ::
 
-    One 1
-    fish, 1
-    fish, 1
-    Two 1
+    One     1
+    fish,   1
+    fish,   1
+    Two     1
 
-    Red 1
-    Fish, 1
-    Blue 1
-    fish. 1
+    Red     1
+    Fish,   1
+    Blue    1
+    fish.   1
 
-    Blue 1
-    Fish, 1
-    Two 1
-    Fish. 1
+    Blue    1
+    Fish,   1
+    Two     1
+    Fish.   1
 
 The reducers will compute the sum of all the *count* values for a
-given word *w*, then produce the key-value pair (*w*, *sum*).
+given word *w*, then produce the key-value pair (*w*, *sum*).  Each pair appears as *w* ``TAB`` *sum* in the output.
 
 In this example, we can envision a reducer for each distinct word found
 by the three mappers, where the reducer gets a list of single counts 
@@ -351,7 +351,7 @@ consisting of the word being counted and ``sum``, which holds the
 number of times that word appeared in *all* of the original data.
 
 4.1.2.2 Running the example code on WebMapReduce
-""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""
 
 To run WMR with this combination of data, mapper, and reducer,
 carry out the following steps.
@@ -410,8 +410,8 @@ If something doesn't work as described here, the following section
 may help with troubleshooting. *Read it next in any case so that you
 know what you can do when you work on your own new examples.*
 
-4.1.3 More about using WMR; exercises
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+4.1.3 More about using WMR
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Using WMR and its test mode
 """""""""""""""""""""""""""
@@ -444,18 +444,18 @@ programs,and what to do if something goes wrong with your WMR job.
 
    ::
 
-      Blue 1
-      Blue  1
-      fish, 1
-      fish, 1
-      fish. 1
-      Fish, 1
-      Fish, 1
-      Fish. 1
-      One 1
-      Red 1
-      Two 1
-      Two 1
+      Blue    1
+      Blue    1
+      fish,   1
+      fish,   1
+      fish.   1
+      Fish,   1
+      Fish,   1
+      Fish.   1
+      One     1
+      Red     1
+      Two     1
+      Two     1
 
   Observe that the output is sorted, due to the shuffling step.
   However, this does show all the key-value pairs that result from
@@ -492,19 +492,19 @@ Java        :download:`idmapper.java <code/id-identity/idmapper.java>`     :down
 
    ::
 
-      Blue 2
-      fish, 2
-      fish. 1
-      Fish, 2
-      Fish. 1
-      One 1
-      Red 1
-      Two 2
+      Blue    2
+      fish,   2
+      fish.   1
+      Fish,   2
+      Fish.   1
+      One     1
+      Red     1
+      Two     2
 
    *Note:* Use a ``TAB`` character to separate the key and value in
    the input lines above. To keep a test case around, it is easier to
    enter your data in an editor, then cut and paste to enter that data
-   in the text box. Alternatively, you can"Upload" a file that
+   in the text box. Alternatively, you can "Upload" a file that
    contains the data.
 
 -  Unfortunately, the current WMR system does *not* provide very
@@ -522,8 +522,12 @@ Java        :download:`idmapper.java <code/id-identity/idmapper.java>`     :down
                computing, so it cannot handle large data.
 
 
-Exercises:  Next Steps with word counting
-"""""""""""""""""""""""""""""""""""""""""
+4.1.4 WMR Exercises
+^^^^^^^^^^^^^^^^^^^
+
+
+Next Steps with word counting
+"""""""""""""""""""""""""""""
 
 
 #. In WMR, you can choose to use your own input data files. Try
@@ -553,8 +557,8 @@ Exercises:  Next Steps with word counting
    end of each line. Each of you mapper functions works on one line.
    Try one of these.
 
-Exercises:  Creating a search index
-"""""""""""""""""""""""""""""""""""
+Creating a search index
+"""""""""""""""""""""""
 
 Consider our original motivating example for MapReduce, namely creating a search engine.  A web-search engine must perform three processes.
 
@@ -569,18 +573,18 @@ MapReduce could be used in each of these three stages.
 - For web crawling, the following MapReduce operation could assemble a list of pages to retrieve.
   
   mapper
-    Extract all destination pages of hyperlinks in each web page in the data set so far, and produce a key-value pair ``(`` *"dest"* ``,`` *"page"* ``)`` for each hyperlink, where *dest* is the destination of that hyperlink and *page* is the web page containing that hyperlink.
+    Extract all destination pages of hyperlinks in each web page in the data set so far, and produce a key-value pair (*"dest"*, *"page"*) for each hyperlink, where *dest* is the destination of that hyperlink and *page* is the web page containing that hyperlink.
   reducer
-    For the reducer call handling all key-value pairs ``(`` *"dest"* ``,`` *"page"* ``)``, produce a single key-value pair ``(`` *"dest"* ``, "" )`` . 
+    For the reducer call handling all key-value pairs (*"dest"*, *"page"*), produce a single key-value pair (*"dest"*," )`` . 
 
 - MapReduce programming could create a search index from a given set of pages, as described below.
 
-- For the search algorithm, MapReduce computations could produce measures of relevance for ordering the search results.  For example, one indicator of relevance of a page is the number of times that page occurs *as a destination of a hyperlink* among all web pages in the data set.  This indicator assumes that more important websites will likely be destinations of hyperlinks from other website - this was key assumption of Google's original search algorithm, called ``PageRank <https://en.wikipedia.org/wiki/PageRank>``_.  To compute that indicator, we could use this MapReduce operation.
+- For the search algorithm, MapReduce computations could produce measures of relevance for ordering the search results.  For example, one indicator of relevance of a page is the number of times that page occurs *as a destination of a hyperlink* among all web pages in the data set.  This indicator assumes that more important websites will likely be destinations of hyperlinks from other website - this was key assumption of Google's original search algorithm, called `PageRank <https://en.wikipedia.org/wiki/PageRank>`_.  To compute that indicator, we could use this MapReduce operation.
   
   mapper
     Same mapper as indicated for web crawling above.
   reducer
-    Receive all key-value pairs ``(`` *"dest"* ``,`` *"page"* ``)`` for a particular destination web page *dest*, and produce a single key-value pair ``(`` *"dest"* ``,`` *"ct"* ``)`` where *ct* is the count of key-value pairs received for *dest*.  
+    Receive all key-value pairs (*"dest"*, *"page"*) for a particular destination web page *dest*, and produce a single key-value pair (*"dest"*, *"ct"*) where *ct* is the count of key-value pairs received for *dest*.  
 
 Actually programming the three processes for a web-search engine requires software parsing web pages in order to separate the word contents of a page from the formatting instructions (e.g., HTML markup), and retrieving the destination pages of hyperlinks.  Rather than delve into that web-page parsing software here, we will instead explore how to create a search index *for text files* such as Project Gutenberg books in the following exercises.  The same MapReduce algorithm ideas could produce a search index for web pages, if we had parsing software.  
 
@@ -594,13 +598,13 @@ since that line appears as the 507th line of that book file.
 #. Create a simple search index by writing a mapper and a reducer described as follows:
    
    mapper
-     For each line of input (with name and line number prepended) in a book, produce a key-value pair ``(`` *"w"* ``,`` *"book ln"* ``)`` for each word *w* that appears on that line, where *book* is the name of that book and *ln* is the line number for that line.
+     For each line of input (with name and line number prepended) in a book, produce a key-value pair (*"w"*, *"book ln"*) for each word *w* that appears on that line, where *book* is the name of that book and *ln* is the line number for that line.
    reducer
      Identity reducer:  emit each key-value pair that a reducer receives.
 
    Your mapper should first obtain the value *book ln* from its line, consisting of all characters in that line before the second space.  Then, it should enter a loop that finds each word *w* in that line *after that second space* and emit a pair with that word *w* as the key and *book ln* as the value.
 
-   For the reducer, you can use the `identity reducer`_ provided for your language.
+   For the reducer, you can use the `identity reducer`_  provided for your language.
 
    Before applying your code to an entire book, use the Test interface to check it with some small data, e.g., these two lines:
 
