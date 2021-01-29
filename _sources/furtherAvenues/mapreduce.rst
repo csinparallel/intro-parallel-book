@@ -15,11 +15,11 @@ A MapReduce framework such as Hadoop provides most of the details of data handli
 
 - The *mapper* function operates on the input data and generates *key-value pairs* that represent some information of interest from that input. 
 
-  For example, if we are interested in finding all occurrences of words in a data set of web pages, a mapper function might operate on one line of a web page and produce a key-value pair for each word in that line, where the key is that word and the value is the name of that web page, e.g., ``("the", "mysite/index.html")``.    
+  For example, if we are interested in finding all occurrences of words in a data set of web pages, a mapper function might operate on one line of a web page and produce a key-value pair for each word in that line, where the key is that word and the value is the name of that web page, e.g., ("the", "mysite/index.html").    
 
 - The *reducer* function acts on all key-value pairs produced by mappers *that have the same key* and produces other key-value pairs that distill or summarize the interesting information in those input pairs.  
 
-  For example, if we're interested in how frequently each word appears in each web page, and the input key-value pairs have the form ``("the", "mysite/index.html")``, then a reducer might produce key-value pairs of the form ``("the mysite/index.html", "28")`` where 28 is the count of input pairs matching that web-page value.  
+  For example, if we're interested in how frequently each word appears in each web page, and the input key-value pairs have the form ("the", "mysite/index.html"), then a reducer might produce key-value pairs of the form ("the mysite/index.html", "28") where 28 is the count of input pairs matching that web-page value.  
 
 Figure 1 shows the effects of calling mappers on each line of each split of input data, then calling reducers on the various key-value pairs produced by those mappers.  
 
@@ -38,22 +38,22 @@ By writing the mapper and reducer functions for a MapReduce framework, a program
 
 #. Goal
      Count frequencies of all words in all web pages in a data set of web pages
-   mapper.
-     Read one line of input from a web page *wpname*, and produce a key-value pair ``(`` *"w"* ``,`` *"wpname"* ``)`` for each word *w* that appears on that line
+   mapper
+     Read one line of input from a web page *wpname*, and produce a key-value pair ( *"w"*, *"wpname"*) for each word *w* that appears on that line
    reducer
-     Receive all key-value pairs ``(`` *"w"* ``,`` *"wpname"* ``)`` for a given word *w*, and produce one key-value pair ``(`` *"w wpname"* ``,`` *"ct"* ``)`` for each web page *wpname*, where *ct* is the number of input pairs with value *wpname*.
+     Receive all key-value pairs (*"w"*, *"wpname"*) for a given word *w*, and produce one key-value pair (*"w wpname"*, *"ct"*) for each web page *wpname*, where *ct* is the number of input pairs with value *wpname*.
 #. Goal
      For every word found in a data set of web pages, produce a list of all line numbers of web pages containing that word.
    mapper
-     Read one line of input from a web page *wpname*, and produce a key-value pair ``(`` *"w"* ``,`` *"ln wpname"* ``)`` for each word *w* that appears on that line, where *ln* is the line number within *wpname* that was read
+     Read one line of input from a web page *wpname*, and produce a key-value pair (*"w"*, *"ln wpname"*) for each word *w* that appears on that line, where *ln* is the line number within *wpname* that was read
    reducer
-     Receive all key-value pairs ``(`` *"w"* ``,`` *"ln wpname"* ``)`` for a given word ``*w*``, and produce one key-value pair ``(`` *"w wpname"* ``,`` *"ln1 ln2 ln3 ..."* ``)`` for each web page *wpname*, where *lnN* is the *N* th value of *ln* among input pairs with values *ln wpname*
+     Receive all key-value pairs (*"w"*, *"ln wpname"*) for a given word *w*, and produce one key-value pair (*"w wpname"*, *"ln1 ln2 ln3 ..."*) for each web page *wpname*, where *lnN* is the *N* th value of *ln* among input pairs with values *ln wpname*
 #. Goal
      Find the average rating for each movie in a data set of movie ratings.
    mapper
-     Read one movie rating, consisting of an integer movie id *mid*, an integer rating *r* from 0 to 5, and other information such as reviewer and date.  Produce a pair ``(`` *"mid"* ``,`` *"r"* ``)``
+     Read one movie rating, consisting of an integer movie id *mid*, an integer rating *r* from 0 to 5, and other information such as reviewer and date.  Produce a pair (*"mid"*, *"r"*)
    reducer
-     Receive all key-value pairs ``(`` *"mid"* ``,`` *"r"* ``)`` for a given movie id *mid*, and produce a pair ``(`` *"mid"* ``,`` *"ave"* ``)`` where *ave* is the average value of *r* among all those input pairs.  
+     Receive all key-value pairs (*"mid"*, *"r"*) for a given movie id *mid*, and produce a pair (*"mid"*, *"ave"*) where *ave* is the average value of *r* among all those input pairs.  
 
 Besides providing the code for a mapper and a reducer, a MapReduce programmer must also enter configuration options for the framework, e.g., specifying where to find the data set, what type of data that data set contains, where to store the results, perhaps indicating how to split the data set, etc. 
 
@@ -81,9 +81,9 @@ MapReduce frameworks represent implement several parallel programming patterns.
 
 - The *Map-Reduce* pattern, in which data processing is accomplished using a mapper function and a reducer function as described above.
 
-The Map-Reduce pattern for problem solving was pioneered decades ago in *functional programming* languages such as LISP or Scheme, generally without parallelism. Google adapted the map-reduce programming model to function efficiently on large clusters of computers to process vast amounts of data--for example, Google's selection of the entire web (`Dean and Ghemawat,2004 <http://labs.google.com/papers/mapreduce.html>`_).
+The Map-Reduce pattern for problem solving was pioneered decades ago in *functional programming* languages such as LISP or Scheme, generally without parallelism. Google adapted the map-reduce programming model to function efficiently on large clusters of computers to process vast amounts of data--for example, Google's selection of the entire web (`Dean and Ghemawat,2004 <https://www.usenix.org/legacy/events/osdi04/tech/full_papers/dean/dean.pdf>`_).
 
-Our discussion is based on the MapReduce framework `Hadoop <http://hadoop.apache.org/core/>`_, an open-source implementation of the Apache Foundation, which was started primarily by Yahoo!.  Hadoop is not the only MapReduce framework:  before Hadoop, Google implemented a proprietary framework of their own described in the paper above;  some other implementations are intended for smaller-scale computations that fit on a single computer.
+Our discussion is based on the MapReduce framework `Hadoop <https://hadoop.apache.org>`_, an open-source implementation of the Apache Foundation, which was started primarily by Yahoo!.  Hadoop is not the only MapReduce framework:  before Hadoop, Google implemented a proprietary framework of their own described in the paper above;  some other implementations are intended for smaller-scale computations that fit on a single computer.
 
 Hadoop's ability to complete a correct computation even when there are crashes is an example of *fault tolerance*.  We already mentioned several fault-tolerance features in Hadoop, including replication of the data set and automated continuation of a large computation.  Other fault-tolerance features include guaranteeing that copies of data splits reside on different computers, and the computational design where all mappers complete before any of the shuffle, and all of the shuffle completes before any reducers begin (this guards against errors due to partially completed stages of computation).  
 
@@ -113,7 +113,7 @@ WMR <http://webmapreduce.sourceforge.net/docs/using/index.html>`_.
 For this activity, you should be able to follow along with the
 instructions below and determine how to use WMR.
 
-An example of map-reduce computing with WMR: counting words
+4.1.2.1 An example of map-reduce computing with WMR: counting words
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 To program with map-reduce, you must first decide how to use
@@ -147,14 +147,14 @@ then the output should be:
 
 ::
 
-    Blue 2
-    One 1
-    Red 1
-    Two 2
-    fish, 2
-    Fish, 2
-    fish. 1
-    Fish. 1
+    Blue    2
+    One     1
+    Red     1
+    Two     2
+    fish,   2
+    Fish,   2
+    fish.   1
+    Fish.   1
 
 As this output indicates, we did not make any attempt to trim
 punctuation characters in this first example. Nor did we consider that
@@ -164,10 +164,12 @@ practice using WebMapReduce with the initial functions described
 below. However, you can consider adding punctuation removal and 
 lowercase conversion to your mapper code as you work through the example.
 
-.. Note::
+.. Notes::
 
-  The WebMapReduce system will sort the words
+  - The WebMapReduce system will sort the words
   according to the ASCII codes of the characters within words.
+
+  - As we shall see, each word and its count will be separated by a ``TAB`` character in WebMapReduce output.
 
 What follows is a plan for the mapper and reducer functions. 
 
@@ -184,27 +186,27 @@ could emit the following combined output:
 
 ::
 
-    One 1
-    fish, 1
-    fish, 1
-    Two 1
+    One     1
+    fish,   1
+    fish,   1
+    Two     1
 
-    Red 1
-    Fish, 1
-    Blue 1
-    fish. 1
+    Red     1
+    Fish,   1
+    Blue    1
+    fish.   1
 
-    Blue 1
-    Fish, 1
-    Two 1
-    Fish. 1
+    Blue    1
+    Fish,   1
+    Two     1
+    Fish.   1
 
 The reducers will compute the sum of all the *count* values for a
-given word *w*, then produce the key-value pair (*w*, *sum*).
+given word *w*, then produce the key-value pair (*w*, *sum*).  Each pair appears as *w* ``TAB`` *sum* in the output.
 
 In this example, we can envision a reducer for each distinct word found
 by the three mappers, where the reducer gets a list of single counts 
-per occurance of the word that a mapper found, loking like this:
+per occurance of the word that a mapper found, looking like this:
 
 ::
 
@@ -348,8 +350,8 @@ output from the mapper. This time, only one pair is emitted,
 consisting of the word being counted and ``sum``, which holds the
 number of times that word appeared in *all* of the original data.
 
-Running the example code on WebMapReduce
-""""""""""""""""""""""""""""""""""""""""
+4.1.2.2 Running the example code on WebMapReduce
+""""""""""""""""""""""""""""""""""""""""""""""""
 
 To run WMR with this combination of data, mapper, and reducer,
 carry out the following steps.
@@ -408,8 +410,8 @@ If something doesn't work as described here, the following section
 may help with troubleshooting. *Read it next in any case so that you
 know what you can do when you work on your own new examples.*
 
-4.1.3 More about using WMR; exercises
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+4.1.3 More about using WMR
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Using WMR and its test mode
 """""""""""""""""""""""""""
@@ -442,18 +444,18 @@ programs,and what to do if something goes wrong with your WMR job.
 
    ::
 
-      Blue 1
-      Blue  1
-      fish, 1
-      fish, 1
-      fish. 1
-      Fish, 1
-      Fish, 1
-      Fish. 1
-      One 1
-      Red 1
-      Two 1
-      Two 1
+      Blue    1
+      Blue    1
+      fish,   1
+      fish,   1
+      fish.   1
+      Fish,   1
+      Fish,   1
+      Fish.   1
+      One     1
+      Red     1
+      Two     1
+      Two     1
 
   Observe that the output is sorted, due to the shuffling step.
   However, this does show all the key-value pairs that result from
@@ -468,6 +470,8 @@ programs,and what to do if something goes wrong with your WMR job.
    .. literalinclude:: code/id-identity/idmapper.py
     :linenos:
     :language: python
+
+.. _`identity mappers and reducers`:
 
 Here are identity mappers and reducers for some languages.
 
@@ -489,19 +493,19 @@ Java        :download:`idmapper.java <code/id-identity/idmapper.java>`     :down
 
    ::
 
-      Blue 2
-      fish, 2
-      fish. 1
-      Fish, 2
-      Fish. 1
-      One 1
-      Red 1
-      Two 2
+      Blue    2
+      fish,   2
+      fish.   1
+      Fish,   2
+      Fish.   1
+      One     1
+      Red     1
+      Two     2
 
    *Note:* Use a ``TAB`` character to separate the key and value in
    the input lines above. To keep a test case around, it is easier to
    enter your data in an editor, then cut and paste to enter that data
-   in the text box. Alternatively, you can"Upload" a file that
+   in the text box. Alternatively, you can "Upload" a file that
    contains the data.
 
 -  Unfortunately, the current WMR system does *not* provide very
@@ -517,77 +521,6 @@ Java        :download:`idmapper.java <code/id-identity/idmapper.java>`     :down
    .. note:: Do not use ``Test`` for large data, but only to debug
                your mappers and reducers. This option does *not* use cluster
                computing, so it cannot handle large data.
-
-
-Next Steps
-""""""""""
-
-
-#. In WMR, you can choose to use your own input data files. Try
-   choosing to 'browse' for a file, and using this
-   :download:`mobydick.txt <mobydick.txt>` as file
-   input.
-
-#. You have likely noticed that capitalized words are treated
-   separately from lowercase words. Change your mapper to also convert
-   each word to lowercase before checking whether it is in the
-   dictionary.
-
-#. Also remove punctuation from each word after splitting the line 
-   (so all the 'fish' variations get counted together).
-
-#. There are a large number of files of books from Project
-   Gutenberg available on the Hadoop system underlying WebMapReduce.
-   First start by trying this book as an input file by choosing
-   'Cluster Path' as Input in WMR and typing one of these into the
-   text box:
-
-   | /shared/gutenberg/WarAndPeace.txt
-   | /shared/gutenberg/CompleteShakespeare.txt
-   | /shared/gutenberg/AnnaKarenina.txt
-
-   These books have many lines of text with 'newline' chacters at the
-   end of each line. Each of you mapper functions works on one line.
-   Try one of these.
-
-#. Next, you should try a collection of many books, each of which
-   has no newline characters in them. In this case, each mapper 'task'
-   in Hadoop will work on one whole book (your dictionary of words per
-   mapper will be for the whole book, and the mappers will be running
-   on many books at one time). In the Hadoop file system inside WMR we
-   have these datasets available for this:
-
-       =====================================    ================
-       'Cluster path' to enter in WMR           Number of books
-       =====================================    ================
-       /shared/gutenberg/all\_nonl/group10      2018
-       /shared/gutenberg/all\_nonl/group11      294
-       /shared/gutenberg/all\_nonl/group6       830
-       /shared/gutenberg/all\_nonl/group8       541
-       =====================================    ================
-
-   While using many books, it will be useful for you to experiment
-   with the different datasets so that you can get a sense for how
-   much a system like Hadoop can process.
-
-   To do this, it will also be useful for you to save your
-   configuration so that you can use it again with a different number
-   of reducer tasks. Once you have entered your mapper and reducer
-   code, picked the Python3 language, and given your job a descriptive
-   name, choose the `'Save'` button at the bottom of the WMR panel.
-   This will now be a `'Saved Configuration'` that you can retrieve
-   using the link on the left in the WMR page.
-
-   Try using the smallest set first (group11). Do not enter anything
-   in the map tasks box- notice that the system will choose the same
-   number of mappers as the number of books (this will show up once
-   you submit the job). Also do not enter anything for the number of
-   reduce tasks. With that many books, when the job completes you will
-   see there are many pages of output, and some interesting 'words'.
-   For the 294 books in group11, note how you obtain several pages of
-   results. You will also notice that the stripping of punctuation
-   isn't perfect. If you wish to try improving this you could, but it
-   is not necessary.
 
 
 Additional Notes
@@ -617,16 +550,158 @@ the value and the entire line's content is treated as the key. This
 is why the key is split in the mapper shown above.
 
 
+4.1.4 WMR Exercises
+^^^^^^^^^^^^^^^^^^^
 
 
+A. Next Steps with word counting
+"""""""""""""""""""""""""""""
 
 
-xxxxx
+#. In WMR, you can choose to use your own input data files. Try
+   choosing to 'browse' for a file, and using this
+   :download:`mobydick.txt <mobydick.txt>` as file
+   input.
 
-Talk about web-search in particular, and introduce the notion of the cloud.
+#. You have likely noticed that capitalized words are treated
+   separately from lowercase words. Change your mapper to also convert
+   each word to lowercase before checking whether it is in the
+   dictionary.
 
-Give students an overview of the MapReduce paradigm, and then explain how they can access/play with it. 
+#. Also remove punctuation from each word after splitting the line 
+   (so all the 'fish' variations get counted together).
 
-Talk about WebMapReduce, and give them a link to play with. 
+#. There are a large number of files of books from Project
+   Gutenberg available on the Hadoop system underlying WebMapReduce.
+   First start by trying this book as an input file by choosing
+   'Cluster Path' as Input in WMR and typing one of these into the
+   text box:
 
-Also talk about Amazon EC2 clusters, and how they can run their own MapReduce jobs on those.
+   | /shared/gutenberg/WarAndPeace.txt
+   | /shared/gutenberg/CompleteShakespeare.txt
+   | /shared/gutenberg/AnnaKarenina.txt
+
+   These books have many lines of text with 'newline' characters at the
+   end of each line. Each of you mapper functions works on one line.
+   Try one of these.
+
+B. Creating a search index
+"""""""""""""""""""""""
+
+Consider our original motivating example for MapReduce, namely creating a search engine.  A web-search engine must perform three processes.
+
+- Assemble a data set of web pages, typically obtained by *web crawling*, which collects all the web pages encountered by following all hyperlinks within all web pages for the websites to include in a search.
+
+- Create a *search index* from that data set, with an index entry for every occurrence of every word in each web page.  An index entry would include a word together with the web page where that word was found, the location of of that occurence of the word within that web page, and perhaps other context information for that occurrence.
+
+- Implement a search algorithm, which responds to a *search query* from a user by producing an ordered list of web pages relevant to that query, using the search index and factors such as prominence of a web page or other indicators of relevance to that query.
+
+MapReduce could be used in each of these three stages.
+
+- For web crawling, the following MapReduce operation could assemble a list of pages to retrieve.
+  
+  mapper
+    Extract all destination pages of hyperlinks in each web page in the data set so far, and produce a key-value pair (*"dest"*, *"page"*) for each hyperlink, where *dest* is the destination of that hyperlink and *page* is the web page containing that hyperlink.
+  reducer
+    For the reducer call handling all key-value pairs (*"dest"*, *"page"*), produce a single key-value pair (*"dest"*," )`` . 
+
+- MapReduce programming could create a search index from a given set of pages, as described below.
+
+- For the search algorithm, MapReduce computations could produce measures of relevance for ordering the search results.  For example, one indicator of relevance of a page is the number of times that page occurs *as a destination of a hyperlink* among all web pages in the data set.  This indicator assumes that more important websites will likely be destinations of hyperlinks from other website - this was key assumption of Google's original search algorithm, called `PageRank <https://en.wikipedia.org/wiki/PageRank>`_.  To compute that indicator, we could use this MapReduce operation.
+  
+  mapper
+    Same mapper as indicated for web crawling above.
+  reducer
+    Receive all key-value pairs (*"dest"*, *"page"*) for a particular destination web page *dest*, and produce a single key-value pair (*"dest"*, *"ct"*) where *ct* is the count of key-value pairs received for *dest*.  
+
+Actually programming the three processes for a web-search engine requires software parsing web pages in order to separate the word contents of a page from the formatting instructions (e.g., HTML markup), and retrieving the destination pages of hyperlinks.  Rather than delve into that web-page parsing software here, we will instead explore how to create a search index *for text files* such as Project Gutenberg books in the following exercises.  The same MapReduce algorithm ideas could produce a search index for web pages, if we had parsing software.  
+
+We will use book names and line numbers to represent location of a word within a book.  This will require adding names and line numbers to the lines of each book we process.  For example, in the version :download:`mobydick.txt_ln  <mobydick.txt_ln>` of mobydick.txt with line numbers, the first line of Chapter 1 appears as
+
+  ``mobydick 507 Call me Ishmael.  Some years ago--never mind how long``
+
+since that line appears as the 507th line of that book file.  
+
+
+#. Create and test a simple search index by writing a mapper and a reducer described as follows:
+   
+   mapper
+     For each line of input (with name and line number prepended) in a book, produce a key-value pair (*"w"*, *"book ln"*) for each word *w* that appears on that line, where *book* is the name of that book and *ln* is the line number for that line.
+   reducer
+     Identity reducer:  emit each key-value pair that a reducer receives.
+
+   Notes:
+   
+   - Your mapper should first obtain the value *book ln* from its line, consisting of all characters in that line before the second space.  Then, it should enter a loop that finds each word *w* in that line *after that second space* and emit a pair with that word *w* as the key and *book ln* as the value.
+
+   - For the reducer, you can use the `identity reducer`__  provided for your language.
+   
+     __ `identity mappers and reducers`_
+
+   - Instead of applying your code to an entire book, use the Test interface to check it with some small data, e.g., these two lines:
+
+     ::
+      
+      try 1   This is the first line
+      try 2   This is another line``
+
+     The expected output for that input is
+
+     ::
+      
+      another try     2
+      first try       1
+      is try  1
+      is try  2
+      line try        1
+      line try        2
+      the try 1
+      This try        1
+      This try        2
+      
+   - The keys should appear in sorted order in the test output, but the values might not be sorted.  For example,
+
+       ``line try        2``
+
+     might appear before
+
+       ``line try        1``
+
+     in the test output.
+
+#. Now try your mapper and reducer from the previous problem with the Project Gutenberg book :download:`mobydick.txt_loc  <mobydick.txt_loc>`.
+
+   Here are some ideas for partially checking the results.
+
+   - Choose a word *w* that appears in the output of your word-count code on ``mobydick.txt`` (*without* the file-name and line-number prefixes).  Then verify that the word count for *w* agrees with the number of lines for *w* in your search-index output.  Repeat this verification for multiple words.
+   - Choose a word *w* with a small word count in ``mobydick.txt``, and check the your search-index results manually for that word.  This will involve searching for that word in the file ``mobydick.txt_loc``, perhaps using an editor.  
+
+   Note:
+
+     You can examine the output of a successful WMR job by scrolling in the ``Job Succeeded`` page.
+
+     Alternatively, you can retrieve the output from a job named ``jobname`` by downloading from the data path ``/user/wmr/out/jobname/000000/`` within WMR.
+
+#. Now use your mapper and reducer to create a search index for multiple books.  The example data set ``/shared/gutenberg/loc_set1`` contains the following prefixed Project Gutenberg books.
+   
+   - /shared/gutenberg/loc/MobyDick.txt_loc (same as ``mobydick.txt_loc`` above)
+   - /shared/gutenberg/loc/WarAndPeace.txt_loc
+   - /shared/gutenberg/loc/CompleteShakespeare.txt_loc
+   - /shared/gutenberg/loc/AnnaKarenina.txt_loc
+
+
+#. [A multicycle problem, such as sorting the index?  A numerical problem like movie ratings? Develop code for handling HTML for web crawling and page rank??]
+
+
+--------
+
+Suzanne's outline:
+
+  Talk about web-search in particular, and introduce the notion of the cloud.
+
+  Give students an overview of the MapReduce paradigm, and then explain how they can access/play with it. 
+
+  Talk about WebMapReduce, and give them a link to play with. 
+
+  Also talk about Amazon EC2 clusters, and how they can run their own MapReduce jobs on those.
+
