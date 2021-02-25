@@ -114,7 +114,7 @@ For this activity, you should be able to follow along with the
 instructions below and determine how to use WMR.
 
 4.1.2.1 An example of map-reduce computing with WMR: counting words
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 To program with map-reduce, you must first decide how to use
 mappers and reducers in order to accomplish your computational
@@ -164,7 +164,7 @@ practice using WebMapReduce with the initial functions described
 below. However, you can consider adding punctuation removal and 
 lowercase conversion to your mapper code as you work through the example.
 
-.. Notes::
+.. note::
 
   - The WebMapReduce system will sort the words
   according to the ASCII codes of the characters within words.
@@ -555,7 +555,7 @@ is why the key is split in the mapper shown above.
 
 
 A. Next Steps with word counting
-"""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""
 
 
 #. In WMR, you can choose to use your own input data files. Try
@@ -586,7 +586,7 @@ A. Next Steps with word counting
    Try one of these.
 
 B. Creating a search index
-"""""""""""""""""""""""
+""""""""""""""""""""""""""
 
 Consider our original motivating example for MapReduce, namely creating a search engine.  A web-search engine must perform three processes.
 
