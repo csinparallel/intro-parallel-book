@@ -166,8 +166,7 @@ lowercase conversion to your mapper code as you work through the example.
 
 .. note::
 
-  - The WebMapReduce system will sort the words
-  according to the ASCII codes of the characters within words.
+  - The WebMapReduce system will sort the words according to the ASCII codes of the characters within words.
 
   - As we shall see, each word and its count will be separated by a ``TAB`` character in WebMapReduce output.
 
