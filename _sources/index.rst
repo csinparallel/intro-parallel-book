@@ -20,9 +20,9 @@ Table of Contents
 
    messagePassing/toctree.rst
 
-   commonAlgorithms/index.rst
+   commonAlgorithms/toctree.rst
 
-   furtherAvenues/index.rst
+   furtherAvenues/toctree.rst
 
 Acknowledgements
 ::::::::::::::::
