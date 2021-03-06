@@ -6,5 +6,5 @@ CHAPTER 0: Introduction
     :maxdepth: 2
 
     intro.rst
-    concepts.rst
+    performance.rst
     setup.rst
