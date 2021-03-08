@@ -44,7 +44,7 @@ There are many tutorials on-line on how to create a Raspberry Pi cluster. Here a
 
 
 Using Cloud Resources
----------------------
+^^^^^^^^^^^^^^^^^^^^^^
 
 Another way to get access to multicore and distributed systems is through cloud access. Include directions for access cloud resources here. 
 

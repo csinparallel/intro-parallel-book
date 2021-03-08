@@ -63,7 +63,7 @@ Multiprocessors fall into one of three categories:
 
 In Section 0.0, we saw that *computing* involves designing, implementing, and then running a program on a computer. As we shall see next, the kind of computer on which you will be running your program affects how you design and implement the program.
 
-0.2: Parallel Computing
+0.2 Parallel Computing
 -------------------------
 
 If you run a traditional sequential program on a multiprocessor, that program will only utilize one of the CPU’s cores. That is, if you have a laptop with an 8-core CPU but run a traditional sequential program on it, you are only using 1/8 of your laptop’s capabilities! Sequential computing thus squanders much of the potential of a modern multiprocessor.

@@ -187,7 +187,7 @@ Note finally that the :math:`Speedup_p` lines for Scenario 2 and Scenario 2 are 
 
 Computational efficiency is another term that has a precise parallel computing definition:
 
-..math::
+.. math::
 
   Efficiency_p= \frac{Speedup_p}{P}
 
@@ -235,7 +235,7 @@ Gene Amdahl was one of the pioneers of computing. In 1967, he devised a formula 
 
 Here *parPct* is the percentage of the runtime spent in activities that benefit from parallelization, *seqPct* is the percentage of a computation’s runtime spent in activities that do not benefit from parallelization (i.e., that must be performed sequentially), and the numerator Time1 is the time when P == 1, normalized to the percentage 100% (i.e., 1.0). Regardless of the value of *parPct*, as P → ∞, the fraction *parPct/P* → 0, leaving the fraction on the right. 
 
-To illustrate the implications of this, let’s revisit Scenario 1 of our pizza-eating problem. In Scenario 1a, eating the pizza took us 9 minutes, of which the parallelizable part (eating the pizza) took us 8 minutes. The parallelizable percentage *parPct* is thus 8 / 9 = 0.89 (89%), which means the sequential percentage seqPct is 1.0 – 0.89 = 0.11 (11%). Plugging 0.11 into Amdahl’s Law for *seqPct*, we get 1 / 0.11 = 9 as the upper bound on :math:`Speedup_p` for Scenario 1. To illustrate this, Figure 0-8 shows :math:`Speedup_p` for Scenario 1 as P increases from 2 through 2,048 people:
+To illustrate the implications of this, let’s revisit Scenario 1 of our pizza-eating problem. In Scenario 1a, eating the pizza took us 9 minutes, of which the parallelizable part (eating the pizza) took us 8 minutes. The parallelizable percentage *parPct* is thus 8 / 9 = 0.89 (89%), which means the sequential percentage *seqPct* is 1.0 – 0.89 = 0.11 (11%). Plugging 0.11 into Amdahl’s Law for *seqPct*, we get 1 / 0.11 = 9 as the upper bound on :math:`Speedup_p` for Scenario 1. To illustrate this, Figure 0-8 shows :math:`Speedup_p` for Scenario 1 as P increases from 2 through 2,048 people:
 
 .. figure:: images/0-17.AmdahlScenario1.png
    :scale: 50 %
