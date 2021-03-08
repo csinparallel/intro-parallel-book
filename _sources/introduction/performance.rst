@@ -161,13 +161,16 @@ Put differently, the limitation we encounter as we increase P depends on the pro
 
 In the world of parallel computing, the term speedup has the following very precise meaning:
 
-SpeedupP=Time1TimeP
+.. math::
 
-That is, to compute the speedup for a given value of P, we divide the time needed to solve the problem when P == 1 by the time it takes to solve the problem when using P PEs. In a perfect world, SpeedupP would equal P, but we don’t live in a perfect world.
+   Speedup_p = \frac{Time_1}{Time_p}
 
-To illustrate, in our Scenario 1a of our pizza-eating problem, Time1 == 9. In Scenario 1b, Time2 == 5, so Speedup2 == 9 / 5 = 1.8, which is less than but fairly close to the ideal value 2. In Scenario 1c, Time4 == 3, so Speedup4 == 9 / 3 = 3, which is also somewhat less than the ideal 4. In Scenario 1d, Time8 == 2, so Speedup8 == 9 / 2 = 4.5, which is much less than the ideal 8. 
 
-By comparison, in Scenario 2a, Time1 == 33. In Scenario 2b, Time2 == 17, so Speedup2 == 33 / 17 = 1.94, which is much closer to the ideal 2 than we had in Scenario 1b. In Scenario 2c, Time4 == 9, so Speedup4 == 33 / 9 = 3.67, which is closer to the ideal of 4 than we had in Scenario 1c. In Scenario 2d, Time8 == 5, so Speedup8 == 33 / 5 = 6.6, which is much closer to the ideal 8 than we had in Scenario 1d. 
+That is, to compute the speedup for a given value of P, we divide the time needed to solve the problem when P == 1 by the time it takes to solve the problem when using P PEs. In a perfect world, :math:`Speedup_p` would equal P, but we don’t live in a perfect world.
+
+To illustrate, in our Scenario 1a of our pizza-eating problem, :math:`Time_1 == 9`. In Scenario 1b, :math:`Time_2 == 5`, so :math:`Speedup_2 == 9 / 5 = 1.8`, which is less than but fairly close to the ideal value 2. In Scenario 1c, :math:`Time_4 == 3`, so :math:`Speedup_4 == 9 / 3 = 3`, which is also somewhat less than the ideal 4. In Scenario 1d, :math:`Time_8 == 2`, so :math:`Speedup_8 == 9 / 2 = 4.5`, which is much less than the ideal 8. 
+
+By comparison, in Scenario 2a, :math:`Time_1 == 33`. In Scenario 2b, :math:`Time_2 == 17`, so :math:`Speedup_2 == 33 / 17 = 1.94`, which is much closer to the ideal 2 than we had in Scenario 1b. In Scenario 2c, :math:`Time_4 == 9`, so :math:`Speedup_4 == 33 / 9 = 3.67`, which is closer to the ideal of 4 than we had in Scenario 1c. In Scenario 2d, :math:`Time_8 == 5`, so :math:`Speedup_8 == 33 / 5 = 6.6`, which is much closer to the ideal 8 than we had in Scenario 1d. 
 
 Figure 0-15 presents a graph in which we compare the speedup values for our two scenarios:
 
@@ -176,19 +179,23 @@ Figure 0-15 presents a graph in which we compare the speedup values for our two 
 
    Figure 0-15: SpeedupP vs. P for Scenarios 1 and 2,
 
-Note that speedup is an aspect of parallelism, so we only compute SpeedupP for P > 1.
-Note also that SpeedupP increases in both Scenarios, but for all values of P: SpeedupP in Scenario 2 is better than the SpeedupP in Scenario 1. The only difference between the two scenarios is the problem size (N); it is quite common that the bigger the problem size N—the more data there is to be processed—the better SpeedupP is for any given value of P.
+Note that speedup is an aspect of parallelism, so we only compute :math:`Speedup_p` for P > 1.
 
-Note finally that the SpeedupP lines for Scenario 2 and Scenari 2 are diverging: the line for Scenario 2 is ascending more steeply (i.e., growing faster) than the SpeedupP line for Scenario 1. This is also commonplace: the bigger the size of the problem, the better the increase in SpeedupP for lower values of P. In the next section, we will see what happens as P gets larger.
+Note also that :math:`Speedup_p` increases in both Scenarios, but for all values of P: :math:`Speedup_p` in Scenario 2 is better than the :math:`Speedup_p` in Scenario 1. The only difference between the two scenarios is the problem size (N); it is quite common that the bigger the problem size N — the more data there is to be processed — the better :math:`Speedup_p` is for any given value of P.
+
+Note finally that the :math:`Speedup_p` lines for Scenario 2 and Scenario 2 are diverging: the line for Scenario 2 is ascending more steeply (i.e., growing faster) than the :math:`Speedup_p` line for Scenario 1. This is also commonplace: the bigger the size of the problem, the better the increase in :math:`Speedup_p` for lower values of P. In the next section, we will see what happens as P gets larger.
 
 Computational efficiency is another term that has a precise parallel computing definition:
 
-EfficiencyP=SpeedupPP
+..math::
 
-That is, to compute how efficient a parallel computation is for a given value of P, we divide the SpeedupP by the value P. In a perfect world, EfficiencyP would equal P/P == 1 for all values of P, but our world is far from perfect. Parallel practitioners often think they are doing well if they can achieve EfficiencyP > 0.6 (60%), so we will use that as our efficiency-acceptability threshold.
+  Efficiency_p= \frac{Speedup_p}{P}
 
-To illustrate, in Scenario 1b of our pizza-eating problem, Speedup2 == 1.8, so Efficiency2 == 1.8 / 2 = 0.9 (90%), which isn’t too bad, compared to the ideal of 1. In Scenario 1c, Speedup4 == 3, so Efficiency4 == 3 / 4 = 0.75 (75%), somewhat less than 1 but still very acceptable. In Scenario 1d, Speedup8 == 4.5, so Efficiency8 == 4.5 / 8 = 0.56 (56%); this is below our threshold of 60%, so it is too inefficient to be acceptable.
-In Scenario 2b, Speedup2 == 1.94, so Efficiency2 == 1.94 / 2 = 0.97 (97%), which is fairly close to the ideal of 1. In Scenario 2c, Speedup4 == 3.67, so Efficiency4 == 3.67 / 4 = 0.92 (92%), which is much better than Scenario 1c. Likewise, in Scenario 2d, Speedup8 == 6.6, so Efficiency8 == 6.6 / 8 = 0.83 (83%). 
+That is, to compute how efficient a parallel computation is for a given value of P, we divide the :math:`Speedup_p` by the value P. In a perfect world, :math:`Efficiency_p` would equal P/P == 1 for all values of P, but our world is far from perfect. Parallel practitioners often think they are doing well if they can achieve :math:`Efficiency_p > 0.6` (60%), so we will use that as our efficiency-acceptability threshold.
+
+To illustrate, in Scenario 1b of our pizza-eating problem, :math:`Speedup_2 == 1.8`, so :math:`Efficiency_2 == 1.8 / 2 = 0.9` (90%), which isn’t too bad, compared to the ideal of 1. In Scenario 1c, :math:`Speedup_4 == 3`, so :math:`Efficiency_4 == 3 / 4 = 0.75` (75%), somewhat less than 1 but still very acceptable. In Scenario 1d, :math:`Speedup_8 == 4.5`, so :math:`Efficiency_8 == 4.5 / 8 = 0.56` (56%); this is below our threshold of 60%, so it is too inefficient to be acceptable.
+
+In Scenario 2b, :math:`Speedup_2 == 1.94`, so :math:`Efficiency_2 == 1.94 / 2 = 0.97` (97%), which is fairly close to the ideal of 1. In Scenario 2c, :math:`Speedup_4 == 3.67`, so :math:`Efficiency_4 == 3.67 / 4 = 0.92` (92%), which is much better than Scenario 1c. Likewise, in Scenario 2d, :math:`Speedup_8 == 6.6`, so :math:`Efficiency_8 == 6.6 / 8 = 0.83` (83%). 
 
 This is much better than Scenario 1d and still well above our 60% threshold. 
 
@@ -199,9 +206,9 @@ Figure 0-16 presents a graph comparing the efficiency values from our two scenar
 
    Figure 0-16: EfficiencyP vs. P for Scenarios 1 and 2
 
-For parallel computations in which N is fixed, computational efficiency tends to decrease as P increases. Figure 0-16 shows this for both Scenarios 1 and 2. In Scenario 1, EfficiencyP decreases as P increases: from 90% to 75% to 56%. In Scenario 2, EfficiencyP again decreases as P increases, but more slowly than before: from 97% to 92% to 83%.
+For parallel computations in which N is fixed, computational efficiency tends to decrease as P increases. Figure 0-16 shows this for both Scenarios 1 and 2. In Scenario 1, :math:`Efficiency_P` decreases as P increases: from 90% to 75% to 56%. In Scenario 2, :math:`Efficiency_P` again decreases as P increases, but more slowly than before: from 97% to 92% to 83%.
 
-However, for any given value of P, efficiency tends to increase as we increase N. We can see this by comparing the EfficiencyP for the corresponding P values in Scenarios 1 and 2: 
+However, for any given value of P, efficiency tends to increase as we increase N. We can see this by comparing the :math:`Efficiency_P` for the corresponding P values in Scenarios 1 and 2: 
 
 - When P is 2, increasing N from 4 to 16 increases EfficiencyP from 90% to 97%
 - When P is 4, increasing N from 4 to 16 increases EfficiencyP from 75% to 92%
@@ -211,18 +218,65 @@ It is typically the case that the larger the size of the problem N, the higher t
 
 0.3.3: Scalability
 ^^^^^^^^^^^^^^^^^^^^
-An important parallel computing topic related to speedup is scalability, which is how well a parallel computation’s speedup increases as the number of PEs increases. There are some computations for which SpeedupP increases linearly as we increase P. These are commonly called embarrassingly parallel computations, not because there is anything embarrassing about the problem or computation, but because the problem is so amenable to parallelization, it would be embarrassing to solve the problem in any other way! For an embarrassingly parallel computation, SpeedupP is always approximately P, EfficiencyP is always approximately 1, and we say the computation scales perfectly. For that reason, some people prefer to call these perfectly parallel problems, and we will use that terminology here.
-To illustrate, if we had computed steps 1-7 of our algorithm before starting the timer, then our pizza-eating problem has a perfectly parallel solution, so long as the number of people P ≤ the number of pizza-slices N. In that situation, the total time to consume the pizza is 2 minutes/slice x N slices / P people ≈ 2*N/P. 
+An important parallel computing topic related to speedup is **scalability**, which is how well a parallel computation’s speedup increases as the number of PEs increases. There are some computations for which :math:`Speedup_p` increases *linearly* as we increase P. These are commonly called **embarrassingly parallel computations**, not because there is anything embarrassing about the problem or computation, but because the problem is so amenable to parallelization, it would be embarrassing to solve the problem in any other way! For an embarrassingly parallel computation, :math:`Speedup_p` is always approximately P, :math:`Efficiency_p` is always approximately 1, and we say the computation *scales perfectly*. For that reason, some people prefer to call these **perfectly parallel problems**, and we will use that terminology here.
+
+To illustrate, if we had computed steps 1-7 of our algorithm before starting the timer, then our pizza-eating problem has a perfectly parallel solution, so long as the number of people P ≤ the number of pizza-slices N. In that situation, the total time to consume the pizza is 2 minutes/slice x N slices / P people ≈ 2 x N /P. 
+
 As we shall see, many (and probably most) problems are not perfectly parallel problems—there is usually some steps of the algorithm that have to be performed sequentially to set things up before we can begin taking advantage of parallelism (which we have modeled by steps 1-7 in our pizza-eating algorithm). For such problems, if we analyze the scalability of a computation that solves the problem, we may be able to identify the optimal number of PEs to use for that problem. For example, in our pizza problem, when the pizza was a Personal pizza (N == 4), our EfficiencyP dropped below 60% for P = 8; so when N == 4, we should fewer than 8 PEs. However, when the pizza was an X-large pizza (N == 16), our EfficiencyP remained reasonably high for P values of 4 and 8. Our algorithm thus scaled fairly well for N == 16 and P values 2 through 8 (and will likely continue to scale well until P reaches at least 16).
+
 0.3.4: Amdahl’s Law
+^^^^^^^^^^^^^^^^^^^^^
+
 Gene Amdahl was one of the pioneers of computing. In 1967, he devised a formula that we might express as follows:
-SpeedupP= Time1TimeP= 1seqPct+ parPctP→ 1seqPct
-Here parPct is the percentage of the runtime spent in activities that benefit from parallelization, seqPct is the percentage of a computation’s runtime spent in activities that do no benefit from parallelization (i.e., that must be performed sequentially), and the numerator Time1 is the time when P == 1, normalized to the percentage 100% (i.e., 1.0). Regardless of the value of parPct, as P → ∞, the fraction parPct/P → 0, leaving the fraction on the right. 
-To illustrate the implications of this, let’s revisit Scenario 1 of our pizza-eating problem. In Scenario 1a, eating the pizza took us 9 minutes, of which the parallelizable part (eating the pizza) took us 8 minutes. The parallelizable percentage parPct is thus 8 / 9 = 0.89 (89%), which means the sequential percentage seqPct is 1.0 – 0.89 = 0.11 (11%). Plugging 0.11 into Amdahl’s Law for seqPct, we get 1 / 0.11 = 9 as the upper bound on SpeedupP for Scenario 1. To illustrate this, Figure 0-8 shows SpeedupP for Scenario 1 as P increases from 2 through 2,048 people:
 
-Figure 0-17: Scenario 1: Reaching Amdahl’s Limit as P Becomes Large
-That is, as P approaches infinity, SpeedupP approaches 9. No matter how many PEs we use to try to speed up our solution to this problem, 9 is an absolute upper bound on the SpeedupP for Scenario 1.
-Next, let’s apply Amdahl’s Law to Scenario 2. In Scenario 2a, eating the pizza ourself took 33 minutes, of which the parallelizable part (eating the pizza) took us 32 minutes. The parallelizable percentage of the program parPct is thus 32 / 33 = 0.97 (97%), which means the sequential percentage seqPct is 1.0 - 0.97 = 0.03 (3%). Plugging 0.03 into Amdahl’s Law for seqPct, we get 1 / 0.03 = 33 as the upper bound on SpeedupP for Scenario 2. To illustrate this, Figure 0-18 shows SpeedupP for Scenario 2, as P increases from 2 through 16,384 people:
+.. math::
 
-Figure 0-18: Scenario 2: Reaching Amdahl’s Limit as P Becomes Large
-As long as we spend 1 minute working through steps 1-7 of our algorithm sequentially, SpeedupP can never exceed 33 in Scenario 2, no matter how many friends we invite to help us eat the 16 slices. Put differently, 33 is the asymptotic limit for SpeedupP in Scenario 2.
+   Speedup_P= \frac{Time_1}{Time_p} = \frac{1}{seqPct + parPct_p} → \frac{1}{seqPct}
+
+Here *parPct* is the percentage of the runtime spent in activities that benefit from parallelization, *seqPct* is the percentage of a computation’s runtime spent in activities that do not benefit from parallelization (i.e., that must be performed sequentially), and the numerator Time1 is the time when P == 1, normalized to the percentage 100% (i.e., 1.0). Regardless of the value of *parPct*, as P → ∞, the fraction *parPct/P* → 0, leaving the fraction on the right. 
+
+To illustrate the implications of this, let’s revisit Scenario 1 of our pizza-eating problem. In Scenario 1a, eating the pizza took us 9 minutes, of which the parallelizable part (eating the pizza) took us 8 minutes. The parallelizable percentage *parPct* is thus 8 / 9 = 0.89 (89%), which means the sequential percentage seqPct is 1.0 – 0.89 = 0.11 (11%). Plugging 0.11 into Amdahl’s Law for *seqPct*, we get 1 / 0.11 = 9 as the upper bound on :math:`Speedup_p` for Scenario 1. To illustrate this, Figure 0-8 shows :math:`Speedup_p` for Scenario 1 as P increases from 2 through 2,048 people:
+
+.. figure:: images/0-17.AmdahlScenario1.png
+   :scale: 50 %
+
+   Figure 0-17: Scenario 1: Reaching Amdahl’s Limit as P Becomes Large
+
+
+That is, as P approaches infinity, :math:`Speedup_p` approaches 9. No matter how many PEs we use to try to speed up our solution to this problem, 9 is an absolute upper bound on the :math:`Speedup_p` for Scenario 1.
+
+Next, let’s apply Amdahl’s Law to Scenario 2. In Scenario 2a, eating the pizza ourself took 33 minutes, of which the parallelizable part (eating the pizza) took us 32 minutes. The parallelizable percentage of the program *parPct* is thus 32 / 33 = 0.97 (97%), which means the sequential percentage *seqPct* is 1.0 - 0.97 = 0.03 (3%). Plugging 0.03 into Amdahl’s Law for *seqPct*, we get 1 / 0.03 = 33 as the upper bound on :math:`Speedup_p` for Scenario 2. To illustrate this, Figure 0-18 shows :math:`Speedup_p` for Scenario 2, as P increases from 2 through 16,384 people:
+
+.. figure:: images/0-18.AmdahlScenario2.png
+   :scale: 50 %
+
+   Figure 0-18: Scenario 2: Reaching Amdahl’s Limit as P Becomes Large
+
+As long as we spend 1 minute working through steps 1-7 of our algorithm sequentially, :math:`Speedup_p` can never exceed 33 in Scenario 2, no matter how many friends we invite to help us eat the 16 slices. Put differently, 33 is the **asymptotic limit** for :math:`Speedup_p` in Scenario 2.
+
+0.3.5: The Gustafson-Barsis Law
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Amdahl’s law seems somewhat pessimistic, in the sense that it defines a limit on the amount of speedup a parallel application can expect to gain. However, as we can see by comparing Scenario 1 vs Scenario 2, the particular limit on :math:`Speedup_p` that Amdahl’s Law prescribes is for a given problem-size N. What happens when N changes?
+
+In 1988, the computer scientists John Gustafson and Edwin Barsis published the following “answer” to Amdahl’s Law that is now known as the Gustafson-Barsis Law (or sometimes just Gustafson’s Law): if P remains the same but N is increased, then:
+
+.. math::
+
+  Speedup_p= P + seqPct \times (1 - P)
+
+
+Gustafson and Barsis noted that if the sequential portion of the program stays the same when we increase the problem size N, then :math:`seqPct → 0`, the rightmost term :math:`seqPct \times (1 - P) → 0`, and :math:`Speedup_p → P`, the ideal value!
+
+In application, the Gustafson-Barsis Law tells us that if we keep P fixed but increase N and this causes the *seqPct* to decrease, then the :math:`Speedup_p` will increase. Figure 0-19 shows how this can be seen in our two scenarios:
+
+.. figure:: images/0-19.AmdahlVsGustafson.png
+   :scale: 50 %
+
+   Figure 0-19: Comparing Amdahl’s and Gustafson’s Laws, Scenario 1 vs. Scenario 2
+
+In Figure 0-19, as we move from left to right and follow the SpeedupP line for either scenario, we reach the asymptotic limit predicted by Amdahl's Law for that scenario. 
+
+However, if we choose a particular P value on the horizontal axis and move vertically from Scenario 1 to Scenario 2 (increasing N from 4 to 16), we see an increase in :math:`Speedup_p` as the Gustafson-Barsis Law predicts. For any given value of P, if we were to continue increasing N, then as N → ∞, the :math:`seqPct → 0` and :math:`Speedup_p → P`.
+
+The Gustafson-Barsis Law thus "rescues" us from Amdahl's Law, provided the seqPct value remains the same as we increase the problem-size N. 
