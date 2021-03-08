@@ -7,4 +7,6 @@ CHAPTER 0: Introduction
 
     intro.rst
     performance.rst
+    patterns.rst
+    hardware.rst
     setup.rst
