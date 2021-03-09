@@ -229,7 +229,7 @@ Gene Amdahl was one of the pioneers of computing. In 1967, he devised a formula 
 
 .. math::
 
-   Speedup_P= \frac{Time_1}{Time_p} = \frac{1}{seqPct + parPct/p → \frac{1}{seqPct}
+   Speedup_P= \frac{Time_1}{Time_p} = \frac{1}{seqPct + parPct/p} → \frac{1}{seqPct}
 
 Here *parPct* is the percentage of a computation's runtime spent in activities that benefit from parallelization, *seqPct* is the percentage of the runtime spent in activities that do not benefit from parallelization (i.e., that must be performed sequentially), and the numerator :math:`Time_1` is the time when P == 1, normalized to the percentage 100% (i.e., 1.0). Regardless of the value of *parPct*, as P → ∞, the fraction *parPct/P* → 0, leaving the fraction on the right.
 This formula has come to be known as **Amdahl’s Law**. 
