@@ -18,7 +18,7 @@ If you are reading this book, you are probably familiar with the term *computing
 
 2. *Writing* software consists of implementing an algorithm in a particular programming language, which results in a *computer program*. This program must be thoroughly *tested* to ensure that it actually solves the problem; otherwise, it may be necessary to revisit one’s design and start anew.
 
-3. *Running* software consists of having a *computer perform the program’s statements*. When we are confident that a program correctly solves the problem, we can the problem by running the program on a computer.
+3. *Running* software consists of having a *computer perform the program’s statements*. When we are confident that a program correctly solves the problem, we can solve the problem by running the program on a computer.
 
 Computing thus consists of two parts: (i) the *software* or program that is being used to solve a problem, and (ii) the *hardware* or computer on which the software is being run.
 
@@ -41,7 +41,7 @@ Multiprocessors fall into one of three categories:
 1. If a multiprocessor has multiple cores that share the same main memory, then the system is called a **shared memory multiprocessor**. Figure 0-1 illustrates such a system. The vast majority of today’s personal computers—including desktops, laptops, tablets, smartphones, and single board computers like the Raspberry Pi—have multiple cores, making them shared memory multiprocessors.
 
 .. figure:: images/0-1.SharedMemoryMultiprocessor.png
-   :scale: 50 %
+   :scale: 40 %
 
    Figure 0-1: Shared Memory Multiprocessor Diagram
 
@@ -50,14 +50,14 @@ Multiprocessors fall into one of three categories:
 
 
 .. figure:: images/0-2.DistributedMemory.png
-   :scale: 50 %
+   :scale: 40 %
 
    Figure 0-2: Distributed Memory Multiprocessor Diagram
 
 3. If a distributed memory multiprocessor’s CPUs are shared memory multiprocessors (e.g., it has multicore CPUs), and/or they use graphics processing units GPUs) to accelerate a computation, then the computer is called a **heterogeneous multiprocessor**. Figure 0-3 illustrates how such a system differs from the others. Most of today’s supercomputers are heterogeneous multiprocessors—in essence, Beowulf clusters with multicore CPUs and hardware accelerators.
 
 .. figure:: images/0-3.HeterogeneousMultiprocessor.png
-   :scale: 50 %
+   :scale: 40 %
 
    Figure 0-3: Heterogeneous Multiprocessor Diagram
 
