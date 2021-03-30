@@ -1,8 +1,11 @@
 3.3 Sieve of Eratosthenes
 --------------------------
 
+Author: Marc Smith, Vassar College
 
-Another array operation is finding a list of primes. Has a lot of dependencies. 
+.. E-mail: mlsmith@smith.edu
+
+.. Another array operation is finding a list of primes. Has a lot of dependencies. 
 
 
 
@@ -33,7 +36,15 @@ Eratosthenes is the algorithm we will describe and implement in this chapter.
 3.3.2 The Algorithm Unplugged
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Go through the unplugged activity to explain the algorithm. 
+To understand how the Sieve of Eratosthenes works, let's go through an unplugged 
+example together. The following video explains how the sieve works. You can try 
+this out yourself using pen and paper!
+
+.. video:: video-ex1
+   :controls:
+   :thumb: /_images/whileloop.png
+
+   http://media.interactivepython.org/thinkcsVideos/whileloop.mov
 
 3.3.3 OpenMP Implementation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
