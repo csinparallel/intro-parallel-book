@@ -52,15 +52,26 @@ text (reST). The following [cheat sheet](http://openalea.gforge.inria.fr/doc/ope
 is a useful guide for the different markup components needed to write a document 
 using restructured text.
 
-A section contribution may have the following outline:
+In addition to restructured text, runestone chapters contain Runestone 
+Directives (see the 
+[Runestone Author Guide](https://runestone.academy/runestone/static/authorguide/index.html) 
+for details). Runestone Directives allow the integration of many interactive 
+content, such as videos, multiple choice questions, parson problems and others. 
+
+
+The follow example illustrates how a particular section may be set up using 
+restructured text and Runestone directives:
 
 ```
 3.x This is a section heading
 ----------------------------------------
 
-Section content would go here. Here is an example of **bold** text. Here 
-is an example of *italicized* text. This (:math:`a^2 + b^2 = c^2`) is an 
-example of an in-lined LaTex math equation.
+Section content would go here. Notice how the number of hyphens/dashes extend 
+past the section heading. The number of hyphens must be at least as long as 
+the section title itself.
+
+Here is an example of **bold** text. Here is an example of *italicized* text. 
+This (:math:`a^2 + b^2 = c^2`) is an example of an in-lined LaTeX math equation.
 
 The following is an example of an standalone math equation:
 
@@ -77,6 +88,52 @@ text.
 
 Here is an example of a URL: `CSinParallel <csinparallel.org>`_
 
+Here is how a video may be included (from the Runestone documentation):
+
+.. video:: video-ex1
+   :controls:
+   :thumb: /_images/whileloop.png
+
+   http://media.interactivepython.org/thinkcsVideos/whileloop.mov
+
 ```
+
+## Previewing your work
+
+There are two main commands that an author needs to know in order to preview 
+their work locally. 
+
+### runestone build
+
+Use the `runestone build` command to locally compile your changes. Most 
+warnings can be ignored. If the project does not build for whatever reason, 
+contact CSinParallel at csinparallel@stolaf.edu. 
+
+### runestone serve
+
+Use the `runestone serve` command to launch the server (typically at 
+https://localhost:8000). We recommend having the local server open at at all 
+times and having a separate window to do your compiling. You will need to 
+reload your browser to see any new changes.
+
+### Trouble shooting tips
+
+Here are some helpful tips if you find yourself getting stuck
+
+* If `runestone build` does not work, check your Runestone version. If it 
+  is 5.6.0 or later, open up `conf.py` and ensure line 21 reads
+  `from runestone import runestone_static_dirs, runestone_extensions, setup`
+  (notice the addition of `, setup` at the end of the command). 
+
+
+* Make sure that your runestone objects have unique keys. If you reuse keys, 
+  there will be build errors. 
+
+* The video format has to be in `mov` format for Runestone to interpret it. 
+  Annoying, yes, but a tool like `ffmpeg` can automatically do the conversion 
+  for you. If this is too hard, send a link to your mp4 video to 
+  csinparallel@stolaf.edu and we will convert it for you. 
+
+## Merging changes back in
 
 
