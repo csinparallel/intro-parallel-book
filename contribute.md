@@ -131,8 +131,10 @@ Here are some helpful tips if you find yourself getting stuck
 
 * The video format has to be in `mov` format for Runestone to interpret it. 
   Annoying, yes, but a tool like `ffmpeg` can automatically do the conversion 
-  for you. If this is too hard, send a link to your mp4 video to 
-  csinparallel@stolaf.edu and we will convert it for you. 
+  for you. A command like the following usually works (for mp4 to mov):
+  `ffmpeg -i video.mp4 -f mov video.mov`. If you don't have access to the 
+  command line or having difficulties with ffmpeg, send a link to your mp4 
+  video to csinparallel@stolaf.edu and we will convert it for you. 
 
 ## Merging changes back in
 
