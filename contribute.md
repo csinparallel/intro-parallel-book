@@ -136,4 +136,21 @@ Here are some helpful tips if you find yourself getting stuck
 
 ## Merging changes back in
 
+*PDC For Beginners* uses the [fork and pull model](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request)
+for collaborative development. 
+
+When you are ready to share your changes, please create a
+[Git Pull Request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request). 
+GitHub also has specific documentation on how to [create a pull request from 
+a fork](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork)
+
+After we review your work, it will be merged into the main branch of the 
+repository. We will rebuild the book on our sever soon after!
+
+
+## Questions
+
+If you have any questions or concerns, please contact the CSinParallel team at 
+csinparallel@stolaf.edu
+
 
