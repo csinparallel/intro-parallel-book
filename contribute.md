@@ -4,8 +4,7 @@ If you are interested in contributing to *PDC For Beginners*, please
 reach out to CSinParallel at csinparallel@stolaf.edu
 
 ## Setting up the local authoring environment
-Thanks for contributing to *PDC For Beginners*! To set up the local authoring 
-environment, please complete the following steps:
+To set up the local authoring environment, please complete the following steps:
 
 ## Installing Runestone
 
