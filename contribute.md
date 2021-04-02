@@ -16,6 +16,11 @@ general, it's recommended that you run Runestone in a virtual environment
 (like virtualenv). You will need at least Python 3.7 and pip (or pip3) 
 installed on your system.
 
+The following instructions should work on most Linux and OS X systems. If you 
+have a Mac and are having trouble with the instructions below, check out 
+an [alternative setup](mac_installation.md) put together by Dr. Suzanne Rivoire 
+of Sonoma State University.
+
 The following set of commands work for most users (taken from the Runestone 
 Installation Guide): 
 
