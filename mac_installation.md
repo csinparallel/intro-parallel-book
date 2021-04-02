@@ -1,12 +1,15 @@
 # Instructions For Setting Up The Runestone Environment On Mac OS X
 By Suzanne Rivoire, Ph.D.
+
 Sonoma State University
 
 ## My Mac preliminaries
 
 ### Homebrew package manager
 Why?  [How to set up virtual environments for Python on MacOS | Opensource.com](https://opensource.com/article/19/6/python-virtual-environments-mac)
+
 How? [The Missing Package Manager for macOS (or Linux) — Homebrew](https://brew.sh/)
+
 Note that Homebrew seems to install Xcode command line tools if needed, contrary to what most articles suggest.
 
 ### Pyenv
@@ -70,7 +73,3 @@ $ gh auth login
 
 Fork http://github.com/csinparallel/intro-parallel-book
 
-Clone my fork:
-```
- gh repo clone srivoire/intro-parallel-book
-```
