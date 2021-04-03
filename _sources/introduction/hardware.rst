@@ -4,7 +4,7 @@ TBD
 
 0.5.0: Laptop
 ^^^^^^^^^^^^^^^
-TBD
+TBD!
 
 0.5.1: Raspberry Pi (or other SBC)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

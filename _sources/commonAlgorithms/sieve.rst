@@ -37,14 +37,24 @@ Eratosthenes is the algorithm we will describe and implement in this chapter.
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To understand how the Sieve of Eratosthenes works, let's go through an unplugged 
-example together. The following video explains how the sieve works. You can try 
+example together. The following video explains how the classic sieve works. You can try 
 this out yourself using pen and paper!
 
-.. video:: video-ex1
+.. video:: primes-part1
    :controls:
    :thumb: /_images/whileloop.png
 
-   http://media.interactivepython.org/thinkcsVideos/whileloop.mov
+   https://d32ogoqmya1dw8.cloudfront.net/files/csinparallel/primes-pt1.mov
+
+The algorithm is parallelized using the *century* method. See below for a short video that 
+explains how the century method works: 
+
+.. video:: primes-part2
+   :controls:
+   :thumb: /_images/whileloop.png
+
+   https://d32ogoqmya1dw8.cloudfront.net/files/csinparallel/primes-pt2.mov
+
 
 3.3.3 OpenMP Implementation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
