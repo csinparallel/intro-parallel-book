@@ -69,6 +69,18 @@ A C implementation of this program may look like the following:
    }
 
 
+.. mchoice:: rc_mc_ser_1
+    :correct: a
+    :answer_a: The program works as expected (outputs answer 2.0)
+    :answer_b: The program returns a different approximate value (but the same value with every run) 
+    :answer_c: The program returns a different approximate value every run.
+    :feedback_a: Correct! The area under the curve sums to 2. 
+    :feedback_b: Not quite. Did you try and run the code block above?
+    :feedback_c: Try again. Did you run the code block above?
+
+    Run the OpenMP implementation of integration a few times. What do you discover?  
+
+
 Let's now consider how we can use multiple threads to approximate the area under the curve in parallel. One strategy would be to 
 assign each thread a *subset* of the total set of subdivisions, so that each thread separately computes its assigned set of trapezoids.
 
