@@ -78,7 +78,7 @@ A C implementation of this program may look like the following:
     :feedback_b: Not quite. Did you try and run the code block above?
     :feedback_c: Try again. Did you run the code block above?
 
-    Run the OpenMP implementation of integration a few times. What do you discover?  
+    Run the above serial implementation of integration a few times. What do you discover?  
 
 
 Let's now consider how we can use multiple threads to approximate the area under the curve in parallel. One strategy would be to 
