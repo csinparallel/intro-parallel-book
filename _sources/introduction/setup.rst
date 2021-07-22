@@ -1,79 +1,50 @@
-0.3 Getting Access to a Parallel System
-=======================================
+0.6 Getting Access to a Parallel System
+----------------------------------------
 
-We would talk about setting up a Raspberry Pi for use here, including links to system images (or docker software, however we are planning to deploy). We can also include instructions for setting up a Raspberry Pi cluster, and a listing of cloud resource options available. 
+Most computers today have processors that can support parallel execution of programs. Since almost all machines these days contain *multicore processors*, you can use those multiple cores to locally run many of the examples in this book. Since our book already supports interactive multi-threaded execution, you can 
+run some of our smaller examples directly on the browser. 
 
-Usign a Raspberry Pi
-*********************************
+The message passing examples in our book are not yet interactive. Therefore, you will need access to a computer that supports message pasing to run them. 
+Note that message passing examples can be run on multicore systems. However, accessing a *cluster* of computers is often a better illustrates the power 
+of message passing to communicate between computers.  
+
+Installing these libraries on different operating systems is specific to each OS. There are quite a few references available for doing this.
+
+The code for the examples
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ZZZ Tarball of patternlets of just mpi4py examples here. Note that prepared raspberry pi images contain this code.
+
+This book presents each of the examples found in this code file archive. You should read about each one and then try it on your system where you have the above mentioned software packages installed.
+
+On the system where you have the code installed, you should use a terminal to navigate to the folder called patternlets/mpi4py. On the Raspberry Pi cluster based on the images created by the CSinParallel group, the command is:
+
+.. code:: bash
+
+  cd CSinParallel/patternlets/mpi4py
+
+
+Using a Raspberry Pi
+^^^^^^^^^^^^^^^^^^^^^^^
+If you don't have a quad-core laptop or multicore machine that you can readily connect to, a potentially inexpensive option is to use a Raspberry Pi single 
+board computer. The Raspberry Pi is a credit-card sized single board computer that costs under $50.00 with all components. You can run all the shared memory code
+directly on a Raspberry Pi Computer. If you have multiple Raspberry Pis, you can also build a cluster to locally run the distributed computing examples in this 
+book.
+
+The Raspberry Pi cluster images provided by the CSinParallel group already have everything you need installed, including the following code examples that we describe in detail in the following chapters.
+
+**Remote Desktop Setup Instructions**:
+While you can connect peripherals (such as mouse, keyboard and monitor) directly to the Raspberry Pi, and alternative is to hook the Pi up to a laptop and use 
+Virtual Network Client (VNC) to remote desktop into your pi. The instructions here helpfully illustrate how to connect a remote Desktop environment between 
+a Raspberry Pi and a laptop.
+
+**Raspberry Pi Cluster Setup Instructions**:
+
+There are many tutorials on-line on how to create a Raspberry Pi cluster. Here are some useful resources for building your own Raspberry Pi cluster.
 
 
 Using Cloud Resources
-*********************************
+^^^^^^^^^^^^^^^^^^^^^^
 
+Another way to get access to multicore and distributed systems is through cloud access. Include directions for access cloud resources here. 
 
-Runestone uses the ``restructuredText`` (rst) markup language.  We chose this over markdown largely because rst is extensible.  Nearly all of the basic markup tasks are already handled by restructuredText.  You should check out the docs for the basics of restructuredText (link below). Our extensions are all for the interactive elements.  One key hint about restructuredText:  Its like **Python** -- *indentation matters!*
-
-* `restructuredText Docs <http://docutils.sourceforge.net/rst.html>`_
-* `Runestone Docs <https://runestone.academy/runestone/static/authorguide/index.html>`_
-* Join the discussion on our `Google Group <https://groups.google.com/forum/#!forum/runestone_instructors>`_
-* Tell us about problems on `Github <https://github.com/RunestoneInteractive/RunestoneComponents>`_
-
-
-
-Sample Directives
-****************************
-
-Some code examples below
-
-ActiveCode
-**********
-
-.. activecode:: code_example
-   :coach:
-   :caption: This is a caption
-
-   print("My first program adds a list of numbers")
-   myList = [2, 4, 6, 8, 10]
-   total = 0
-   for num in myList:
-       total = total + num
-   print(total)
-
-Multiple Choice
-********************
-
-.. mchoice:: question1_2
-    :multiple_answers:
-    :correct: a,b,d
-    :answer_a: red
-    :answer_b: yellow
-    :answer_c: black
-    :answer_d: green
-    :feedback_a: Red is a definitely on of the colors.
-    :feedback_b: Yes, yellow is correct.
-    :feedback_c: Remember the acronym...ROY G BIV.  B stands for blue.
-    :feedback_d: Yes, green is one of the colors.
-
-    Which colors might be found in a rainbow? (choose all that are correct)
-
-These are just two of the many interactive components for writing online course materials.  You can see examples of all of them `On our Example Page <http://interactivepython.org/runestone/static/overview/overview.html>`_
-
-Now feel free to modify this file to start creating your own interactive page.
-
-
-Section 4: Theme
-*****************
-
-You can override the style rules in the default theme by adding css rules to a file named **theme-overrides.css** (the filename is important - this will replace an existing file). Make sure the file's directory is part of the ``html_static_path``. You can do so by placing it in a folder **_static**, then modifying ``html_static_path`` in conf.py to include that folder:
-
-.. code:: 
-
-    html_static_path =  runestone_static_dirs() + ['_static']
-
-
-If you want to do more significant changes to the theme, you should copy the files in the runestone/common/project/template/sphinx_bootstrap to a directory like ``_templates/my_theme``. Then make sure these values are set in conf.py:
-
-.. code:: 
-
-    html_theme_path = ["_templates"]
-    html_theme = 'my_theme'

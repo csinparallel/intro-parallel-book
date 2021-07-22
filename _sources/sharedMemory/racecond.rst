@@ -69,6 +69,18 @@ A C implementation of this program may look like the following:
    }
 
 
+.. mchoice:: rc_mc_ser_1
+    :correct: a
+    :answer_a: The program works as expected (outputs answer 2.0)
+    :answer_b: The program returns a different approximate value (but the same value with every run) 
+    :answer_c: The program returns a different approximate value every run.
+    :feedback_a: Correct! The area under the curve sums to 2. 
+    :feedback_b: Not quite. Did you try and run the code block above?
+    :feedback_c: Try again. Did you run the code block above?
+
+    Run the above serial implementation of integration a few times. What do you discover?  
+
+
 Let's now consider how we can use multiple threads to approximate the area under the curve in parallel. One strategy would be to 
 assign each thread a *subset* of the total set of subdivisions, so that each thread separately computes its assigned set of trapezoids.
 
@@ -96,8 +108,8 @@ The following video illustrates how 4 threads would work together to approximate
 
 1.2.2 Parallel Integration - First Attempt
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-One of the advantages of OpenMP is the ability to incrementally add parallelism to a program. Using what we learned about the fork-join pattern, let's 
-update the serial version of the integration program with OpenMP pragmas:
+One of the advantages of OpenMP is the ability to incrementally add parallelism to a program. Using what we learned about the fork-join pattern and available 
+pragams in the last section, let's update the serial version of the integration program with OpenMP pragmas:
 
 .. activecode:: rc_integration_par1
    :language: c
@@ -146,7 +158,8 @@ Our parallel implementation adds just two lines the serial code. First, we inclu
 access all the functions available to us in the OpenMP library. The second line is the inclusion of the ``omp parallel for`` 
 pragma on line 26. 
 
-The ``omp parallel for`` pragma is very similar to the ``omp parallel`` pragma we saw in the last section. The ``omp parallel for`` pragma:
+Recall that the ``omp parallel for`` pragma combines the functionality of the ``omp parallel``  and ``omp for`` pragmas we covered in the last section. 
+Specifically, the ``omp parallel for`` pragma:
 
 * creates a team of threads
 * assigns each thread a subset of iterations of the for loop
@@ -188,12 +201,232 @@ output of the serial program.
 
     Do you have any guesses on what could be causing the issue?  
 
-1.2.3 Introducing Race Conditions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Point out that this is not an issue with the program be task parallelism. In fact, the same thing can occur in a data parallel context.
+1.2.3 Returning to the Array Example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Return back to array addition. Show that the same error occurs. 
+While some may find it tempting to point the finger at task parallelism for our incorrect result, the truth is that 
+we can get an incorrect result even when employing the SPMD pattern. Suppose we modify the populating array problem to 
+one of array addition. In other words, instead of simply populating an array with random values, we are adding up the 
+values in the array in parallel.  
 
-Return to unplugged activity to show what a race condition is, and how critical sections can help.
+Here is a modified code snippet with the ``omp parallel for`` pragma placed in the correct place but commented out. Since 
+the sum of *n* elements from :math:`1 \ldots n` is :math:`\frac{n(n+1)}{2}`, we know the sum when *n* is 20 million 
+is a really long number: 200,000,010,000,000. 
+
+Here is an updated code snippet that has the pragma around the sum commented out. Running it should confirm that the 
+sum is the long value shown above.
+
+.. activecode:: rc_add_array
+   :language: c
+   :compileargs: ['-Wall', '-ansi', '-pedantic', '-std=c99']
+   :linkargs: ['-lm', '-fopenmp']
+   :caption: Integration (parallel - first attempt)
+
+   #include <stdio.h>
+   #include <math.h>
+   #include <stdlib.h>
+   #include <omp.h> //<--- added the omp header file
+
+   #define N 20000000 //size of the array
+
+   int main(void){
+
+       int * array = malloc(N*sizeof(int)); //declare array of size N
+       int i;
+
+       //populate array
+       #pragma omp parallel for  //<-- from our earlier example
+       for (i = 0; i < N; i++) {
+           array[i] = i+1;
+       }
+       printf("Done populating %d elements!\n", N);
+       printf("Summing elements together...\n");
+
+       long sum = 0;
+       //#pragma omp parallel for
+       for (i = 0; i < N; i++) {
+           sum+= array[i];
+       }
+       printf("Sum is: %ld\n", sum);
+
+       return 0;
+   }
 
 
+.. mchoice:: rc_mc_array_1
+    :correct: b
+    :answer_a: Yes, the program always prints out the correct result.
+    :answer_b: No, the result is different every time.  
+    :feedback_a: Incorrect. Did you remember to uncomment the pragma? Did you run the code a few times?
+    :feedback_b: Correct! Once again, the program is losing or overwriting values somewhere...
+
+    Now uncomment the pragama on line 22 and re-run the program a few times. Do you always get the correct result?
+
+
+1.2.4 Race Conditions and Critical Sections
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To understand what is going on, let's use an analogy to describe 
+the process of adding an array in parallel.
+
+
+.. video:: video-racecond12
+   :controls:
+   :thumb: images/race_conditions1_thumb.png
+
+   https://d32ogoqmya1dw8.cloudfront.net/files/csinparallel/raceconditions1-2.mov.mov
+
+To understand what is going on, we need to define a few new terms, specifically **race condition** 
+**critical section**, and **lock**. Watch the following video to learn what these terms mean:
+
+.. video:: video-racecond3
+   :controls:
+   :thumb: images/race_conditions3_thumb.png
+
+   https://d32ogoqmya1dw8.cloudfront.net/files/csinparallel/raceconditions3.mov.mov
+
+.. dragndrop:: dnd-rc-1
+   :feedback: Feedback that is displayed if things are incorrectly matched.
+   :match_1: arises when two or more threads attempt to modify a shared variable ||| race condition
+   :match_2: smallest set of instructions that must execute sequentially to ensure correctness |||critical section
+   :match_3: a mechanism by which to protect a resource |||lock
+   :match_4: common pattern that often causes race conditions|||read-modify-write
+
+   Match descriptions that best define each term.
+
+
+Let's watch another video that explains how these mechanisms can help fix the issue in our program:
+
+.. video:: video-racecond4
+   :controls:
+   :thumb: images/race_conditions4_thumb.png
+
+   https://d32ogoqmya1dw8.cloudfront.net/files/csinparallel/raceconditions4.mov.mov
+
+The ``omp critical`` pragma allows a programmer to define a critical section. At an 
+initial glance, it is tempting to place the ``omp critical`` pragma around the 
+statement ``sum+=array``. However, since the critical section should be as small as possible,
+its necessary to separate the summing of the array elements from the update to the shared sum variable.
+
+The following program does just that:
+
+
+.. activecode:: rc_add_array_fixed
+   :language: c
+   :compileargs: ['-Wall', '-ansi', '-pedantic', '-std=c99']
+   :linkargs: ['-lm', '-fopenmp']
+   :caption: Integration (parallel - first attempt)
+
+   #include <stdio.h>
+   #include <math.h>
+   #include <stdlib.h>
+   #include <omp.h> //<--- added the omp header file
+
+   #define N 20000000 //size of the array
+
+   int main(void){
+
+       int * array = malloc(N*sizeof(int)); //declare array of size N
+       int i;
+
+       //populate array
+       #pragma omp parallel for  //<-- from our earlier example
+       for (i = 0; i < N; i++) {
+           array[i] = i+1;
+       }
+       printf("Done populating %d elements!\n", N);
+       printf("Summing elements together...\n");
+
+       long sum = 0;
+       #pragma omp parallel shared(sum)
+       {
+           int x;
+           long local_sum = 0; //variables local to each thread
+
+           #pragma omp for
+           for (x = 0; x < N; x++) {
+               local_sum += array[x]; //each thread computes a local sum
+           }
+
+           #pragma omp critical
+           {
+               sum+= local_sum; //read-modify-write of sum variable
+           }
+       }
+       printf("Sum is: %ld\n", sum);
+
+       return 0;
+   }
+
+If you are having trouble understanding how the ``sum+=local_sum`` statement 
+on line 34 translates to a read-modify-write pattern, recall that a single 
+line of code often translates to multiple instructions in assembly. The 
+line can also be written as ``sum = sum + local_sum``. This single line 
+of code involves:
+
+* reading the ``sum`` variable (and ``local_sum`` variable)
+* adding the values of ``sum`` and ``local_sum`` together, and 
+* writing the total to the ``sum`` variable.
+
+
+Lastly, observe that fixing the race condition added several lines to 
+our program. One way to fix this is to use a new pragma called 
+``omp atomic``. The ``omp atomic`` pragma forces the program to 
+treat the enclosed section as being **atomic**, or something 
+that is executed without interruption.
+
+The following program illustrates how the ``omp atomic`` pragma
+can be used to shorten the program:
+
+.. activecode:: rc_add_array_atomic
+   :language: c
+   :compileargs: ['-Wall', '-ansi', '-pedantic', '-std=c99']
+   :linkargs: ['-lm', '-fopenmp']
+   :caption: Integration (parallel - first attempt)
+
+   #include <stdio.h>
+   #include <math.h>
+   #include <stdlib.h>
+   #include <omp.h> //<--- added the omp header file
+
+   #define N 20000000 //size of the array
+
+   int main(void){
+
+       int * array = malloc(N*sizeof(int)); //declare array of size N
+       int i;
+
+       //populate array
+       #pragma omp parallel for  //<-- from our earlier example
+       for (i = 0; i < N; i++) {
+           array[i] = i+1;
+       }
+       printf("Done populating %d elements!\n", N);
+       printf("Summing elements together...\n");
+
+       long sum = 0;
+       #pragma omp parallel for
+       for (i = 0; i < N; i++) {
+           #pragma omp atomic 
+           sum+= array[i];
+       }
+       printf("Sum is: %ld\n", sum);
+
+       return 0;
+   }
+
+
+.. mchoice:: rc_mc_array_2
+    :correct: a
+    :answer_a: The revised program is slower.
+    :answer_b: Both versions of the program take an equal amount of time to execute.  
+    :answer_c: The revised program is faster.
+    :answer_d: The program is impossible to revise. You always get a syntax error.
+    :feedback_a: Correct! In fact, it is so slow it exceeds runestone's time limit!
+    :feedback_b: Incorrect. Did you try modifying the program and re-running it?
+    :feedback_c: Incorrect. Did you try modifying the program and re-running it?
+    :feedback_d: No, it's fixable. Try replacing the world 'atomic' with the word 'critical'.
+
+    Try replacing the ``omp atomic`` pragma (line 24) with the ``omp critical`` pragma and re-run the program. What happens?
+
+In the next section, we cover a technique called reduction that offers another alternative.

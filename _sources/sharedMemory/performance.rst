@@ -16,3 +16,5 @@ Have students use the array addition example and scale up the array size while k
 Have them recalculate speedup and efficiency. 
 
 Introduce the notion of load balancing, and how smart strategies can help reduce performance bottlenecks.
+
+Introduce static vs dynamic scheduling here as well.

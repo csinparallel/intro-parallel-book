@@ -5,8 +5,9 @@ This book gives you just a taste of parallelism. However, if you are looking to 
 
 
 
-.. include:: mapreduce.rst
+.. toctree::
+    :maxdepth: 2
 
-.. include:: gpu.rst
-
-.. include:: other.rst
+    mapreduce.rst
+    gpu.rst
+    other.rst
