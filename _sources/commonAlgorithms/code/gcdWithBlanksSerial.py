@@ -2,6 +2,7 @@ NUM_BLOCKS = 50
 PAIRS_PER_BLOCK = 20000
 MIN_VALUE = 1000
 MAX_VALUE = 10000000000000000
+NUM_WORKERS = 1
 VERBOSE = False
 
 def gcd(a, b):
@@ -15,25 +16,25 @@ import random
 random.seed(99)
 
 def buildInputs(inputQ):
-    for i in range(_______________):
+    for i in range(_______________): #a
         block = []
-        for i in range(_______________):
+        for i in range(_______________): #b
             block.append([random.randint(MIN_VALUE, MAX_VALUE), random.randint(MIN_VALUE, MAX_VALUE)])
         inputQ.put(block)
 
     # use sentinels to avoid possible race condition (multiple checks for not empty, then one gets, other hangs on get)
-    for i in range(_______________):
+    for i in range(_______________): #c
         inputQ.put("DONE")
 
 def computeGCDs(id, inputQ, outputQ):
-    block = _______________
-    while(block != _______________):
+    block = _______________ #d
+    while(block != _______________): #e
         blockOutput = []
-        for i in range(_______________):
+        for i in range(_______________): #f
             pair = block[i]
             blockOutput.append([id, pair[0], pair[1], gcd(pair[0], pair[1])])
         outputQ.put(blockOutput)
-        block = _______________
+        block = _______________ #d
 
 def processOutputs(outputQ):
     for i in range(NUM_BLOCKS):

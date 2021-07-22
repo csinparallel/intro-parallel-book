@@ -139,28 +139,138 @@ In the unplugged activity above, very little synchronization between the workers
 
    A similar situation would occur if we were to program the unplugged activity as is. GCD is easy for a computer to compute quickly. To make the overhead of the shared queue worthwhile, then, we need to increase the amount of work required per task. We can easily accomplish this by having each worker request not just a single pair of numbers, but rather a *block* of many pairs of numbers. Only when the worker has handled the entire block will it put all results on the output queue and get another block from the input queue. This increases the amount of work that each process performs, reducing the number of times workers would be saying "get" and "put", thus also reducing communication overhead.
 
-Translating it to code
-^^^^^^^^^^^^^^^^^^^^^^^^^
-Let's start by examining an implementation of the GCD function in Python. 
-
-
-
+Translating it to code: Serial Version
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Let's now write a Shared Queue implementation of GCD. In the serial version, one process will "put" all the gcd pairs in the input queue, and then "get" a *block* of GCD pairs, find the GDC of each pair, and then place the result in the output queue.
 
-corresponding code in Python. Consider the provided code, with blanks:
+Download the file gcdWithBlanksSerial.py. 
 
-.. literalinclude:: code/gcdSerialWithBlanks.py
+The code begins running in the ``main`` namespace at the bottom. 
+
+.. literalinclude:: code/gcdWithBlanksSerial.py
    :language: python
-   :linenos:
+   :lines: 65-66
 
-The code begins running in the if block at the bottom. Sequential and parallel versions of the code are run and compared.
+   
 
-In the sequential version of the code, the main process does everything:
-    • buildInputs creates NUM_BLOCKS blocks of numbers, with PAIRS_PER_BLOCK pairs of numbers in each block. The numbers range from MIN_VALUE to MAX_VALUE.
-    • computeGCDs is then called, which gets one block at a time from inputQ, then one pair at a time from the current block. It computes the GCD by calling the provided gcd function (an implementation of Euclid’s algorithm), and appends the results to a blockOutput variable. When the block is fully processed, the results for the block are put on the output, and a new block is obtained.
-    • processOutputs is then called, which simply obtains one output at a time. If VERBOSE is true, then all results will be printed. Otherwise, nothing is really done to “process” the outputs beyond simply obtaining them, but this function simulates what would be done as the next step in a larger application.
 
-Study the sequential code as best as you can before moving forward. The great news is that the parallel code uses exactly the same functions! The only difference is that the main process creates NUM_WORKERS child processes that will each do the work in parallel.
+The main process then runs the ``gcdSequential`` function:
+
+.. literalinclude:: code/gcdWithBlanksSerial.py
+   :language: python
+   :lines: 48-59
+
+Specifically, ``gcdSequential`` executes the following steps:
+
+* The ``buildInputs`` function is called, which creates NUM_BLOCKS blocks of numbers, with PAIRS_PER_BLOCK pairs of numbers in each block. The numbers range from MIN_VALUE to MAX_VALUE.
+
+* ``computeGCDs`` is then called, which gets one block at a time from inputQ, then one pair at a time from the current block. It computes the GCD by calling the provided gcd function (an implementation of Euclid’s algorithm), and appends the results to a blockOutput variable. When the block is fully processed, the results for the block are put on the output, and a new block is obtained.
+
+* processOutputs is then called, which simply obtains one output at a time. If ``VERBOSE`` is set to ``True``, then all results will be printed. Otherwise, nothing is really done to "process" the outputs beyond simply obtaining them, but this function simulates what would be done as the next step in a larger application.
+
+Try it out: the ``buildInputs`` function
+"""""""""""""""""""""""""""""""""""""""""
+A copy of the ``buildInputs`` function from ``gcdWithBlanksSerial.py`` is shown below:
+
+.. code-block:: python
+
+   def buildInputs(inputQ):
+       for i in range(_______________):  #a
+           block = []
+       for i in range(_______________): #b
+           block.append([random.randint(MIN_VALUE, MAX_VALUE), random.randint(MIN_VALUE, MAX_VALUE)])
+           inputQ.put(block)
+
+       # use sentinels to avoid possible race condition (multiple checks for not empty, then one gets, other hangs on get)
+       for i in range(_______________): #c
+           inputQ.put("DONE")
+
+A single variable is needed for each of the ``range()`` functions in the above code snippets. Can you figure out what they are? Read the description of the ``buildInputs`` function above if you are having trouble.
+
+.. dragndrop:: dnd-sq-ser-1
+    :match_11: NUM_BLOCKS|||#a
+    :match_12: PAIRS_PER_BLOCK|||#b
+    :match_13: WORKERS|||#c
+
+    Match the variable with its appropriate place in the code 
+
+
+Try it out: the ``computeGCDs`` function
+"""""""""""""""""""""""""""""""""""""""""
+
+Now, let's look at of the ``computeGCDs`` function.
+
+.. code-block:: python
+
+   def computeGCDs(id, inputQ, outputQ):
+       block = _______________ #d
+       while(block != _______________): #e
+           blockOutput = []
+           for i in range(_______________): #f
+               pair = block[i]
+               blockOutput.append([id, pair[0], pair[1], gcd(pair[0], pair[1])])
+               outputQ.put(blockOutput)
+           block = _______________ #d
+
+.. dragndrop:: dnd-sq-ser-2
+    :match_11: inputQ.get()|||#d
+    :match_12: PAIRS_PER_BLOCK|||#f
+    :match_13: "DONE"|||#e
+
+    Match the variable with its appropriate place in the code 
+
+Try it out: timing the serial version
+""""""""""""""""""""""""""""""""""""""""""""""
+Fill in the blanks in your local copy of ``gcdWithBlanksSerial.py``. Once you are done, add a ``print()`` statement to the ``main()`` function to display the amount of time it takes to run the code:
+
+.. code-block:: python
+
+    def main():
+        print("NUM_BLOCKS: {}\nPAIRS_PER_BLOCK: {}\nMIN_VALUE: {}\nMAX_VALUE: {}\nNUM_WORKERS: {}".format(NUM_BLOCKS, PAIRS_PER_BLOCK, MIN_VALUE, MAX_VALUE, NUM_WORKERS))
+        seqTime = gcdSequential()
+        print("Sequential Time is: {} seconds".format(seqTime)) #add this line
+
+.. shortanswer:: short-sq-ser-1
+
+   Run the code a few times. What kind of performance do you see?
+
+Study the sequential code as best as you can before moving forward. 
+
+
+Translating it to code: Parallel Version
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To create a parallel version of this program, first copy your completed ``gcdWithBlanksSerial.py`` file to a new file called ``gcdWithBlanks.py``. Next, modify the main function so that a new function, ``gcdParallel()`` is called:
+
+
+.. code-block:: python
+
+    def main():
+        print("NUM_BLOCKS: {}\nPAIRS_PER_BLOCK: {}\nMIN_VALUE: {}\nMAX_VALUE: {}\nNUM_WORKERS: {}".format(NUM_BLOCKS, PAIRS_PER_BLOCK, MIN_VALUE, MAX_VALUE, NUM_WORKERS))
+        seqTime = gcdSequential()
+        print("Sequential Time is: {} seconds".format(seqTime)) 
+        parTime = gcdParallel() #add this line
+        print("Parallel Time is: {} seconds".format(seqTime)) #add this line too
+
+The great news is that the parallel version of this code uses exactly the same functions! The only difference is that the main process creates NUM_WORKERS child processes that will each do the work in parallel. Copy and paste the following fill-in-the-blank function to your ``gcdWithBlanks.py`` file:
+
+.. code-block:: python
+
+    def gcdParallel():
+        print("----------\ngcdParallel")
+        inputQ = _______________ #g
+        outputQ = _______________ #g
+
+        buildInputs(inputQ)
+
+        startTime = timeit.default_timer()
+        for i in range(1, NUM_WORKERS+1):
+            #h: create a start a process here
+        ________________________________ #i
+        elapsedTime = timeit.default_timer() - startTime
+        print("Elapsed time (s):", elapsedTime)
+        return elapsedTime
+
 
 The code contains many blanks. Fill in the blanks to complete the implementation.
 
