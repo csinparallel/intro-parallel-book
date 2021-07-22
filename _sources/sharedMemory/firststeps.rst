@@ -190,12 +190,13 @@ each thread is operating on a different unit of data or memory.
 
 As an example, consider the process of filling an array of size *n* with elements from 1 .. *n* -1:
 
-.. youtube:: uLcypqARneE
-    :height: 315
-    :width: 560
-    :align: left
+.. video:: video-fill-array
+   :controls:
+   :thumb: images/array-fill-par_thumb.png
 
-The following snippet of C code is a serial implementation that populates an array with 50 million elements:
+   https://d32ogoqmya1dw8.cloudfront.net/files/csinparallel/filling_array.mov
+
+The following snippet of C code is a serial implementation that populates an array with 20 million elements:
 
 .. activecode:: sm_arrayfill_serial
    :language: c
@@ -206,7 +207,7 @@ The following snippet of C code is a serial implementation that populates an arr
    #include <stdio.h>
    #include <stdlib.h>
 
-   #define N 50000000 //size of the array
+   #define N 20000000 //size of the array
 
    int main(void){
 
@@ -226,11 +227,11 @@ Let's consider how we would parallelize a program like this. One way is to assig
 segment of the array, and have each thread populate its own component of the array. The following 
 video illustrates how 4 threads would populate an array (each thread is assigned a different color):
 
-.. youtube:: YV86Q0XFtJA
-    :height: 315
-    :width: 560
-    :align: left
+.. video:: video-fill-part
+   :controls:
+   :thumb: images/array-fill-par_thumb.png
 
+   https://d32ogoqmya1dw8.cloudfront.net/files/csinparallel/filling_array_parallel.mov
 
 
 .. mchoice:: sm_mc_tpdp_1
@@ -250,5 +251,73 @@ fall somewhere along the spectrum. For now, it is sufficient to recognize that b
 ways to assign work to threads.
 
 
-1.1.3 Two new pragmas: ``omp for`` and ``omp parallel for``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1.1.3 For-Loop Pragmas
+^^^^^^^^^^^^^^^^^^^^^^
+
+Before we parallelize the populate array program, we need to introduce two new pragmas. The first is the 
+``omp for`` pragma. This pragma parallelizes the iterations of a for loop by assigning each thread a chunk of 
+iterations of the loop. The following code snippet illustrates how to use the ``omp for`` pragma to parallelize 
+the populate array program:
+
+.. activecode:: sm_arrayfill_parallel1
+   :language: c
+   :compileargs: ['-Wall', '-ansi', '-pedantic', '-std=c99']
+   :linkargs: ['-fopenmp']
+   :caption: Array Fill (serial)
+
+   #include <stdio.h>
+   #include <stdlib.h>
+
+   #define N 20000000 //size of the array
+
+   int main(void){
+
+        int * array = malloc(N*sizeof(int)); //declare array of size N
+
+        #pragma omp parallel //<-- entered omp parallel pragma here
+        {
+            //populate array
+
+            #pragma omp for //<-- entered omp for pragma here
+            for (int i = 0; i < N; i++) {
+                array[i] = i+1;
+            }
+
+        }
+        printf("Done populating %d elements!", N);
+        return 0;
+   }
+
+
+Notice that in the body of the above program that there is nothing between the ``omp parallel`` and the ``omp for`` pragmas. This is fairly common, as sometimes the key piece of code to be parallelized is just a for loop. To simplify the process for programmers, OpenMP provides the ``omp parallel for`` pragma, which literally combines the functionality of the ``omp parallel`` and the ``omp for`` pragmas into one line of code. 
+
+The following program illustrates this new pragma in action:
+
+.. activecode:: sm_arrayfill_parallel_for
+   :language: c
+   :compileargs: ['-Wall', '-ansi', '-pedantic', '-std=c99']
+   :linkargs: ['-fopenmp']
+   :caption: Array Fill (serial)
+
+   #include <stdio.h>
+   #include <stdlib.h>
+
+   #define N 20000000 //size of the array
+
+   int main(void){
+
+        int * array = malloc(N*sizeof(int)); //declare array of size N
+        int i;
+
+        //populate array
+        #pragma omp parallel for //<-- inserted omp parallel for pragma
+        for (i = 0; i < N; i++) {
+            array[i] = i+1;
+        }
+
+        printf("Done populating %d elements!", N);
+        return 0;
+   }
+
+Notice how much shorter and simpler this code is. However, the ``omp parallel for`` isn't always appropriate for all cases, as we will see in 
+the next section.

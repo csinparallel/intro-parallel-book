@@ -12,11 +12,11 @@ Define terms such as node, core, cluster compute, peer-to-peer, and process.
 Re-introduce the jigsaw puzzle analogy and discuss the distributed memory/process communication use case.
 
 
+.. toctree::
+    :maxdepth: 2
 
-.. include:: firststeps.rst
-
-.. include:: improve.rst
-
-.. include:: performance.rst
-
-.. include:: forestfire.rst
+    firststeps.rst
+    sendAndReceive.rst
+    performance.rst
+    improve.rst
+    forestfire.rst

@@ -11,13 +11,11 @@ In this chapter, we cover common algorithmic patterns and their parallel impleme
 strategies to use when parallelizing more complex tasks. 
 
 
+.. toctree::
+    :maxdepth: 2
 
-.. include:: sorting.rst
-
-.. include:: selection.rst
-
-.. include:: sieve.rst
-
-.. include:: sharedq.rst
-
-.. include:: matmul.rst
+    sorting.rst
+    selection.rst
+    sieve.rst
+    sharedq.rst
+    matmul.rst
