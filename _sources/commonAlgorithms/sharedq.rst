@@ -2,9 +2,7 @@
 3.4 Shared Queue
 -----------------
 
-In this section, we will see how to make a process and how to communicate between processes via a **shared queue**, a special type of data data structure 
-through which processes can communicate with each other. Recall that a queue is a first-in-first-out (FIFO) data structure. The queue is *shared* in that each process has access to the same queue structure. The Python multiprocessing module uses the shared queue data structure to allow 
-processes to pass messages to each other.
+In this section, we will see how to make a process and how to communicate between processes via a **shared queue**. Recall that a queue is a first-in-first-out (FIFO) data structure. The queue is *shared* in that each process has access to the same queue structure. The Python multiprocessing module uses the shared queue data structure to allow processes to pass messages to each other.
 
 After giving an overview of the Python multiprocessing module, we will then practice computing the greatest common divisor (GCD) of many pairs of numbers through an unplugged activity, and finally develop code using the multiprocessing module to perform this task more quickly with parallelism.
 
@@ -37,7 +35,7 @@ The Python multiprocessing module comes with the standard Python distribution. I
 
 Creating a shared queue
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-A shared queue can be created by calling the ``Queue`` constructor, which has no arguments. It can then be passed to each process via the ``Process`` constructor’s ``args`` formal parameter. The blocking ``put`` and ``get`` methods can then be used to put data on the queue and remove data from the queue, respectively.
+One way that processes can communicate is by putting and getting values into and out of a shared queue data structure. A shared queue can be created by calling the ``Queue`` constructor, which has no arguments. It can then be passed to each process via the ``Process`` constructor’s ``args`` formal parameter. The blocking ``put`` and ``get`` methods can then be used to put data on the queue and remove data from the queue, respectively.
 
 For example, consider the code below:
 
@@ -49,7 +47,7 @@ For example, consider the code below:
 
 Here, the main process creates the ``Queue`` object and passes it to each of two worker processes. When the workers start executing the ``parrotSpeak`` function, there is not yet anything on the queue, and so they both block on the ``q.get()`` call on line 5. After a pause on line 32, the main process begins putting data on the queue. The two workers race to get each message. The 0.1 second ``sleep`` in the ``parrotSpeak`` function makes it more likely that the race winner will vary even with such a small set of messages.
 
-Since this is a shared queue, values are "getted" off the queue in the same order they are "putted" on the queue. Note, however, that due to a race condition, it is possible that the worker processes won’t actually complete the processing of a value in this same order.
+Since this is a shared queue, values are "getted" off the queue in the same order they are "putted" on the queue. Note, however, that due to a race condition, it is possible that the worker processes won’t actually *complete* the processing of a value in this same order.
 
 Note also the two ``"DONE"`` strings at the end of the messages list. These two sentinels are used to tell each worker when to stop calling get to obtain more messages. There are other approaches that can be used instead, but this approach is simple and effective.
 
@@ -62,7 +60,7 @@ The Greatest Common Divisor (GCD)
 
 Recall that the GCD of two positive integers is the highest number that goes evenly into both numbers. For example, the GCD of 24 and 36 is 12, because 24/12 = 2 and 36/12 = 3, and there is no number larger than 12 that divides both numbers evenly. If you’re uncertain how to compute the GCD, for now just do your best by choosing relatively small positive integers and seeing with a calculator if they divide both numbers. 
 
-An function that implements the GCD using Euclid's algorithm is shown below. In short, Euclid's algorithm is based on the observation that the GCD of two numbers does not change if the larger number is replaced by the difference of the two numbers. The modulo operation simply finds the difference between the larger and smaller numbers after a sequence of subtractions of the smaller number(i.e. division). **Make sure you understand this code before continuing on**. Pay close attention to Line 4: ``a, b = b%a, a``. This line simultaneously assigns ``a`` the value of ``b%a`` (i.e., the *remainder* when b is divided by a), and assigns ``b`` the old value of ``a``. 
+A function that implements the GCD using Euclid's algorithm is shown below. In short, Euclid's algorithm is based on the observation that the GCD of two numbers does not change if the larger number is replaced by the difference of the two numbers. The modulo operation simply finds the difference between the larger and smaller numbers after a sequence of subtractions of the smaller number(i.e. division). **Make sure you understand this code before continuing on**. Pay close attention to Line 4: ``a, b = b%a, a``. This line simultaneously assigns ``a`` the value of ``b%a`` (i.e., the *remainder* when b is divided by a), and assigns ``b`` the old value of ``a``. 
 
 .. activecode:: gcd_simple
    :language: python
