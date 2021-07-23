@@ -141,7 +141,7 @@ Translating it to code: Serial Version
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Let's now write a Shared Queue implementation of GCD. In the serial version, one process will "put" all the gcd pairs in the input queue, and then "get" a *block* of GCD pairs, find the GDC of each pair, and then place the result in the output queue.
 
-Download the file gcdWithBlanksSerial.py. 
+Download the file `gcdWithBlanksSerial.py <https://github.com/csinparallel/intro-parallel-book/blob/master/_sources/commonAlgorithms/code/gcdWithBlanksSerial.py>`_. 
 
 The code begins running in the ``main`` namespace at the bottom. 
 
@@ -409,6 +409,6 @@ Timing the parallel version
    Add code to the main function to compute the speedup of the parallel version over the serial version. Re-run your code, modifying the ``WORKERS`` variable each time. What kind of speedup do you see?
 
 
-A fully working program can be downloaded here.
+A fully working program can be downloaded `here <https://github.com/csinparallel/intro-parallel-book/blob/master/_sources/commonAlgorithms/code/gcd.py>`_.
 
 
