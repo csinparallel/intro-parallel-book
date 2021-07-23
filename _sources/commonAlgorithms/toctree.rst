@@ -17,5 +17,6 @@ strategies to use when parallelizing more complex tasks.
     sorting.rst
     selection.rst
     sieve.rst
-    sharedq.rst
     matmul.rst
+    sharedq.rst
+
