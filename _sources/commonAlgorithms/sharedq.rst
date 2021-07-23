@@ -166,7 +166,7 @@ Specifically, ``gcdSequential`` executes the following steps:
 
 * ``computeGCDs`` is then called, which gets one block at a time from inputQ, then one pair at a time from the current block. It computes the GCD by calling the provided gcd function (an implementation of Euclid’s algorithm), and appends the results to a blockOutput variable. When the block is fully processed, the results for the block are put on the output, and a new block is obtained.
 
-* processOutputs is then called, which simply obtains one output at a time. If ``VERBOSE`` is set to ``True``, then all results will be printed. Otherwise, nothing is really done to "process" the outputs beyond simply obtaining them, but this function simulates what would be done as the next step in a larger application.
+* ``processOutputs`` is then called, which simply obtains one output at a time. If ``VERBOSE`` is set to ``True``, then all results will be printed. Otherwise, nothing is really done to "process" the outputs beyond simply obtaining them, but this function simulates what would be done as the next step in a larger application.
 
 Try it out: the ``buildInputs`` function
 """""""""""""""""""""""""""""""""""""""""
@@ -265,16 +265,152 @@ The great news is that the parallel version of this code uses exactly the same f
 
         startTime = timeit.default_timer()
         for i in range(1, NUM_WORKERS+1):
-            #h: create a start a process here
+            #h: create and start a process here
+
         ________________________________ #i
         elapsedTime = timeit.default_timer() - startTime
         print("Elapsed time (s):", elapsedTime)
         return elapsedTime
 
 
-The code contains many blanks. Fill in the blanks to complete the implementation.
+The code contains many blanks. Let's fill in the blanks together to complete the implementation.
 
-<gcd.py is the answer key>
+Initializing new queues
+""""""""""""""""""""""""""
 
+.. fillintheblank:: sq-fitb1
+
+   Fill in the blanks to complete the statements commented with ``#g``. The goal here is to initialize ``inputQ`` and ``outputQ`` with *new queues*.
+
+   inputQ = ``|blank|``
+    
+   outputQ = ``|blank|``
+
+   -   :Queue\(\): Correct.
+       :x: Incorrect. Take a look at the serial implementation. How are queues initialized?
+   -   :Queue\(\): Correct.
+       :x: Incorrect. Take a look at the serial implementation. How are queues initialized?
+
+Completing the for loop:
+""""""""""""""""""""""""""""""""
+The for loop in ``gcdParallel()`` is where all the parallelization happens. Essentially, we want each worker to compute the gcd, using the created input and output queues. Let's build this code together:
+
+    .. code-block:: python
+
+       for i in range(1, NUM_WORKERS+1):
+            #h: create a start a process here
+
+.. mchoice:: sq-mc-1
+   :answer_a: create_process()
+   :answer_b: process()
+   :answer_c: Process()
+   :answer_d: make_process()
+   :correct: c
+   :feedback_a: Take a look at the shared queue parrot example. How are processes created?
+   :feedback_b: Take a look at the shared queue parrot example. Is the function call lowercase?
+   :feedback_c: Great work!
+   :feedback_d: Take a look at the shared queue parrot example. How are processes created?
+
+   What function allows for a worker to start a process?
+
+
+.. mchoice:: sq-mc-2
+   :answer_a: target
+   :answer_b: format
+   :answer_c: put
+   :answer_d: args
+   :answer_e: get
+   :correct: a,d
+   :feedback_a: Great job!
+   :feedback_b: Take another look at process creation in the "hello world" example. What are its arguments?
+   :feedback_c: Take another look at process creation in the "hello world" example. What are its arguments?
+   :feedback_d: Nice work!
+   :feedback_e: Take another look at process creation in the "hello world" example. What are its arguments?
+
+   The function that creates a process has two formal parameters. What are they?
+
+
+.. fillintheblank:: sq-fitb2
+
+   Let's assign values to the two formal parameters:
+
+   target = ``|blank|``, args = (``|blank|``)
+
+   -   :computeGCDs: Correct! That is the correct target function!
+       :x: Not quite. What is the name of the function we want each process to call? 
+   -   :i\, inputQ\, outputQ: Correct! Those are the correct arguments that the target function needs!
+       :x: Incorrect. Consider what the target function is, what arguments it usually takes, and what they should be in the context of the loop.
+
+.. mchoice:: sq-mc-3
+   :answer_a: process()
+   :answer_b: begin()
+   :answer_c: start()
+   :answer_d: put()
+   :answer_e: get()
+   :correct: c
+   :feedback_a: No, this is similar to the function that creates processes. We are looking for a method to start the process!
+   :feedback_b: No. Take another look at the "hello world" program. How are processes started?
+   :feedback_c: Great job!
+   :feedback_d: Take another look at the "hello world" program. How are processes started?
+   :feedback_e: Take another look at the "hello world" program. How are processes started?
+
+   The process creation function invokes a method to start a process. What is that method called?
+
+Finishing up the function
+""""""""""""""""""""""""""""""""
+
+.. fillintheblank:: sq-fitb3
+
+   The last thing the parallel version does is manage all the data in the output queue. What function should be called at line ``#i``? Be sure to include any arguments.
+
+   -   :processOutputs\(outputQueue\): That's correct! Wonderful job!
+       :computeGCDs\(.*\): Nope. This was run inside the for loop!
+       :processOutputs\(.*\): Close. What are the arguments?
+       :buildInputs\(.*\): Not quite. This function was used to set up the queues for initial use. We want to conclude the function!  
+       :x: Try again. Take a look at the serial version of this code. What happens after the gcd is computed?
+
+
+Putting it all together
+"""""""""""""""""""""""""""""""""
+
+Using the solutions to the previous exercises, complete the ``gcdParallel()`` function.
+
+.. reveal:: re-sq-final
+    :showtitle: Show solution
+    :hidetitle: Hide solution
+
+    .. code-block:: python
+
+        def gcdParallel():
+            print("----------\ngcdParallel")
+            inputQ = Queue()
+            outputQ = Queue()
+
+            buildInputs(inputQ)
+
+            startTime = timeit.default_timer()
+            for i in range(1, NUM_WORKERS+1):
+                Process(target=computeGCDs, args=(i, inputQ, outputQ)).start()
+
+            processOutputs(outputQ)
+            elapsedTime = timeit.default_timer() - startTime
+            print("Elapsed time (s):", elapsedTime)
+            return elapsedTime
+
+
+Timing the parallel version
+""""""""""""""""""""""""""""""""""""""""""""""
+
+.. shortanswer:: short-sq-par-1
+
+   Run the code a few times, modifying the ``WORKERS`` variable. What kind of times do you see?
+
+
+.. shortanswer:: short-sq-par-2
+
+   Add code to the main function to compute the speedup of the parallel version over the serial version. Re-run your code, modifying the ``WORKERS`` variable each time. What kind of speedup do you see?
+
+
+A fully working program can be downloaded here.
 
 
