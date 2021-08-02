@@ -29,36 +29,61 @@ The Python multiprocessing module comes with the standard Python distribution. I
 
    * After creating Process object ``p``, we simply call the start method on it to start the process. Each process, once started, runs the ``sayHi`` function with the provided id value passed in to the constructor via the ``args`` formal parameter. 
 
-.. exercise suggestion: ask students what the output is when they run the code. 
+.. mchoice:: sq-mc-a
+   :answer_a: The greetings will be printed in a completely random order.
+   :answer_b: The greetings will be printed in mixed-up order, but generally we can expect lower-numbered processes to tend to print before higher-number processes.
+   :answer_c: The greetings will always be printed exactly in numerical order.
+   :correct: b
+   :feedback_a: Try again: The greetings will be mixed-up, yes, but note that there is an order in which the processes are started.
+   :feedback_b: Correct! The greetings will be mixed-up due to the processes racing to print, but the lower-numbered processes are started first, so they'll tend to print first. Each process will say "Hello from" followed by its provided id, from 0 to 19.
+   :feedback_c: Try again: With processes running simultaneously, the actual order of printing will vary from one run to the next.
 
- .. what is the expected output when when the above code is run? Add a sentence. 
+   Which of the following do you think is true about the output of the above code?
 
 Creating a shared queue
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 One way that processes can communicate is by putting and getting values into and out of a shared queue data structure. A shared queue can be created by calling the ``Queue`` constructor, which has no arguments. It can then be passed to each process via the ``Process`` constructor’s ``args`` formal parameter. The blocking ``put`` and ``get`` methods can then be used to put data on the queue and remove data from the queue, respectively.
 
-For example, consider the code below:
-
-.. add a sentence that explains what the code does
+For example, consider the code below. Here, two worker processes play the roles of two parrots, speaking (printing) sentences provided by the main process. The sentences are passed to the worker processes via a shared queue.
 
 .. literalinclude:: code/queueEx.py
    :language: python
    :linenos:
 
-Here, the main process creates the ``Queue`` object and passes it to each of two worker processes. When the workers start executing the ``parrotSpeak`` function, there is not yet anything on the queue, and so they both block on the ``q.get()`` call on line 5. After a pause on line 32, the main process begins putting data on the queue. The two workers race to get each message. The 0.1 second ``sleep`` in the ``parrotSpeak`` function makes it more likely that the race winner will vary even with such a small set of messages.
+The main process creates the ``Queue`` object and passes it to each of two worker processes. When the workers start executing the ``parrotSpeak`` function, there is not yet anything on the queue, and so they both block on the ``q.get()`` call on line 5. After a pause on line 32, the main process begins putting data on the queue. The two workers race to get each message. The 0.1 second ``sleep`` in the ``parrotSpeak`` function makes it more likely that the race winner will vary even with such a small set of messages.
 
 Since this is a shared queue, values are "getted" off the queue in the same order they are "putted" on the queue. Note, however, that due to a race condition, it is possible that the worker processes won’t actually *complete* the processing of a value in this same order.
 
-Note also the two ``"DONE"`` strings at the end of the messages list. These two sentinels are used to tell each worker when to stop calling get to obtain more messages. There are other approaches that can be used instead, but this approach is simple and effective.
+Note also the two ``"DONE"`` strings at the end of the messages list. These two sentinels are used to tell each worker when to stop calling ``get`` to obtain more messages. There are other approaches that can be used instead, but this approach is simple and effective.
 
-.. could a video be created that visualizes what this code does, perhaps a sample execution?
-.. add a few sentences that explains what the executed code does
+View the video below in full-screen to see this program in action.
 
+.. video:: video-shared-queue
+   :controls:
+   :thumb: images/thumbnail-shared-queue.png
+
+   https://d32ogoqmya1dw8.cloudfront.net/files/csinparallel/filling_array.mov
+
+.. NOTE: The above .mov file is just a placeholder! It should be replaced with the video-shared-queue.mp4 file.
+.. I'm also not sure why the thumbnail image doesn't show up.
+
+.. mchoice:: sq-mc-b
+   :answer_a: The process ordering will often be different.
+   :answer_b: The message ordering might be different.
+   :answer_c: It is possible for the same process to print twice in a row.
+   :answer_d: It is possible for the same message to be printed twice in a row.
+   :correct: d
+   :feedback_a: Try again: This statement is actually true. The worker processes are racing to get and print messages, and so the order of process execution may vary.
+   :feedback_b: Try again: This statement is actually true. Usually message ordering will be the same because printing occurs immediately after getting, in a short period of time compared to the sleep call. But there is a slight chance that a process is interrupted between the get and print, thus changing the message ordering.
+   :feedback_c: Try again: This statement is actually true. Even with the brief sleep, it is possible for one process to continue running long enough to print multiple messages without interruption.
+   :feedback_d: Correct! This statement is false. It is not possible for the same message to be printed twice in a row. The Queue class is designed such that only one process can get from it at a time. Each get call removes a message from the queue, so that any subsequent get call will not get the same message again.
+
+   (After watching the video.) Suppose you were to run the code a second time. Which of the following statements is FALSE? Consider both the process ordering (the ordering of 1's and 2's in the output) and the message ordering (the order in which the messages appear).
 
 The Greatest Common Divisor (GCD)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Recall that the GCD of two positive integers is the highest number that goes evenly into both numbers. For example, the GCD of 24 and 36 is 12, because 24/12 = 2 and 36/12 = 3, and there is no number larger than 12 that divides both numbers evenly. If you’re uncertain how to compute the GCD, for now just do your best by choosing relatively small positive integers and seeing with a calculator if they divide both numbers. 
+Recall that the GCD of two positive integers is the highest number that goes evenly into both numbers. For example, the GCD of 24 and 36 is 12, because 24/12 = 2 and 36/12 = 3, and there is no number larger than 12 that divides both numbers evenly. If you’re uncertain how to compute the GCD, one simple way for now is just to choose relatively small positive integers and see with a calculator if they divide both numbers.
 
 A function that implements the GCD using Euclid's algorithm is shown below. In short, Euclid's algorithm is based on the observation that the GCD of two numbers does not change if the larger number is replaced by the difference of the two numbers. The modulo operation simply finds the difference between the larger and smaller numbers after a sequence of subtractions of the smaller number(i.e. division). **Make sure you understand this code before continuing on**. Pay close attention to Line 4: ``a, b = b%a, a``. This line simultaneously assigns ``a`` the value of ``b%a`` (i.e., the *remainder* when b is divided by a), and assigns ``b`` the old value of ``a``. 
 
@@ -89,20 +114,22 @@ Suppose the goal is to compute the GCD of *many* pairs of numbers. Using a share
 
 An Unplugged Activity 
 """"""""""""""""""""""""""""
-Let’s first practice computing the GCD with a shared queue through an unplugged activity.
+Let’s first practice computing the GCD with a shared queue through an unplugged activity. In this activity, a main process will generate numbers and then put them on a shared queue that workers can access for GCD calculations. To compare parallel and serial computation, the main process will also compute these GCDs itself.
 
-Roles (minimum 5 people) and items needed:
-    * 1 main process (1 sheet of paper and one writing utensil)
-    * 2 - 4 workers (1 sheet of paper, one writing utensil, and one calculator, each)
-    * 1 input queue (1 writing utensil)
-    * 1 output queue (1 sheet of paper and one writing utensil)
+This activity requires at least five people. For three of these five people:
+    * One person will play the main process and will need 1 sheet of paper and one writing utensil.
+    * One person will play the input queue and will need 1 writing utensil.
+    * One person will play the output queue and will need 1 sheet of paper and one writing utensil.
 
-Each of the four workers should sit in separate corners of the room. The main process and both queues will stay in the middle of the room.
+At least two additional people are needed. Each will play a separate worker and need one sheet of paper, one writing utensil, and one calculator.
+
+Each of the workers should sit as far apart as possible in the room. The main process and both queues should be in a central location in the room.
 
 Main process procedure:
     1. Fill out one line at a time on a sheet of paper. Each line should contain two randomly chosen two-digit positive integers. Write 7 lines  of numbers in this manner.
     2. Give this sheet of paper to the input queue.
     3. Tell the workers to begin their procedures.
+    4. Compute all GCDs yourself as well, reading one pair of numbers at a time from the input queue's paper. This serves as an example of serial calculation.
 
 Worker procedure:
     1. Say "get" to the input queue and wait until there is a response from the input queue (ignore verbal responses to other workers)
@@ -115,7 +142,7 @@ Worker procedure:
         f. Loop back up to step 2
 
 Input queue procedure:
-    1. Receive a sheet of paper from the main process, with pairs of numbers.
+    1. Receive a sheet of paper from the main process, with pairs of numbers. Keep the paper in a location where the main process can see it too, since it will need to access the paper for the serial calculations.
     2. Wait for a "get" message from a worker.
         a. When received, give the worker a pair of non-crossed-out numbers, and cross out the numbers given.
         b. If multiple requests come in simultaneously, handle them one at a time, with distinct pairs of numbers for each request.
@@ -130,7 +157,7 @@ Output queue procedure:
         c. If multiple requests come in simultaneously, handle them one at a time.
 
 
-In the unplugged activity above, very little synchronization between the workers is needed. Only one worker can access a queue at a time, but otherwise each worker is free to work as quickly or slowly as needed. If each task (computing the GCD) is enough work to justify potentially waiting briefly for queue access, the parallel approach will show speedup over a sequential approach.
+In the unplugged activity above, very little synchronization between the workers is needed. Only one worker can access a queue at a time, but otherwise each worker is free to work as quickly or slowly as needed. If each task (computing the GCD) is enough work to justify potentially waiting briefly for queue access, the parallel approach will show speedup over the sequential approach. This will most likely be the case in this activity: the parallel workers will complete all GCD calculations before the main process is able to do the same.
 
 .. note::
    The unplugged activity could be implemented directly in code. However, computing the GCD, even of very large numbers, is a fast operation. To see why this is a bit of a problem, imagine if the unplugged activity asked workers to add 1 to each of the provided numbers, instead of computing the GCD. The workers would be saying “get” and “put” much more frequently, and so the proportion of time spent waiting for queue access, instead of calculating, would grow. In other words, the overhead of process communication will outweigh any benefits of parallelism.
@@ -139,7 +166,7 @@ In the unplugged activity above, very little synchronization between the workers
 
 Translating it to code: Serial Version
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Let's now write a Shared Queue implementation of GCD. In the serial version, one process will "put" all the gcd pairs in the input queue, and then "get" a *block* of GCD pairs, find the GDC of each pair, and then place the result in the output queue.
+Let's now write a Shared Queue implementation of GCD. In the serial version, one process will "put" all the GCD pairs in the input queue, and then "get" a *block* of GCD pairs, find the GDC of each pair, and then place the result in the output queue.
 
 Download the file `gcdWithBlanksSerial.py <https://github.com/csinparallel/intro-parallel-book/blob/master/_sources/commonAlgorithms/code/gcdWithBlanksSerial.py>`_. 
 
