@@ -67,6 +67,19 @@ View the video below in full-screen to see this program in action.
 .. NOTE: The above .mov file is just a placeholder! It should be replaced with the video-shared-queue.mp4 file.
 .. I'm also not sure why the thumbnail image doesn't show up.
 
+.. mchoice:: sq-mc-b
+   :answer_a: The process ordering will often be different.
+   :answer_b: The message ordering might be different.
+   :answer_c: It is possible for the same process to print twice in a row.
+   :answer_d: It is possible for the same message to be printed twice in a row.
+   :correct: d
+   :feedback_a: Try again: This statement is actually true. The worker processes are racing to get and print messages, and so the order of process execution may vary.
+   :feedback_b: Try again: This statement is actually true. Usually message ordering will be the same because printing occurs immediately after getting, in a short period of time compared to the sleep call. But there is a slight chance that a process is interrupted between the get and print, thus changing the message ordering.
+   :feedback_c: Try again: This statement is actually true. Even with the brief sleep, it is possible for one process to continue running long enough to print multiple messages without interruption.
+   :feedback_d: Correct! This statement is false. It is not possible for the same message to be printed twice in a row. The Queue class is designed such that only one process can get from it at a time. Each get call removes a message from the queue, so that any subsequent get call will not get the same message again.
+
+   (After watching the video.) Suppose you were to run the code a second time. Which of the following statements is FALSE? Consider both the process ordering (the ordering of 1's and 2's in the output) and the message ordering (the order in which the messages appear).
+
 The Greatest Common Divisor (GCD)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
