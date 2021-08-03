@@ -20,6 +20,7 @@ In addition, we would like to acknowledge the contributions of the following aut
 
 * Elizabeth Shoop, Macelester College
 
+* Steven Bogaerts, DePauw University
 
 .. toctree::
     :maxdepth: 2
