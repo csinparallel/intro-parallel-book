@@ -10,7 +10,7 @@ Author: Dorian Arnold, Emory University
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ..
-  Crawling: Concept Overview and Description
+  Crawling: Overview and Description
 
   #. Define selection problems:
      * Generalized problem definition: Finding kth element in a collection
