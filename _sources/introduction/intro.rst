@@ -10,7 +10,7 @@
 
 0.0 Computing
 --------------------------------
-Welcome to *Parallel Computing for Beginners*! This chapter will start you on your parallel computing journey, laying the conceptual foundations needed for the chapters that follow. 
+Welcome to *Parallel Computing for Beginners*! This chapter will start you on your parallel computing journey, laying the conceptual foundations needed for the chapters that follow. There are many concepts to cover, so get ready to learn many new things!
 
 If you are reading this book, you are probably familiar with the term *computing*, which we might define as *designing, writing, and/or running software in order to solve a problem*. Let’s examine each of these in turn:
 
