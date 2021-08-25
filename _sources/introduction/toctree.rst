@@ -5,8 +5,9 @@ CHAPTER 0: Introduction
 .. toctree::
     :maxdepth: 2
 
-    intro.rst
-    performance.rst
-    patterns.rst
-    hardware.rst
-    setup.rst
+    0.computing.rst
+    1.hardware.rst
+    2.parallelComputing.rst
+    3.performance.rst
+    4.strategies.rst
+    5.platforms.rst
