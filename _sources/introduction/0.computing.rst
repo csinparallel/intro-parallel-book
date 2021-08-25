@@ -1,0 +1,24 @@
+
+
+
+.. This section contains a brief history of parallel computing, and its modern uses. Questions that we should be answering:
+
+.. * what is it used for?
+.. * why should students care?
+.. * what can students expect to learn by the end of this book?
+
+
+0.0 Computing
+--------------------------------
+Welcome to *Parallel Computing for Beginners*! This chapter will start you on your parallel computing journey, laying the conceptual foundations needed for the chapters that follow. There are many concepts to cover, so get ready to learn many new things!
+
+If you are reading this book, you are probably familiar with the term *computing*, which we might define as *designing, writing, and/or running software in order to solve a problem*. Let’s examine each of these in turn:
+
+1. *Designing* software consists of carefully specifying what must be done to solve the problem, and then devising an *algorithm* — a series of well-defined steps—that solves the problem. 
+
+2. *Writing* software consists of implementing an algorithm in a particular programming language, which results in a *computer program*. This program must be thoroughly *tested* to ensure that it actually solves the problem; otherwise, it may be necessary to revisit one’s design and start anew.
+
+3. *Running* software consists of having a *computer perform the program’s statements*. When we are confident that a program correctly solves the problem, we can solve the problem by running the program on a computer.
+
+Computing thus consists of two parts: (i) the *software* or program that is being used to solve a problem, and (ii) the *hardware* or computer on which the software is being run.
+

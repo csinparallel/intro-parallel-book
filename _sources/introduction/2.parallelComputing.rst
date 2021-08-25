@@ -1,0 +1,30 @@
+
+
+0.2 Parallel Computing
+-------------------------
+
+If you run a traditional sequential program on a multiprocessor, that program will only utilize one of the CPU’s cores. That is, if you have a laptop with an 8-core CPU but run a traditional sequential program on it, you are only using 1/8 of your laptop’s capabilities! Sequential computing thus squanders much of the potential of a modern multiprocessor.
+
+**Parallel computing** is *designing, writing, and running software that solves a problem in a way that takes advantage of a multiprocessor’s parallel capabilities*. 
+
+To utilize the hardware of a multiprocessor efficiently, the software has to be designed and written to take advantage of that multiprocessor’s hardware. When this is the case, the software is called *parallel software* and the resulting program is called a *parallel program*. Unlike a sequential program, a parallel program seeks to utilize the parallel capabilities of a multiprocessor as efficiently as possible.
+
+Some problems are very time-consuming to solve sequentially. A few of these include:
+
+* weather forecasting
+* earthquake prediction
+* quantum mechanics simulations
+* astronomy data analysis (e.g., galaxy formation, cosmos evolution) 
+* geological data analysis (e.g., earthquake prediction, oil exploration)
+* molecular modeling (e.g., virtual reactions, drug design)
+* genomic data analysis (e.g., genetic sequencing, gene mapping)
+* cryptology (e.g., decrypting encrypted messages)
+
+These kinds of problems might take weeks, months, or years to solve sequentially, but by designing and writing the solutions as parallel software, and running that software on a multiprocessor, the problems can be solved much more quickly.
+
+As we saw in the last section, there are three different kinds of multiprocessors: shared memory, distributed memory, and heterogeneous. These three kinds of multiprocessors are sometimes called **multiprocessor platforms**. Unfortunately, when it comes to writing software, there is no "one size fits all" approach that works for all three platforms. Each kind of multiprocessor is so different from the others, the software for a given platform must be designed and written separately, if we want to use that platform as efficiently as possible. In the subsequent chapters of this book, each chapter focuses on how to design and write software for a particular multiprocessor platform.
+
+
+
+
+
