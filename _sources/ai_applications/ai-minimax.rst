@@ -1,6 +1,8 @@
 5.0 Introduction
 ----------------
 
+Useful syntax guide: https://sublime-and-sphinx-guide.readthedocs.io/en/latest/images.html 
+
 In many ways, the progress of Artificial Intelligence research can be measured
 through the history of human-competitive game play.  In 1994, an AI called "Chinook"
 defeated checkers champion Marion Tinsley. In 1997, IBM's Deep Blue defeated
