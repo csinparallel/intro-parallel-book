@@ -81,8 +81,7 @@ Example: fill in the blank, drag and drop, multiple choice.
 
 Here's how we would implement this serially in python.
 
-.. activecode:: minimax_serial 
-   :language: cpp
+.. code-block:: minimax_serial 
 
    ~~~~
    //minimax in a single recursive function
