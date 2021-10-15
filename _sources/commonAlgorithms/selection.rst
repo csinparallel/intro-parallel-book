@@ -10,7 +10,7 @@ Author: Dorian Arnold, Emory University
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ..
-  Crawling: Concept Overview and Description
+  Crawling: Overview and Description
 
   #. Define selection problems:
      * Generalized problem definition: Finding kth element in a collection
@@ -122,13 +122,15 @@ Click "show" below to reveal the solution for the previous exercise:
      int Collection[COLLECTION_SIZE]={18, 83, 80, 12, 86, 66, 68, 41, 91, 84, 57, 93, 67, 6, 50, 75, 58, 85, 45, 96, 72, 33, 77, 48, 73, 10, 99, 29, 19, 65, 26, 25};
 
      int main( ) {
-       int i, min;
+       int min, time_steps=0;
 
          /* 1. Initialize min to first element of collection */
          min=Collection[0];
 
          /* 2. Compare minimum to each element in collection. */
-         for( i = 0; i < COLLECTION_SIZE; i++){
+         for( int i = 0; i < COLLECTION_SIZE; i++){
+             /* increment time_step each computation/iteration */
+             time_steps++;
 
              /* 2.a If element is less than minimum, set minimum to element */
              if( Collection[i] < min ){
@@ -138,10 +140,10 @@ Click "show" below to reveal the solution for the previous exercise:
  
          /* 3. Print minimum value */
          printf("The minimum value in the collection is: %d\n", min);
+         printf("It took %d 'time steps' to process %d elements in the collection.\n", time_steps, COLLECTION_SIZE);
      }
 
-**TODO: Consider encoding time steps (e.g. a counter) into the Serial Solution to show how many "time steps" the solution requires?**
-
+Our solution also prints the number of 'steps' (in this case comparison computations) required to process the collection. Unsurprisingly, the sequential algorithm requires one comparison computation per element in the collection.
 
 3.2.3: A Parallel Selection Algorithm
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -200,7 +202,14 @@ Parallel algorithms are most often more complicated than their sequential counte
 
    For a collection of 32 elements evenly distributed amongst 4 tasks and assuming an iteration takes one (1) unit of time to execute, how many time units does it take to execute the parallel selection algorithm? (Be sure to consider that each of the four tasks simultaneously can execute an iteration every time unit.)
 
-**TODO: Add diagram, e.g. a work/span graph, to illustrate the number of steps vs time steps. Possibly via a reveal section.**
+In the diagram below, we illustrate how the parallel Selection algorithm's work or computations span over time, fixating on the algorithm's core in which the selection comparisons are made. Again, we assume that one comparison computation requires a single time step. For a collection or workload of N total elements, the elements are evenly distributed among P tasks. Executing simultaneously, each task will require N/P time steps to select the minimum in its sub-collection. Once the P tasks have selected their P minima, it will require an additional P time steps to select the global minimum from the P local minima. In total, the total number of time steps to execute the parallel algorithm will be (N/P) + P, where N is the total number of elements in the collection, and P is the total number of tasks. Recall that the total number of time steps required by the sequential algorithm was N.
+
+.. figure:: selection/timesteps.jpg
+  :scale: 80 %
+
+  Figure: Parallel Selection Algorithm: Workflow/Time Step Diagram
+
+While the parallel algorithm reduces the number of time steps, it does increase the overall number of computations. In parallel, P tasks execute N/P operations for a sub-total of N operations. Additionally, the final merge task requires an additional P operations for a total of N+P operations. Recall that the total number of computations required by the sequential task was N.
 
 
 3.2.3 A Parallel Solution using OpenMP
@@ -379,7 +388,13 @@ Below we have a new version of shared memory selection using OpenMP's reduction 
 
 **TODO: Describe a general MPI strategy: distribute data, parallel loops, collect local minima, find global minimum ...**
 
-.. activecode:: selection_mpi
+Above we have seen how to parallelize the Selection Algorithm via thread-based parallelism using OpenMP, where multiple threads within the same program instance can share the same memory and, therefore, are able to access common data structures. Another common task-based parallelization approach leverages multiple cooperating processes, tasks that are heavier-weight than threads and do not share the same memory. Therefore, these processes cooperate by sending and receiving data via explicit messages. We now detail process-based approaches for parallelizing Selection using MPI, the Message Passing Interface.
+
+Every process of an MPI-based program must initiate its MPI session by calling MPI_INIT and should terminate the session by calling MPI_FINALIZE. No MPI functions may be called before MPI_INIT or after MPI_FINALIZE, and each of these functions should only be called once per process. Among other things, MPI_INIT establishes communication channels amongst the cooperating tasks and establishes one of these tasks as the session leader, also called the MPI root process. In between the session initialization and finalization, processes can cooperate to divide and conquer a larger computation.
+
+In our Selection example, we divide and distribute the collection evenly amongst the cooperating processes. The MPI_Scatter routine is perfect for this step. As its name suggests, this routine scatters or distributes data from the root process to all others: to each process, the root sends a different segment of the message array. Upon segment receipt, each process finds its local data minimum. Then the root process collects all local minima using MPI_Gather, the reciprocal to MPI_Scatter: MPI_Gather assembles at the root a single array comprised of individual segments, one from every other process in the MPI session. Finally, the root process finds the global minimum, that is the minimum of all the gathered local minima.
+
+.. activecode:: selection_mpi_gather
    :language: c
    :caption: Selection using MPI
    :nocodelens:
@@ -450,33 +465,121 @@ Below we have a new version of shared memory selection using OpenMP's reduction 
    }
 
 
-**TODO: Breadkdown MPI coding example, line by line, not just abstractly and generally.**
-
-**TODO: Tie MPI solution to the previous discussion on critical sections vs reduction.**
-
-**TODO: Consider discussing MPI_Reduce as well? (If so, reference back to general reduction discussion.)**
+Recall from our OpenMP-based examples, we had to consider and mitigate race conditions that occur when different threads race within a critical section of code that updates common data/memory regions potentially leading to incorrect results. Since MPI processes do not share memory regions, this style of parallelization does not suffer critical sections and race conditions. Some consider explicit message passing easier to understand and program correctly compared to implicit shared memory programming. A major trade-off to consider is that explicit message passing can incur higher overheads when compared to implicit memory sharing. At the same time, tasks that cooperate via shared memory must have access to a common, shared physical memory region. Tasks that cooperate via message passing only need to be connected via a common communication network. 
 
 
-3.2.5 Comparing Performance of the Various Solutions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Alternatively, as shown in the code below, we can combine the collection and processing of the local results in one step using  the MPI_Reduce function. This function integrates a Scatter (as before) to compile a single array at the root but additionally reduces the array elements into a single element by applying a given Reduction operation. In the code below, the built-in MPI routine MPI_MIN is used to reduce the aggregate array to the single element with the lowest value. 
+
+.. activecode:: selection_mpi_reduce
+   :language: c
+   :caption: Selection using MPI
+   :nocodelens:
+
+   #include <stdio.h>
+   #include <mpi.h>
+   #include <stdlib.h>
+
+   #define COLLECTION_SIZE 32
+
+   int Collection[COLLECTION_SIZE]={18, 83, 80, 12, 86, 66, 68, 41, 91, 84, 57, 93, 67, 6, 50, 75, 58, 85, 45, 96, 72, 33, 77, 48, 73, 10, 99, 29, 19, 65, 26, 25};
+
+   int main(int argc, char **argv)
+   {
+       int i;
+       int lsize;
+       char min;
+       int world_rank, world_size;
+
+       /* PREPARATIONS */
+       MPI_Init(NULL, NULL);
+       MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
+       MPI_Comm_size(MPI_COMM_WORLD, &world_size);
+    
+       /* 1. Divide Collection amongst tasks */
+       /* Compute size of local collections */
+       lsize = COLLECTION_SIZE / world_size;
+
+       // For each process, create a buffer for local collection
+       int *lcollection = (int *)malloc( sizeof(int) * lsize );
+    
+       // Scatter collection from root process to all others
+       MPI_Scatter(Collection, lsize, MPI_INT, lcollection, lsize, MPI_INT, 0, MPI_COMM_WORLD);
+
+       // 2. Initialize each task's local minimum
+       min=lcollection[0];
+
+       // 3. Each task compares its local minimum to each element in its local collection.
+       for( i = 0; i < lsize; i++){
+           // 3.a If element is less than minimum, set minimum to element
+           if( lcollection[i] < min ){
+               lmin = lcollection[i];
+           }
+       }
+    
+       // 4. Simultaneously, collect all local minima and find the global minimum from the local minima
+       MPI_Reduce(&lmin, &gmin, 1, MPI_LONG, MPI_MIN, 0, MPI_COMM_WORLD);
+
+
+       // 5. Print global minimum value */
+       printf("The minimum value in the collection is: %d\n", min);
+
+       // Clean up
+       free(lcollection);
+       MPI_Barrier(MPI_COMM_WORLD);
+       MPI_Finalize();
+
+       return 0;
+   }
+
+MPI's MPI_Reduce function is analogous to OpenMP's reduction construct. The former aggregates independent data from cooperating processes and combines them into a single value. Similarly, the latter aggregates independent data from cooperating threads and combines them into a single value.
+
+**TODO: Breakdown MPI coding example, line by line, not just abstractly and generally.**
+
+3.2.5 Performance Consideratons
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. Sprinting!?
 
-**TODO: Add performance section with data/graphs**
 
 .. not a very deep dive. Goal to expose the reader to how these basic concepts can evolve into deeper, interesting and sophisticated challenges.
 
-#. Plots of number of steps for sequential and parallel solutions vs. collection size
-#. Plots of time performance for sequential and parallel solutions vs. collection size
-#. Exercise: will parallel solution always outperform sequential solution?
-#. Things to consider
+**TODO: Consider an interactive exercise: will parallel solution always outperform sequential solution?**
 
-   #. Opportunity/Costs: When does parallelization begin to pay off?
-   #. Diminishing Returns: When does parallelization stop paying off?
-   #. Load Imbalance: What if concurrent work is not evenly distributed?
-   #. Ways to further increase parallelism, e.g. deeper divide/conquer hierarchies
+
+Generally, the number of computations required by an algorithm is inherent to that algorithm. Therefore, parallelization strategies aim to increase the number of computations executed simultaneously, not reduce the number of computations required. Sometimes, a parallelization strategy may, in fact, increase the number of computations. Nonetheless, increasing the number of simultaneous computations can reduce the time it takes for the algorithm to complete.
+
+Below, we show how the number of computations and execution time vary with the degree of parallelism for our selection algorithm on 1,024 elements, starting with the sequential algorithm (one task) up to 1,024 tasks. We assume that each comparison requires one time step and that the workload is evenly distributed amongst the parallel tasks.
+
+.. figure:: selection/timesteps-chart.jpg
+  :scale: 15%
+
+  Figure: Parallel Selection Algorithm: Computations and Time Steps vs. Level of Parallelism
+
+In the parallel strategies, first the 1,024 sequential comparison computations are divided among and executed by the parallel tasks. Then, the result from each parallel task is collected and processed into the global result. 
+Therefore, the total number of comparison computations required by the parallel strategy is #sequential_computations + #tasks. We see that as the level of parallelism increases, so does the total number of computations.
+
+However, the parallel tasks execute simultaneously, requiring 1,024/#tasks time steps to process the initial 1,024 computations. Then, an additional #tasks time steps are required to process the local results into the global result. Therefore, the total number of time steps executed by the parallel algorithms is ( 1,024 / #tasks ) + #tasks.
+
+We observe that to a point, as we increase the level of parallelism, we decrease required execution time. After the point where adding more tasks is no longer beneficial, 32 tasks in our example, we see that dividing the 1024 computations among an increased number of tasks no longer improves performance and even leads to a performance degradation.
+
+
+**TODO: Is it worthwhile to add empirical performance results for the algorithms above?**
+
+.. For each algorithm, fix workload, vary amount of parallelism
+
+These basic examples demonstrate when considering code parallelization, we must consider the cost/benefit trade-offs. The key benefit is the opportunity to reduce the algorithm's overall execution time. However, the costs to consider include the time and effort it takes to correctly and effectively parallelize the algorithm, 
+
 
 3.2.6 Summary
 ^^^^^^^^^^^^^^^
 
-**TODO: Add Chapter Summary**
+The principle benefit of algorithm parallelization is to reduce the algorithm's overall execution time. Using Selection, we demonstrated some basic yet effective parallelization approaches using OpenMP (for parallelization using tasks that share a common physical memory) and MPI (for parallelization using explicit message passing for tasks that do not necessarily share a common physical memory). Using our case studies, we see that parallelization requires careful considerations, including:
+
+* engineering effort: the time and effort required to correctly and effectively parallelize the algorithm,
+* understanding the payoff: at what number of parallel tasks (for a given workload) the parallelization effort will begin to pay off sufficiently,
+* understanding diminishing or negative returns: at what number of parallel tasks (for a given workload) the parallelization effort will stop to pay off,
+
+Additional considerations beyond the scope of this module include:
+
+* load imbalances: What if the concurrent work cannot be evenly distributed among parallel tasks?
+* advanced parallelism strategies, e.g., deeper, multi-level divide-and-conquer hierarchies.
