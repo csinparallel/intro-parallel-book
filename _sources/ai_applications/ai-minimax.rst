@@ -1,7 +1,8 @@
 5.0 Introduction
 ----------------
 
-Useful syntax guide: https://sublime-and-sphinx-guide.readthedocs.io/en/latest/images.html 
+..
+    Useful syntax guide: https://sublime-and-sphinx-guide.readthedocs.io/en/latest/images.html 
 
 In many ways, the progress of Artificial Intelligence research can be measured
 through the history of human-competitive game play.  In 1994, an AI called "Chinook"
@@ -12,7 +13,7 @@ top-ranked Go player, earning the rank of 9 dan.
 At the heart of these AI milestones is a simple algorithm called Minimax that dates back to John von Neumann (1928), although Claude Shannon (1950) is often given credit for recognizing its applications to games like chess.  Minimax is an optimal strategy for deterministic two-player zero-sum games of perfect information.  
 
 
-.. note::  **Deterministic** means that there are no random events like dice that determine the state of the game.  **Zero-sum**ww means that there is only one winner (such that both players' final scores add up to zero).  **Perfect** **Information** means that both players can see all the pieces in play (like chess or checkers), rather than keeping some information secret (like poker).
+.. note::  **Deterministic** means that there are no random events like dice that determine the state of the game.  **Zero-sum** means that there is only one winner (such that both players' final scores add up to zero).  **Perfect** **Information** means that both players can see all the pieces in play (like chess or checkers), rather than keeping some information secret (like poker).
 
 
 
@@ -34,7 +35,7 @@ both player's scores will always be zero).  Maximizing your score is therefore t
 
 Here's a board, let's say you're player X, where would you go to win?
 
-.. image:: X-Win-In-One-Choice.png
+.. image:: ex-0-x-win-draw.png  
 
 .. mchoice:: ttt-ex-0
    :answer_a: a 
@@ -49,7 +50,7 @@ Right! The best move is the lower right corner, creating 3 in a row!
 
 Here's another board - where should you move to maximize your score?
 
-.. image:: X-Blocks-O.png
+.. image:: ex-1-X-lose-draw.png
 
 .. mchoice:: ttt-ex-1
    :answer_a: a 
@@ -75,44 +76,75 @@ Let's build this tree from the bottom up.  During depth first search, once you r
 
 Here for instance is a Max node, with two possible moves - one results in a win (+1), and the other in a draw (0).  Naturally Max will want to make the winning move - so we can score this board as a +1.
 
-.. image:: win-or-draw.png
+.. image:: ex-2-win-draw-colors.png
+
+Here is the choice redrawn with the scores at the leaf nodes "percolated" up to the top.
+
+.. image:: ex-2a-win-draw-scores.png
 
 Here however is another Max node with two possible moves - one results in a loss (-1) and the other a draw.  Seeking to maximize their score, Max will choose the move that produces a draw.  So we can score this board as a 0.
 
-.. image:: draw-or-lose.png
+.. image:: ex-3-draw-or-lose-colors.png
+
+Again, here is the choice redrawn with the scores at the leaf nodes "percolated" up to the top.
+
+
+.. image:: ex-3a-draw-or-lose-scores.png
 
 We can now move up to the previous board - which is a Min node.  If Min has a choice choice between making a move that leads to a +1 node for Max and a move that leads to a 0 for Max, they'll choose the 0, because that minimizes Max's score.
 
-.. image:: O-turn.png
+.. image:: ex-4-O-turn.png
+
+And again with the scores percolated up.  Note that the maximizing node (Player X) will always pick the highest scoring move.  
+
+.. image:: ex-4a-O-turn-scores.png
+
+5.1.2 Minimax with Depth First Search
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Now that we have the basic mechanics, we can explain the how to search the whole game tree, starting at a given move, to pick the optimal move.  This tree search is particularly amenable to recursive depth first search, because once we score a terminal node, and pass its value to the parent, we can forget about it.
+
+The pseudocode for this algorithm (technically called Negamax) is as follows:
+
+.. code-block::
+   :caption: negamax
+    //assume max is player 1
+    //and min is player -1
+    int Minimax(node,player)
+        if (node is terminal):
+            return player*score(node)
+        else
+            score <- -inf
+            for each child of node:
+                childscore<- -1*Minimax(child,-1*player)
+                score <- max(score,childscore)
+            return score
+
+
 
 5.1.3 Serial Implementation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Here's how we would implement this serially in C.
+Here's how we would implement the minimax function serially in C.  The board is a 1x9 array of integers whose values correspond to player pieces (0 is empty).  The for loop iterates through all possible legal moves, keeping track of the best move it has found along the way.  By using the value 1 to correspond to the maximizing player, and -1 to correspond to the minimizing player allows us to negate scores when passed from a min node to a max node (and vice versa).
 
-CodeLens
+.. Note to self - CodeLens not supported for C, but can link to iframe generated by pythontutor's C visualizations.
 
-Note to self - CodeLens not supported for C, but can link to iframe generated by pythontutor's C visualizations.
+.. code-block::
 
-.. code-block:: minimax_serial 
-    
-   ~~~~
    //minimax in a single recursive function
    // you call max if it is your move
    // and min if it is your opponent's move.
    int minimax(int * board, int player) {
         //How is the position like for player (their turn) on board?
         int winner = win(board);   //is the board a win?
-        if(winner != 0) return winner*player; //base case
-
+        if(winner != 0) 
+            return winner*player; //base case
         int curbestmove = -1; //the best move possible
         int curbestscore = -2;//Losing moves are preferred to no move
         int i;
         for(i = 0; i < BOARDSIZE; ++i) {//For all moves,
             if(board[i] == 0) {//If legal,
                 board[i] = player;//Try the move
-                //    draw(board);
-            //	    getchar();
                 int thisScore = -1 * minimax(board, player*-1);
                 if(thisScore > curbestscore) {
                     curbestscore = thisScore;
@@ -125,8 +157,10 @@ Note to self - CodeLens not supported for C, but can link to iframe generated by
         return curbestscore;
     }
 
-5.1.4 Parallel Implementation
+5.1.4 Parallel Implementation 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A parallel implementation is now fairly straightforward: when it is the computer's turn we use a parallelized for loop to distribute subtrees generated by legal moves across tasks, and then each thread then performs its own recursive minimax on its respective subtrees. Each task needs its own private copy of the board.  The score and bestmove variables are shared, however, and so when each thread updates these it has to do so in a critical section (There may be fancier ways to do this with reductions).
 
 .. activecode:: minimax_omp
    :language: cpp
@@ -145,18 +179,11 @@ Note to self - CodeLens not supported for C, but can link to iframe generated by
 
         #pragma omp for schedule(dynamic,1)
         for(i = 0; i < BOARDSIZE; ++i) {
-            /*
-           #pragma omp critical
-            {
-                printf("thread %d has ival %d\n",omp_get_thread_num(),i);
-                draw(privateboard);
-            }
-            */
             if(privateboard[i] == 0) {
                 privateboard[i] = 1;
                 int tempScore = -minimax(privateboard, -1);
                 privateboard[i] = 0;
-                //i thought there was a way to do this with reductions, but not easily...
+                //critical to protect private variables
                 #pragma omp critical
                 if(tempScore > score) {
                      score = tempScore;
@@ -167,6 +194,40 @@ Note to self - CodeLens not supported for C, but can link to iframe generated by
     }
     //returns a score based on minimax tree at a given node.
     board[bestmove] = 1;
+
+
+5.1.5 MPI Implementation
+------------------------
+
+.. literalinclude path/to/code.c::
+   :language: c
+   :lines: 29-35
+
+.. code-block::
+
+    void computerMove(int * board, int rank, int p) {
+        int move = -1;
+        int score = -2;
+        MPI_Bcast(board,BOARDSIZE,MPI_INT,0,MPI_COMM_WORLD);
+        for(int i = rank; i < BOARDSIZE; i += p) {
+            if(board[i] == 0) {
+                board[i] = 1;
+                int tempScore = -minimax(board, -1);
+                board[i] = 0;         
+                if(tempScore > score) {
+                    score = tempScore;
+                    move = i;
+                }
+            }
+        }
+        int local_best[2] = {score, move};
+        int global_best[2];
+        MPI_Reduce(local_best,global_best,1,MPI_2INT,MPI_MAXLOC,0,MPI_COMM_WORLD);
+        if (rank == 0) {
+            board[global_best[1]] = 1;
+        }
+    }
+   
 
 5.2 Further expoloration
 ------------------------
