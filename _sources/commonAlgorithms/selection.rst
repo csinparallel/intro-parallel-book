@@ -204,8 +204,8 @@ Parallel algorithms are most often more complicated than their sequential counte
 
 In the diagram below, we illustrate how the parallel Selection algorithm's work or computations span over time, fixating on the algorithm's core in which the selection comparisons are made. Again, we assume that one comparison computation requires a single time step. For a collection or workload of N total elements, the elements are evenly distributed among P tasks. Executing simultaneously, each task will require N/P time steps to select the minimum in its sub-collection. Once the P tasks have selected their P minima, it will require an additional P time steps to select the global minimum from the P local minima. In total, the total number of time steps to execute the parallel algorithm will be (N/P) + P, where N is the total number of elements in the collection, and P is the total number of tasks. Recall that the total number of time steps required by the sequential algorithm was N.
 
-.. figure:: selection/timesteps.jpg
-  :scale: 80 %
+.. figure:: selection/figs/timesteps.jpg
+  :scale: 30 %
 
   Figure: Parallel Selection Algorithm: Workflow/Time Step Diagram
 
@@ -269,18 +269,26 @@ To avoid race conditions in OpenMP parallel loops, we must use the OpenMP "criti
        printf("The minimum value in the collection is: %d\n", min);
    }
 
-.. shortanswer:: q1
+.. mchoice:: q9
+    :answer_a: critical regions require additional time to set up
+    :answer_b: critical regions execute sequentially and negate the concurrency we seek from parallel executions
+    :answer_c: if critical regions contain code that could be executed properly in parallel, performance is impeded
+    :answer_d: all of the above
+    :correct: d
+    :feedback_a: Yes! But are any of the other answers also true?
+    :feedback_b: Yes! But are any of the other answers also true?
+    :feedback_c: Yes! But are any of the other answers also true?
+    :feedback_d: Yes!
 
-   Can you think of any negative performance impact caused by the use of our critical section synchronization?
+    Can you think of any negative performance impact caused by the use of our critical section synchronization?
 
 
 Potentially, if we are not careful, this can eliminate all the potential time savings we sought with the parallel solution in the first place! Indeed, our OpenMP Parallel Loop solution suffers this consequence. In fact, if you were to time its execution, you would observe that it runs even slower than the sequential code: it suffers all the overhead in setting up and executing parallel threads but gains none of the advantages of doing so.
 
 Nonetheless, it is a simple, straightforward, naive solution that demonstrates how one might go about parallelizing the selection algorithm. The approach is reasonable, but the solution suffers due to practical shared data problems.
 
-.. shortanswer:: q11
 
-   As an additional exercise, how can you extend our OpenMP Parallel Loop approach to eliminate the race condition caused by simultaneous updates to the single, global "min" parameter?
+(As an additional exercise, consider extending our OpenMP Parallel Loop example to eliminate the race condition caused by simultaneous threads updating the single "min" parameter?)
 
 
 
@@ -394,10 +402,8 @@ Every process of an MPI-based program must initiate its MPI session by calling M
 
 In our Selection example, we divide and distribute the collection evenly amongst the cooperating processes. The MPI_Scatter routine is perfect for this step. As its name suggests, this routine scatters or distributes data from the root process to all others: to each process, the root sends a different segment of the message array. Upon segment receipt, each process finds its local data minimum. Then the root process collects all local minima using MPI_Gather, the reciprocal to MPI_Scatter: MPI_Gather assembles at the root a single array comprised of individual segments, one from every other process in the MPI session. Finally, the root process finds the global minimum, that is the minimum of all the gathered local minima.
 
-.. activecode:: selection_mpi_gather
-   :language: c
+.. code-block:: C
    :caption: Selection using MPI
-   :nocodelens:
 
    #include <stdio.h>
    #include <mpi.h>
@@ -470,10 +476,8 @@ Recall from our OpenMP-based examples, we had to consider and mitigate race cond
 
 Alternatively, as shown in the code below, we can combine the collection and processing of the local results in one step using  the MPI_Reduce function. This function integrates a Scatter (as before) to compile a single array at the root but additionally reduces the array elements into a single element by applying a given Reduction operation. In the code below, the built-in MPI routine MPI_MIN is used to reduce the aggregate array to the single element with the lowest value. 
 
-.. activecode:: selection_mpi_reduce
-   :language: c
+.. code-block:: C
    :caption: Selection using MPI
-   :nocodelens:
 
    #include <stdio.h>
    #include <mpi.h>
@@ -531,43 +535,45 @@ Alternatively, as shown in the code below, we can combine the collection and pro
        return 0;
    }
 
-MPI's MPI_Reduce function is analogous to OpenMP's reduction construct. The former aggregates independent data from cooperating processes and combines them into a single value. Similarly, the latter aggregates independent data from cooperating threads and combines them into a single value.
-
-**TODO: Breakdown MPI coding example, line by line, not just abstractly and generally.**
+MPI's MPI_Reduce function is analogous to OpenMP's reduction construct. The former aggregates independent data from cooperating processes and combines them into a single value. Similarly, the latter aggregates independent data from cooperating threads and combines them into a single value. For more coverage on MPI Scatter, Gather and Reduce (and other MPI communication) functions, visit this section: https://pdcbook.calvin.edu/pdcbook/PDCBeginners/messagePassing/improve.html.
 
 3.2.5 Performance Consideratons
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. Sprinting!?
 
-
 .. not a very deep dive. Goal to expose the reader to how these basic concepts can evolve into deeper, interesting and sophisticated challenges.
-
-**TODO: Consider an interactive exercise: will parallel solution always outperform sequential solution?**
-
 
 Generally, the number of computations required by an algorithm is inherent to that algorithm. Therefore, parallelization strategies aim to increase the number of computations executed simultaneously, not reduce the number of computations required. Sometimes, a parallelization strategy may, in fact, increase the number of computations. Nonetheless, increasing the number of simultaneous computations can reduce the time it takes for the algorithm to complete.
 
+.. mchoice:: performance_degradation
+    :answer_a: 1024
+    :answer_b: 256
+    :answer_c: 64
+    :answer_d: 32
+    :correct: d
+
+    Suppose we had a set of 1,024 elements to divide among a set of workers. At what number of workers, would we expect to stop seeing an improvement in the number of time steps?
+
+For 1,024 elements, the answer is 32 because 32 is the square root of 1,024 -- determining the maximum amount of parallelism or simultaneous processing for that workload. After that point, dividing the 1,024 computations among even more tasks no longer increases concurrency, and therefore, no longer improves performance. Abstractly, the benefits of parallelism is no longer outweigh the costs. 
+
+
 Below, we show how the number of computations and execution time vary with the degree of parallelism for our selection algorithm on 1,024 elements, starting with the sequential algorithm (one task) up to 1,024 tasks. We assume that each comparison requires one time step and that the workload is evenly distributed amongst the parallel tasks.
 
-.. figure:: selection/timesteps-chart.jpg
-  :scale: 15%
+.. figure:: selection/figs/timesteps-chart.jpg
+  :scale: 60%
 
   Figure: Parallel Selection Algorithm: Computations and Time Steps vs. Level of Parallelism
 
-In the parallel strategies, first the 1,024 sequential comparison computations are divided among and executed by the parallel tasks. Then, the result from each parallel task is collected and processed into the global result. 
-Therefore, the total number of comparison computations required by the parallel strategy is #sequential_computations + #tasks. We see that as the level of parallelism increases, so does the total number of computations.
+In the parallel strategies, first the 1,024 sequential comparison computations are divided among and executed by the parallel tasks. Then, the result from each parallel task is collected and processed into the global result. Therefore, the total number of comparison computations required by the parallel strategy is #sequential_computations + #tasks. We see that as the level of parallelism increases, so does the total number of computations.
 
 However, the parallel tasks execute simultaneously, requiring 1,024/#tasks time steps to process the initial 1,024 computations. Then, an additional #tasks time steps are required to process the local results into the global result. Therefore, the total number of time steps executed by the parallel algorithms is ( 1,024 / #tasks ) + #tasks.
 
-We observe that to a point, as we increase the level of parallelism, we decrease required execution time. After the point where adding more tasks is no longer beneficial, 32 tasks in our example, we see that dividing the 1024 computations among an increased number of tasks no longer improves performance and even leads to a performance degradation.
+When we can no longer increase concurrency, increasing the number of workers no longer improves performance and even leads to a performance degradation. When the 1,024 tasks are evenly distributed among 32 workers, each worker has 32 (1,024/32) items to process, requiring 32 time units. And then an additional 32 time units are needed to process the 32 intermediary results from the workers, resulting in a total execution time of 64 time units. When the 1,024 tasks are evenly distributed among 64 workers, each worker has 16 (1,024/64) items to process, requiring only 16 time units. However, an additional 64 time units are needed to process the 64 intermediary results from the workers, resulting in a total execution time of 80 time units. Summarily, we are performing less work in parallel and more work sequentially, after the optimal parallelism point.
 
+This basic examples demonstrate when considering code parallelization, we must consider the cost/benefit trade-offs. The key benefit is the opportunity to reduce the algorithm's overall execution time. However, the costs to consider include the time and effort it takes to correctly and effectively parallelize the algorithm, 
 
-**TODO: Is it worthwhile to add empirical performance results for the algorithms above?**
-
-.. For each algorithm, fix workload, vary amount of parallelism
-
-These basic examples demonstrate when considering code parallelization, we must consider the cost/benefit trade-offs. The key benefit is the opportunity to reduce the algorithm's overall execution time. However, the costs to consider include the time and effort it takes to correctly and effectively parallelize the algorithm, 
+As an additional exercise, we encourage you to take the various versions of our selection algorithm with a fixed, large input data sizes and observe empirically how performance varies with differing levels of parallelism, i.e., worker tasks.
 
 
 3.2.6 Summary
@@ -577,7 +583,9 @@ The principle benefit of algorithm parallelization is to reduce the algorithm's 
 
 * engineering effort: the time and effort required to correctly and effectively parallelize the algorithm,
 * understanding the payoff: at what number of parallel tasks (for a given workload) the parallelization effort will begin to pay off sufficiently,
-* understanding diminishing or negative returns: at what number of parallel tasks (for a given workload) the parallelization effort will stop to pay off,
+* understanding diminishing or negative returns: at what number of parallel tasks (for a given workload) the parallelization effort will stop to pay off.
+
+In conclusion, algorithm parallelization is not magic, it does not decrease the amount of work to be done. In fact, it necessarily increases the total amount of work. However, by allowing much of the work to be performed concurrently, it is an effective and worthwhile mechanism for reducing algorithm run times.
 
 Additional considerations beyond the scope of this module include:
 
