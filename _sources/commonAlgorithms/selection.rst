@@ -21,7 +21,9 @@ Author: Dorian Arnold, Emory University
 
 Have you ever had a set of items and needed to *select* a particular one based on its size or value compared to the others, for example, the tenth largest city in the world or the third richest person in a country?
 Even more straightforward are versions of this problem where you are selecting an extreme value, for example,
-the ripest watermelon in the patch, the carton of milk with the latest expiration date, or the oldest penny in a jar. In computing, we call this *The Selection Problem* the topic of this chapter. In particular, we focus on one specialized case of Selection, particularly *finding the smallest element*. (Hopefully, the extrapolation from smallest element to smallest or largest kth element is readily imaginable.) After a general introduction, we formalize the problem and its serial (or sequential) solution. Then we identify opportunities to parallelize the serial solution and describe parallel solutions using two different multi-tasking approaches, namely multi-threading using OpenMP and multi-processing using MPI. We conclude the chapter with a discussion of things to consider when parallelizing an algorithm, including performance considerations.
+the ripest watermelon in the patch, the carton of milk with the latest expiration date, or the oldest penny in a jar. In computing, we call this *The Selection Problem*. 
+
+In this chapter, we focus on one specialized case of Selection, particularly *finding the smallest element*. (Hopefully, the extrapolation from smallest element to the smallest or largest :math:`k^{th}` element is readily imaginable.) After a general introduction, we formalize the problem and its serial (or sequential) solution. Then we identify opportunities to parallelize the serial solution and describe parallel solutions using two different multi-tasking approaches, namely multi-threading using OpenMP and multi-processing using MPI. We conclude the chapter with a discussion of things to consider when parallelizing an algorithm, including performance considerations.
 
 Selection is a relevant task used for more complex nearness or proximity search tasks, like finding the shortest path between two nodes in a graph or finding the nearest neighbor of a node in a graph. Many important tasks that we perform all the time are based on proximity searches. For example, web search relies upon proximity search to identify documents that are closely related to given search terms. Proximity search is also fundamental to other applications like data compression, data mining, pattern recognition and even non-computer applications like delivery route scheduling and DNA analysis.
 
@@ -29,7 +31,7 @@ Selection is a relevant task used for more complex nearness or proximity search 
 Serial Selection Unplugged
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
-The following video elucidates the Selection problem walking through the example of finding the smallest marble from a jar (of unsorted marbles). We discuss the specific necessary steps as well as the problem's time performance complexity, that is the general concept of how long the problem takes as a function of the total number of elements, marbles in this case.
+The following video describes the Selection problem by walking through the example of finding the smallest marble from a jar (of unsorted marbles). We discuss the specific necessary steps as well as the problem's *time performance complexity*, which is the general concept of how long the problem takes as a function of the total number of elements (marbles in this case).
 
 **TODO: Create Serial Selection Unplugged video, upload to CSinParallel server, link here**
 
