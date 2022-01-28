@@ -156,8 +156,8 @@ And psuedocode:
 
 
 
-5.2.0 Programming Implementations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5.2 Programming Implementations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 We'll now explore the code implementations for the serial and parallel approaches.
 
@@ -198,6 +198,10 @@ Here's how we would implement the minimax function serially in C.  The board is 
 
 
 
+5.2.2 OpenMP Implementation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In this OpenMP implementation we distribute subtrees of legal moves cyclicly across all threads.  A complication of this is that we need to make a private copy of the 9x9 board for each thread.   Dynamic scheduling allows the first idle thread to pick up the next legal move.  We need a critical section at the point where the threads compare their current move against the global best move.  (This could probably also be accomplished using a reduction clause, like in the MPI implementation below). 
 
 .. code-block:: cpp 
 
@@ -205,8 +209,6 @@ Here's how we would implement the minimax function serially in C.  The board is 
     int bestmove = -1;
     int score = -2;
     int i;
-    //printf("computer move:\n");
-    //draw(board);
     #pragma omp parallel num_threads(nthreads) 
     {
         int *privateboard = malloc(9*sizeof(int));
@@ -231,12 +233,14 @@ Here's how we would implement the minimax function serially in C.  The board is 
     board[bestmove] = 1;
 
 
-5.1.5 MPI Implementation
+5.2.3 MPI Implementation
 ------------------------
 
-.. literalinclude path/to/code.c::
-   :language: c
-   :lines: 29-35
+Our MPI implementation is very similar, although like all distributed memory applications we don't need to worry about shared variables or critical sections.
+
+Specifically, to calculate the computer's next move we broadcast the current state of the board to all worker nodes.  If there are `p` nodes, then each node uses a for loop to iterate through every `pth` legal move, and calls minimax on the corresponding subtree.
+
+.. are there consistent terms in the book for worker nodes, for COMM_SIZE, etc?
 
 .. code-block::
 
@@ -264,8 +268,8 @@ Here's how we would implement the minimax function serially in C.  The board is 
     }
    
 
-5.2 Further expoloration
-------------------------
+5.3 Further exploration
+-----------------------
 
 
 
