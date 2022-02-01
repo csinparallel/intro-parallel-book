@@ -24,6 +24,8 @@ Table of Contents
 
    furtherAvenues/toctree.rst
 
+   ai_applications/toctree.rst
+
 Acknowledgements
 ::::::::::::::::
 
