@@ -10,4 +10,5 @@ This book gives you just a taste of parallelism. However, if you are looking to 
 
     mapreduce.rst
     gpu.rst
+    ai-minimax.rst
     other.rst

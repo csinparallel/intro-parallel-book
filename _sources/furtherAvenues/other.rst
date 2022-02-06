@@ -1,4 +1,4 @@
-4.3 Other Free Resources For Learning Parallel Computing
+4.4 Other Free Resources For Learning Parallel Computing
 ---------------------------------------------------------
 
 List a number of free resources for people to learn more about parallel computing.
