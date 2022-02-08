@@ -1,5 +1,6 @@
 4.3 AI Applications - Minimax Algorithm
 ----------------------------------------
+Author: John Rieffel, Union College
 
 4.3.0 Introduction
 ^^^^^^^^^^^^^^^^^^^
