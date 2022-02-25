@@ -90,18 +90,11 @@ void computerMove(int * board, int nthreads) {
 
         #pragma omp for schedule(dynamic,1)
         for(i = 0; i < BOARDSIZE; ++i) {
-            /*
-           #pragma omp critical
-            {
-                printf("thread %d has ival %d\n",omp_get_thread_num(),i);
-                draw(privateboard);
-            }
-            */
             if(privateboard[i] == 0) {
                 privateboard[i] = 1;
                 int tempScore = -minimax(privateboard, -1);
                 privateboard[i] = 0;
-                //i thought there was a way to do this with reductions, but not easily...
+                //critical to protect private variables
                 #pragma omp critical
                 if(tempScore > score) {
                      score = tempScore;
