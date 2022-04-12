@@ -7,4 +7,6 @@ this textbook can be used as required reading in various courses. For example, s
 useful. Upper-level courses that cover message passing may choose to adopt content from chapter 2. An algorithms course may want to a subset of the sections in Chapter 3 in their course. 
 
 This book assumes that you have some programming knowledge (CS1 foundation), and are at the very least familiar with some Python and/or C. 
-For readers unfamiliar with these concepts, we encourage you to check out other free resources such as *How to Think Like a Computer Scientist* and *Dive into Systems*. 
+For readers unfamiliar with these concepts, we encourage you to check out other free resources such as 
+`How to Think Like a Computer Scientist <https://runestone.academy/ns/books/published/thinkcspy/index.html>`_ and 
+`Dive into Systems <https://diveintosystems.org/book/>`_.
