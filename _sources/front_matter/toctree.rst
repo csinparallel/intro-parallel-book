@@ -20,7 +20,11 @@ In addition, we would like to acknowledge the contributions of the following aut
 
 * Elizabeth Shoop, Macelester College
 
+* Dorian Arnold, Emory University
+
 * Steven Bogaerts, DePauw University
+
+* John Rieffel, Union College
 
 .. toctree::
     :maxdepth: 2
