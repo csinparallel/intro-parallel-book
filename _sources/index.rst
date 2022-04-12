@@ -2,7 +2,8 @@
 Parallel Computing for Beginners
 ===================================
 
-By Joel C. Adams, Richard A. Brown, Suzanne J. Matthews, and Elizabeth Shoop (CSinParallel)
+By: Joel C. Adams, Richard A. Brown, Suzanne J. Matthews, and Elizabeth Shoop (CSinParallel) 
+and Contributing Authors: Dorian Arnold, Steven Bogaerts, and John Rieffel
 
 **NOTE: THIS BOOK IS STILL A WORK IN PROGRESS!**
 
