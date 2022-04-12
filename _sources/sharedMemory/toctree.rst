@@ -2,7 +2,7 @@
 CHAPTER 1: Shared Memory
 :::::::::::::::::::::::::
 
-`Recall <https://www.learnpdc.org/PDCBeginners/introduction/1.hardware.html>`_that a **shared-memory multiprocessor** is a type of computer where its compute units (or **cores**) all share the same main memory. In 
+`Recall <https://www.learnpdc.org/PDCBeginners/introduction/1.hardware.html>`_ that a **shared-memory multiprocessor** is a type of computer where its compute units (or **cores**) all share the same main memory. In 
 `Section 0.5 <https://www.learnpdc.org/PDCBeginners/introduction/5.platforms.html>`_ we discussed how most computers today are shared-memory multiprocessors thanks to multicore CPUs. Virtually all modern Desktop and laptop computers, and even small single board computers such as the Raspberry Pi, contain multicore CPUs. 
 
 Processes and Threads
@@ -59,16 +59,12 @@ whose work is equally distributed among :math:`t` threads, it will take roughly 
 Introducing OpenMP
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Programmers can utilize several languages and libraries to program shared-memory multiprocessors. In this chapter, we will discuss **OpenMP** (or 
-**Open** **M**uliti-**P**rocessing), a standard API for multithreading that has existed for over 25 years. A key advantage of OpenMP over other API and libraries is its use of **pragmas**, or compiler directives that indicate where in a program parallelism should occur. The actual task of 
-creating and destroying teams of threads is done automatically and silently by the compiler, abstracting a way a lot of details that made writing 
-multithreaded applications particularly difficult. In addition, OpenMP makes it possible for programmers to *incrementally* add parallelism to their programs. 
+Programmers can utilize several languages and libraries to program shared-memory multiprocessors. In this chapter, we will discuss **OpenMP** (or Open Muliti-Processing), a standard API for multithreading that has existed for over 25 years. A key advantage of OpenMP over other API and libraries is its use of **pragmas**, or compiler directives that indicate where in a program parallelism should occur. The actual task of 
+creating and destroying teams of threads is done automatically and silently by the compiler, abstracting away many details that make writing 
+multithreaded applications difficult. In addition, OpenMP makes it possible for programmers to *incrementally* add parallelism to their programs. 
 
 
-
-Re-define terms such as core, process thread.
-
-Use analogy or unplugged activity to remind users how shared memory computations work (e.g. Jigsaw Analogy)
+.. Use analogy or unplugged activity to remind users how shared memory computations work (e.g. Jigsaw Analogy)
 
 .. toctree::
     :maxdepth: 2
