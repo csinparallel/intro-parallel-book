@@ -1,7 +1,12 @@
 ## Information for Contributing Authors
 
 If you are interested in contributing to *PDC For Beginners*, please 
-reach out to CSinParallel at csinparallel@stolaf.edu
+reach out to CSinParallel at csinparallel@stolaf.edu. We are especially 
+looking for volunteers to contribute a section on the following topics:
+
+Sorting
+Sieve of Eratosthenes
+Matrix Multiplication
 
 ## Setting up the local authoring environment
 To set up the local authoring environment, please complete the following steps:
