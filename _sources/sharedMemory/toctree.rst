@@ -16,5 +16,4 @@ multithreaded applications difficult. In addition, OpenMP makes it possible for 
     firststeps.rst
     racecond.rst
     reduction.rst
-    performance.rst
     drugdesign.rst
