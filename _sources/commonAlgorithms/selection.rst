@@ -1,4 +1,4 @@
-3.2 Selection
+3.1 Selection
 -------------
 
 Author: Dorian Arnold, Emory University

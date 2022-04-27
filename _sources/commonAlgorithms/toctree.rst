@@ -14,9 +14,6 @@ strategies to use when parallelizing more complex tasks.
 .. toctree::
     :maxdepth: 2
 
-    sorting.rst
     selection.rst
-    sieve.rst
-    matmul.rst
     sharedq.rst
 

@@ -1,5 +1,5 @@
 
-3.4 Shared Queue
+3.2 Shared Queue
 -----------------
 
 Author: Steven Bogaerts, DePauw University
