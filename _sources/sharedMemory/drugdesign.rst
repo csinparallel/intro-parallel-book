@@ -1,4 +1,4 @@
-1.5 Real World Problem - Drug Design
+1.4 Real World Problem - Drug Design
 -------------------------------------
 
 Let's look at a larger example. An important problem in the biological sciences is that of drug design. The goal is to find small molecules, called *ligands*, that are good candidates for developing into drug treatments.
@@ -27,7 +27,7 @@ We create the list of possible ligands in 2 ways:
 
 This means that we will have more ligands of length 2 or 3 and fewer of 4, 5, and 6, which are each declining in number. This has no relation to the real problem, but instead gives us some ligands that can be computed in a reasonable amount of time on a small cluster of single board computers.  This way you can try some experiments and be able to see the advantage of one implementation over the other.
 
-The image of the above Gamma distribution of lengths of ligands came from: `here <https://keisan.casio.com/exec/system/1180573216>`_, where we used a = 4.2 and b = 0.8.
+The image of the above Gamma distribution of lengths of ligands came from: `this website <https://keisan.casio.com/exec/system/1180573216>`_, where we used a = 4.2 and b = 0.8.
 
 The Serial Version
 ^^^^^^^^^^^^^^^^^^^
