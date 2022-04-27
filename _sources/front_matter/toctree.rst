@@ -30,3 +30,4 @@ In addition, we would like to acknowledge the contributions of the following aut
     :maxdepth: 2
 
     preface.rst
+    contributing.rst
