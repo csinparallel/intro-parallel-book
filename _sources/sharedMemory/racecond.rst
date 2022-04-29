@@ -220,7 +220,7 @@ sum is the long value shown above.
    :language: c
    :compileargs: ['-Wall', '-ansi', '-pedantic', '-std=c99']
    :linkargs: ['-lm', '-fopenmp']
-   :caption: Integration (parallel - first attempt)
+   :caption: Array example - parallel sum
 
    #include <stdio.h>
    #include <math.h>

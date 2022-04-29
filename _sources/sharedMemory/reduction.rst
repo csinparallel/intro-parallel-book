@@ -102,15 +102,49 @@ The reduction clause (``reduction(+: integral)``) indicates that the addition op
 Note also that the ``integral`` variable was also removed from the ``shared`` clause.
 
 
-1.3.1 How reduction actually works
+1.3.1 Fix the array sum program
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Explain what a reduction is and how that is an alternative.
+Now that you have learned what the reduction clause is, modify the array example to use reduction:
 
-Introduce the reduction patternlet. 
+.. activecode:: rc_add_array_reduction
+   :language: c
+   :compileargs: ['-Wall', '-ansi', '-pedantic', '-std=c99']
+   :linkargs: ['-lm', '-fopenmp']
+   :caption: Fix this program to use the reduction clause!
 
-Ask students to modify their array addition programs to use reduction.
+   #include <stdio.h>
+   #include <math.h>
+   #include <stdlib.h>
+   #include <omp.h> 
+
+   #define N 20000000 //size of the array
+
+   int main(void){
+
+       int * array = malloc(N*sizeof(int)); //declare array of size N
+       int i;
+
+       //populate array
+       #pragma omp parallel for  //<-- from our earlier example
+       for (i = 0; i < N; i++) {
+           array[i] = i+1;
+       }
+       printf("Done populating %d elements!\n", N);
+       printf("Summing elements together...\n");
+
+       long sum = 0;
+       //#pragma omp parallel for <-- fix this line!
+       for (i = 0; i < N; i++) {
+           sum+= array[i];
+       }
+       printf("Sum is: %ld\n", sum);
+
+       return 0;
+   }
 
 
+1.3.2 Summary
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 So far, we have introduced three different ways to deal with race conditions:
