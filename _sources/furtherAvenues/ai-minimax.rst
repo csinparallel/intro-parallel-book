@@ -1,6 +1,11 @@
 4.3 AI Applications - Minimax Algorithm
 ----------------------------------------
-Author: John Rieffel, Union College
+**Author**: John Rieffel, Union College
+
+**To Cite**:
+Rieffel, John. "AI Applications - Minimax Algorithm". *PDC for Beginners*, 
+edited by CSinParallel. 2022. Available Online.
+`https://doi.org/10.55682/AOPD4880 <https://doi.org/10.55682/AOPD4880>`_
 
 4.3.0 Introduction
 ^^^^^^^^^^^^^^^^^^^
