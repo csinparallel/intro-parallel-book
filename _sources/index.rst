@@ -28,7 +28,7 @@ Table of Contents
 
 To Cite:
 ::::::::::::::::
-Adams, Brown, Matthews, Shoop and others. *PDC for Beginners*, 0.1 Edition. Available online: https://dx.doi.org/10.55682/VXWY1300
+Adams J.C., Brown R., Matthews S.J., Shoop E., and others. *PDC for Beginners*, 0.1 Edition. Available online: https://dx.doi.org/10.55682/VXWY1300
 
 Acknowledgements
 ::::::::::::::::
