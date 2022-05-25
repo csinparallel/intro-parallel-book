@@ -2,9 +2,16 @@
 3.2 Shared Queue
 -----------------
 
-Author: Steven Bogaerts, DePauw University
+**Author:** Steven Bogaerts, DePauw University
 
+**To Cite:**
 
+Bogaerts, Steven. "Shared Queue". *PDC for Beginners*, edited by CSinParallel. 
+2022. Available Online.
+`https://doi.org/10.55682/ONJD7789 <https://doi.org/10.55682/ONJD7789>`_ 
+
+Introduction
+^^^^^^^^^^^^^^^
 In this section, we will see how to make a process and how to communicate between processes via a **shared queue**. Recall that a queue is a first-in-first-out (FIFO) data structure. The queue is *shared* in that each process has access to the same queue structure. The Python multiprocessing module uses the shared queue data structure to allow processes to pass messages to each other.
 
 After giving an overview of the Python multiprocessing module, we will then practice computing the greatest common divisor (GCD) of many pairs of numbers through an unplugged activity, and finally develop code using the multiprocessing module to perform this task more quickly with parallelism.
