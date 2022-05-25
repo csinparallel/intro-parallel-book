@@ -1,7 +1,12 @@
-3.1 Selection
--------------
+3.1 Parallel Selection
+-----------------------
 
-Author: Dorian Arnold, Emory University
+**Author:** Dorian Arnold, Emory University
+
+**To Cite:**
+
+Arnold, Dorian. "Parallel Selection". *PDC for Beginners*, edited by CSinParallel. 2022. 
+Available Online. `https://doi.org/10.55682/BRPC5004 <https://doi.org/10.55682/BRPC5004>`_ 
 
 ..
   E-mail: dorian.arnold@emory.edu
