@@ -11,7 +11,7 @@ Available Online. `https://doi.org/10.55682/BRPC5004 <https://doi.org/10.55682/B
 ..
   E-mail: dorian.arnold@emory.edu
 
-3.2.1 The Selection Task
+3.1.1 The Selection Task
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ..
@@ -83,7 +83,7 @@ The formal algorithm for "simple" serial selection is:
    For a collection of 32 elements, how many steps (iterations) does the sequential selection algorithm need?
 
 
-3.2.2 A Basic (Sequential) Solution
+3.1.2 A Basic (Sequential) Solution
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ..
@@ -151,7 +151,7 @@ Click "show" below to reveal the solution for the previous exercise:
 
 Our solution also prints the number of 'steps' (in this case comparison computations) required to process the collection. Unsurprisingly, the sequential algorithm requires one comparison computation per element in the collection.
 
-3.2.3: A Parallel Selection Algorithm
+3.1.3: A Parallel Selection Algorithm
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ..
@@ -218,7 +218,7 @@ In the diagram below, we illustrate how the parallel Selection algorithm's work 
 While the parallel algorithm reduces the number of time steps, it does increase the overall number of computations. In parallel, :math:`P` tasks execute :math:`N/P` operations for a sub-total of :math:`N` operations. Additionally, the final merge task requires an additional :math:`P` operations for a total of :math:`N + P` operations. Recall that the total number of computations required by the sequential task was :math:`N`.
 
 
-3.2.3 A Parallel Solution using OpenMP
+3.1.3 A Parallel Solution using OpenMP
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. Running!
@@ -394,7 +394,7 @@ Below we have a new version of shared memory selection using OpenMP's reduction 
 
 .. **TODO: For all OMP coding examples, explain specifically, line by line, not just abstractly and generally.**
 
-3.2.4 A Parallel Solution using Message Passing
+3.1.4 A Parallel Solution using Message Passing
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. Running!
@@ -545,7 +545,7 @@ Alternatively, as shown in the code below, we can combine the collection and pro
 
 MPI's ``MPI_Reduce`` function is analogous to OpenMP's ``reduction`` construct. The former aggregates independent data from cooperating processes and combines them into a single value. Similarly, the latter aggregates independent data from cooperating threads and combines them into a single value. For more coverage on MPI Scatter, Gather and Reduce (and other MPI communication) functions, visit `Section 2.4 <https://pdcbook.calvin.edu/pdcbook/PDCBeginners/messagePassing/improve.html>`_.
 
-3.2.5 Performance Consideratons
+3.1.5 Performance Consideratons
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. Sprinting!?
@@ -583,7 +583,7 @@ This basic examples demonstrate when considering code parallelization, we must c
 As an additional exercise, we encourage you to take the various versions of our selection algorithm with a fixed, large input data sizes and observe empirically how performance varies with differing levels of parallelism, i.e., worker tasks.
 
 
-3.2.6 Summary
+3.1.6 Summary
 ^^^^^^^^^^^^^^^
 
 The principle benefit of algorithm parallelization is to reduce the algorithm's overall execution time. Using Selection, we demonstrated some basic yet effective parallelization approaches using OpenMP (for parallelization using tasks that share a common physical memory) and MPI (for parallelization using explicit message passing for tasks that do not necessarily share a common physical memory). Using our case studies, we see that parallelization requires careful considerations, including:
