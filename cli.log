@@ -1,0 +1,1206 @@
+Building with Runestone 6.5.4
+---> runestone.build
+git describe --long
+fatal: detected dubious ownership in repository at '/srv/web2py/applications/runestone/books/PDCBeginners'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /srv/web2py/applications/runestone/books/PDCBeginners
+
+Building into  ./build/PDCBeginners
+mkdir_p path('././build/PDCBeginners')
+mkdir_p path('./build/PDCBeginners')
+mkdir_p path('././build/PDCBeginners/doctrees')
+sphinx-build -b html -d ././build/PDCBeginners/doctrees -c . -a -E -Alogin_required=false -Aloglevel=0 -Acourse_title=PDCBeginners -Apython3=true -Adburl=postgresql://runestone:runestone@db/runestone_dev -Adefault_ac_lang=cpp -Ajobe_server=http://localhost:4000 -Aproxy_uri_runs=/jobe/index.php/restapi/runs/ -Aproxy_uri_files=/jobe/index.php/restapi/files/ -Adownloads_enabled=false -Aenable_chatcodes=false -Aallow_pairs=false -Adynamic_pages=False -Ause_services=false -Abasecourse=PDCBeginners -Acourse_id=PDCBeginners -Aappname=runestone -Acourse_url=http:localhost -Arunestone_version=6.5.4 -Abuild_info=unknown ./_sources ./build/PDCBeginners
+Running Sphinx v4.5.0
+Connecting to DB
+No custom CSS files
+No custom js files
+building [mo]: all of 0 po files
+building [html]: all source files
+updating environment: [new config] 121 added, 0 changed, 0 removed
+Resetting questions
+reading sources... [  0%] 0-0-front_matter/acknowledgements
+reading sources... [  1%] 0-0-front_matter/contributing
+reading sources... [  2%] 0-0-front_matter/copyright
+reading sources... [  3%] 0-0-front_matter/preface
+reading sources... [  4%] 0-0-front_matter/title
+reading sources... [  4%] 0-0-front_matter/toctree
+reading sources... [  5%] 0-introduction/0.computing
+reading sources... [  6%] 0-introduction/1.hardware
+reading sources... [  7%] 0-introduction/2.parallelComputing
+reading sources... [  8%] 0-introduction/3.performance
+reading sources... [  9%] 0-introduction/4.strategies
+reading sources... [  9%] 0-introduction/5.platforms
+reading sources... [ 10%] 0-introduction/6.setup
+reading sources... [ 11%] 0-introduction/toctree
+reading sources... [ 12%] 1-sharedMemory/code/dd_omp2.cpp
+Converted as reST using the C++ lexer.
+reading sources... [ 13%] 1-sharedMemory/code/dd_serial2.cpp
+Converted as reST using the C++ lexer.
+reading sources... [ 14%] 1-sharedMemory/code/dd_threads.cpp
+Converted as reST using the C++ lexer.
+reading sources... [ 14%] 1-sharedMemory/code/spmd.c
+Converted as reST using the C lexer.
+reading sources... [ 15%] 1-sharedMemory/drugdesign
+reading sources... [ 16%] 1-sharedMemory/firststeps
+reading sources... [ 17%] 1-sharedMemory/performance
+reading sources... [ 18%] 1-sharedMemory/preliminaries
+reading sources... [ 19%] 1-sharedMemory/racecond
+reading sources... [ 19%] 1-sharedMemory/reduction
+reading sources... [ 20%] 1-sharedMemory/toctree
+reading sources... [ 21%] 2-messagePassing/code/mpi4py/00spmd.py
+Converted as reST using the Python lexer.
+reading sources... [ 22%] 2-messagePassing/code/mpi4py/01masterWorker.py
+Converted as reST using the Python lexer.
+reading sources... [ 23%] 2-messagePassing/code/mpi4py/04messagePassingDeadlock.py
+Converted as reST using the Python lexer.
+reading sources... [ 23%] 2-messagePassing/code/mpi4py/05messagePassing.py
+Converted as reST using the Python lexer.
+reading sources... [ 24%] 2-messagePassing/code/mpi4py/06messagePassing2.py
+Converted as reST using the Python lexer.
+reading sources... [ 25%] 2-messagePassing/code/mpi4py/07messagePassing3.py
+Converted as reST using the Python lexer.
+reading sources... [ 26%] 2-messagePassing/code/mpi4py/08broadcast.py
+Converted as reST using the Python lexer.
+reading sources... [ 27%] 2-messagePassing/code/mpi4py/09broadcastUserInput.py
+Converted as reST using the Python lexer.
+reading sources... [ 28%] 2-messagePassing/code/mpi4py/11broadcastList.py
+Converted as reST using the Python lexer.
+reading sources... [ 28%] 2-messagePassing/code/mpi4py/12reduction.py
+Converted as reST using the Python lexer.
+reading sources... [ 29%] 2-messagePassing/code/mpi4py/13reductionList.py
+Converted as reST using the Python lexer.
+reading sources... [ 30%] 2-messagePassing/code/mpi4py/16ScatterGather.py
+Converted as reST using the Python lexer.
+reading sources... [ 31%] 2-messagePassing/code/mpi4py/arrayAddition1.py
+Converted as reST using the Python lexer.
+reading sources... [ 32%] 2-messagePassing/code/mpi4py/arrayAddition2.py
+Converted as reST using the Python lexer.
+reading sources... [ 33%] 2-messagePassing/code/mpi4py/integration.py
+Converted as reST using the Python lexer.
+reading sources... [ 33%] 2-messagePassing/code/mpi4py/populateArray.py
+Converted as reST using the Python lexer.
+reading sources... [ 34%] 2-messagePassing/code/mpi4py/populateArrayGather.py
+Converted as reST using the Python lexer.
+reading sources... [ 35%] 2-messagePassing/code/mpi4py/sendReceive.py
+Converted as reST using the Python lexer.
+reading sources... [ 36%] 2-messagePassing/code/mpi4py/tryPopulateArray.py
+Converted as reST using the Python lexer.
+reading sources... [ 37%] 2-messagePassing/firststeps
+reading sources... [ 38%] 2-messagePassing/forestfire
+reading sources... [ 38%] 2-messagePassing/improve
+reading sources... [ 39%] 2-messagePassing/performance
+reading sources... [ 40%] 2-messagePassing/sendAndReceive
+reading sources... [ 41%] 2-messagePassing/toctree
+reading sources... [ 42%] 3-commonAlgorithms/code/gcd.py
+Converted as reST using the Python lexer.
+reading sources... [ 42%] 3-commonAlgorithms/code/gcdWithBlanks.py
+Converted as reST using the Python lexer.
+reading sources... [ 43%] 3-commonAlgorithms/code/gcdWithBlanksSerial.py
+Converted as reST using the Python lexer.
+reading sources... [ 44%] 3-commonAlgorithms/code/helloEx.py
+Converted as reST using the Python lexer.
+reading sources... [ 45%] 3-commonAlgorithms/code/queueEx.py
+Converted as reST using the Python lexer.
+reading sources... [ 46%] 3-commonAlgorithms/matmul
+reading sources... [ 47%] 3-commonAlgorithms/selection
+reading sources... [ 47%] 3-commonAlgorithms/sharedq
+reading sources... [ 48%] 3-commonAlgorithms/sieve
+reading sources... [ 49%] 3-commonAlgorithms/sorting
+reading sources... [ 50%] 3-commonAlgorithms/toctree
+reading sources... [ 51%] 4-cuda/1-gpu-device
+reading sources... [ 52%] 4-cuda/2-cuda-model-dim3
+reading sources... [ 52%] 4-cuda/3-cuda-thread-mapping
+reading sources... [ 53%] 4-cuda/4-VectorAdd
+reading sources... [ 54%] 4-cuda/5-VectorAddUM
+reading sources... [ 55%] 4-cuda/6-VectorAddTiming
+reading sources... [ 56%] 4-cuda/code/cuda/1-basics/1.1-device/Makefile
+Converted as reST using the Makefile lexer.
+reading sources... [ 57%] 4-cuda/code/cuda/1-basics/1.1-device/device_info.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 57%] 4-cuda/code/cuda/1-basics/1.2-dim3/Makefile
+Converted as reST using the Makefile lexer.
+reading sources... [ 58%] 4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 59%] 4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo1D1D.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 60%] 4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo1D2D.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 61%] 4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo2D2D.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 61%] 4-cuda/code/cuda/1-basics/1.3-1DBlockPrint/Makefile
+Converted as reST using the Makefile lexer.
+reading sources... [ 62%] 4-cuda/code/cuda/1-basics/1.3-1DBlockPrint/print1Block.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 63%] 4-cuda/code/cuda/1-basics/1.3-1DBlockPrint/print2Blocks.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 64%] 4-cuda/code/cuda/1-basics/1.4-2DArrayMapping/Makefile
+Converted as reST using the Makefile lexer.
+reading sources... [ 65%] 4-cuda/code/cuda/1-basics/1.4-2DArrayMapping/printThreads-to-2DArray.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 66%] 4-cuda/code/cuda/2-vectorAdd/Makefile
+Converted as reST using the Makefile lexer.
+reading sources... [ 66%] 4-cuda/code/cuda/2-vectorAdd/vectorAdd.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 67%] 4-cuda/code/cuda/3-UMVectorAdd/Makefile
+Converted as reST using the Makefile lexer.
+reading sources... [ 68%] 4-cuda/code/cuda/3-UMVectorAdd/vectorAdd.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 69%] 4-cuda/code/cuda/4-UMVectorAdd-timing/Makefile
+Converted as reST using the Makefile lexer.
+reading sources... [ 70%] 4-cuda/code/cuda/4-UMVectorAdd-timing/vectorAdd.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 71%] 4-cuda/code/cuda/4-UMVectorAdd-timing/vectorAdd_cudaTiming.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 71%] 4-cuda/toctree
+reading sources... [ 72%] 5-applications/ai-minimax
+reading sources... [ 73%] 5-applications/code/minimal-ttt.c
+Converted as reST using the C lexer.
+reading sources... [ 74%] 5-applications/code/ttt-omp.c
+Converted as reST using the C lexer.
+reading sources... [ 75%] 5-applications/code/ttt-serial.c
+Converted as reST using the C lexer.
+reading sources... [ 76%] 5-applications/toctree
+reading sources... [ 76%] 6-furtherAvenues/code/c/wcmapper.c
+Converted as reST using the C lexer.
+reading sources... [ 77%] 6-furtherAvenues/code/c/wcreducer.c
+Converted as reST using the C lexer.
+reading sources... [ 78%] 6-furtherAvenues/code/cpp/wcmapper.cpp
+Converted as reST using the C++ lexer.
+reading sources... [ 79%] 6-furtherAvenues/code/cpp/wcreducer.cpp
+Converted as reST using the C++ lexer.
+reading sources... [ 80%] 6-furtherAvenues/code/id-identity/idmapper.cpp
+Converted as reST using the C++ lexer.
+reading sources... [ 80%] 6-furtherAvenues/code/id-identity/idmapper.java
+Converted as reST using the Java lexer.
+reading sources... [ 81%] 6-furtherAvenues/code/id-identity/idmapper.py
+Converted as reST using the Python lexer.
+reading sources... [ 82%] 6-furtherAvenues/code/id-identity/idreducer.cpp
+Converted as reST using the C++ lexer.
+reading sources... [ 83%] 6-furtherAvenues/code/id-identity/idreducer.java
+Converted as reST using the Java lexer.
+reading sources... [ 84%] 6-furtherAvenues/code/id-identity/idreducer.py
+Converted as reST using the Python lexer.
+reading sources... [ 85%] 6-furtherAvenues/code/id-identity_rab/idmapper.cpp
+Converted as reST using the C++ lexer.
+reading sources... [ 85%] 6-furtherAvenues/code/id-identity_rab/idmapper.java
+Converted as reST using the Java lexer.
+reading sources... [ 86%] 6-furtherAvenues/code/id-identity_rab/idreducer.cpp
+Converted as reST using the C++ lexer.
+reading sources... [ 87%] 6-furtherAvenues/code/id-identity_rab/idreducer.java
+Converted as reST using the Java lexer.
+reading sources... [ 88%] 6-furtherAvenues/code/java/wcmapper.java
+Converted as reST using the Java lexer.
+reading sources... [ 89%] 6-furtherAvenues/code/java/wcreducer.java
+Converted as reST using the Java lexer.
+reading sources... [ 90%] 6-furtherAvenues/code/python3/concmapper.py
+Converted as reST using the Python lexer.
+reading sources... [ 90%] 6-furtherAvenues/code/python3/concreducer.py
+Converted as reST using the Python lexer.
+reading sources... [ 91%] 6-furtherAvenues/code/python3/idmapper.py
+Converted as reST using the Python lexer.
+reading sources... [ 92%] 6-furtherAvenues/code/python3/idreducer.py
+Converted as reST using the Python lexer.
+reading sources... [ 93%] 6-furtherAvenues/code/python3/indexmapper.py
+Converted as reST using the Python lexer.
+reading sources... [ 94%] 6-furtherAvenues/code/python3/indexreducer.py
+Converted as reST using the Python lexer.
+reading sources... [ 95%] 6-furtherAvenues/code/python3/wcmapper.py
+Converted as reST using the Python lexer.
+reading sources... [ 95%] 6-furtherAvenues/code/python3/wcreducer.py
+Converted as reST using the Python lexer.
+reading sources... [ 96%] 6-furtherAvenues/jobe-testing
+reading sources... [ 97%] 6-furtherAvenues/mapreduce
+reading sources... [ 98%] 6-furtherAvenues/other
+reading sources... [ 99%] 6-furtherAvenues/toctree
+reading sources... [100%] index
+
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... done
+preparing documents... done
+writing output... [  0%] 0-0-front_matter/acknowledgements
+writing output... [  1%] 0-0-front_matter/contributing
+writing output... [  2%] 0-0-front_matter/copyright
+writing output... [  3%] 0-0-front_matter/preface
+writing output... [  4%] 0-0-front_matter/title
+writing output... [  4%] 0-0-front_matter/toctree
+writing output... [  5%] 0-introduction/0.computing
+writing output... [  6%] 0-introduction/1.hardware
+writing output... [  7%] 0-introduction/2.parallelComputing
+writing output... [  8%] 0-introduction/3.performance
+writing output... [  9%] 0-introduction/4.strategies
+writing output... [  9%] 0-introduction/5.platforms
+writing output... [ 10%] 0-introduction/6.setup
+writing output... [ 11%] 0-introduction/toctree
+writing output... [ 12%] 1-sharedMemory/code/dd_omp2.cpp
+writing output... [ 13%] 1-sharedMemory/code/dd_serial2.cpp
+writing output... [ 14%] 1-sharedMemory/code/dd_threads.cpp
+writing output... [ 14%] 1-sharedMemory/code/spmd.c
+writing output... [ 15%] 1-sharedMemory/drugdesign
+writing output... [ 16%] 1-sharedMemory/firststeps
+writing output... [ 17%] 1-sharedMemory/performance
+writing output... [ 18%] 1-sharedMemory/preliminaries
+writing output... [ 19%] 1-sharedMemory/racecond
+writing output... [ 19%] 1-sharedMemory/reduction
+writing output... [ 20%] 1-sharedMemory/toctree
+writing output... [ 21%] 2-messagePassing/code/mpi4py/00spmd.py
+writing output... [ 22%] 2-messagePassing/code/mpi4py/01masterWorker.py
+writing output... [ 23%] 2-messagePassing/code/mpi4py/04messagePassingDeadlock.py
+writing output... [ 23%] 2-messagePassing/code/mpi4py/05messagePassing.py
+writing output... [ 24%] 2-messagePassing/code/mpi4py/06messagePassing2.py
+writing output... [ 25%] 2-messagePassing/code/mpi4py/07messagePassing3.py
+writing output... [ 26%] 2-messagePassing/code/mpi4py/08broadcast.py
+writing output... [ 27%] 2-messagePassing/code/mpi4py/09broadcastUserInput.py
+writing output... [ 28%] 2-messagePassing/code/mpi4py/11broadcastList.py
+writing output... [ 28%] 2-messagePassing/code/mpi4py/12reduction.py
+writing output... [ 29%] 2-messagePassing/code/mpi4py/13reductionList.py
+writing output... [ 30%] 2-messagePassing/code/mpi4py/16ScatterGather.py
+writing output... [ 31%] 2-messagePassing/code/mpi4py/arrayAddition1.py
+writing output... [ 32%] 2-messagePassing/code/mpi4py/arrayAddition2.py
+writing output... [ 33%] 2-messagePassing/code/mpi4py/integration.py
+writing output... [ 33%] 2-messagePassing/code/mpi4py/populateArray.py
+writing output... [ 34%] 2-messagePassing/code/mpi4py/populateArrayGather.py
+writing output... [ 35%] 2-messagePassing/code/mpi4py/sendReceive.py
+writing output... [ 36%] 2-messagePassing/code/mpi4py/tryPopulateArray.py
+writing output... [ 37%] 2-messagePassing/firststeps
+writing output... [ 38%] 2-messagePassing/forestfire
+writing output... [ 38%] 2-messagePassing/improve
+writing output... [ 39%] 2-messagePassing/performance
+writing output... [ 40%] 2-messagePassing/sendAndReceive
+writing output... [ 41%] 2-messagePassing/toctree
+writing output... [ 42%] 3-commonAlgorithms/code/gcd.py
+writing output... [ 42%] 3-commonAlgorithms/code/gcdWithBlanks.py
+writing output... [ 43%] 3-commonAlgorithms/code/gcdWithBlanksSerial.py
+writing output... [ 44%] 3-commonAlgorithms/code/helloEx.py
+writing output... [ 45%] 3-commonAlgorithms/code/queueEx.py
+writing output... [ 46%] 3-commonAlgorithms/matmul
+writing output... [ 47%] 3-commonAlgorithms/selection
+writing output... [ 47%] 3-commonAlgorithms/sharedq
+writing output... [ 48%] 3-commonAlgorithms/sieve
+writing output... [ 49%] 3-commonAlgorithms/sorting
+writing output... [ 50%] 3-commonAlgorithms/toctree
+writing output... [ 51%] 4-cuda/1-gpu-device
+writing output... [ 52%] 4-cuda/2-cuda-model-dim3
+writing output... [ 52%] 4-cuda/3-cuda-thread-mapping
+writing output... [ 53%] 4-cuda/4-VectorAdd
+writing output... [ 54%] 4-cuda/5-VectorAddUM
+writing output... [ 55%] 4-cuda/6-VectorAddTiming
+writing output... [ 56%] 4-cuda/code/cuda/1-basics/1.1-device/Makefile
+writing output... [ 57%] 4-cuda/code/cuda/1-basics/1.1-device/device_info.cu
+writing output... [ 57%] 4-cuda/code/cuda/1-basics/1.2-dim3/Makefile
+writing output... [ 58%] 4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo.cu
+writing output... [ 59%] 4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo1D1D.cu
+writing output... [ 60%] 4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo1D2D.cu
+writing output... [ 61%] 4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo2D2D.cu
+writing output... [ 61%] 4-cuda/code/cuda/1-basics/1.3-1DBlockPrint/Makefile
+writing output... [ 62%] 4-cuda/code/cuda/1-basics/1.3-1DBlockPrint/print1Block.cu
+writing output... [ 63%] 4-cuda/code/cuda/1-basics/1.3-1DBlockPrint/print2Blocks.cu
+writing output... [ 64%] 4-cuda/code/cuda/1-basics/1.4-2DArrayMapping/Makefile
+writing output... [ 65%] 4-cuda/code/cuda/1-basics/1.4-2DArrayMapping/printThreads-to-2DArray.cu
+writing output... [ 66%] 4-cuda/code/cuda/2-vectorAdd/Makefile
+writing output... [ 66%] 4-cuda/code/cuda/2-vectorAdd/vectorAdd.cu
+writing output... [ 67%] 4-cuda/code/cuda/3-UMVectorAdd/Makefile
+writing output... [ 68%] 4-cuda/code/cuda/3-UMVectorAdd/vectorAdd.cu
+writing output... [ 69%] 4-cuda/code/cuda/4-UMVectorAdd-timing/Makefile
+writing output... [ 70%] 4-cuda/code/cuda/4-UMVectorAdd-timing/vectorAdd.cu
+writing output... [ 71%] 4-cuda/code/cuda/4-UMVectorAdd-timing/vectorAdd_cudaTiming.cu
+writing output... [ 71%] 4-cuda/toctree
+writing output... [ 72%] 5-applications/ai-minimax
+writing output... [ 73%] 5-applications/code/minimal-ttt.c
+writing output... [ 74%] 5-applications/code/ttt-omp.c
+writing output... [ 75%] 5-applications/code/ttt-serial.c
+writing output... [ 76%] 5-applications/toctree
+writing output... [ 76%] 6-furtherAvenues/code/c/wcmapper.c
+writing output... [ 77%] 6-furtherAvenues/code/c/wcreducer.c
+writing output... [ 78%] 6-furtherAvenues/code/cpp/wcmapper.cpp
+writing output... [ 79%] 6-furtherAvenues/code/cpp/wcreducer.cpp
+writing output... [ 80%] 6-furtherAvenues/code/id-identity/idmapper.cpp
+writing output... [ 80%] 6-furtherAvenues/code/id-identity/idmapper.java
+writing output... [ 81%] 6-furtherAvenues/code/id-identity/idmapper.py
+writing output... [ 82%] 6-furtherAvenues/code/id-identity/idreducer.cpp
+writing output... [ 83%] 6-furtherAvenues/code/id-identity/idreducer.java
+writing output... [ 84%] 6-furtherAvenues/code/id-identity/idreducer.py
+writing output... [ 85%] 6-furtherAvenues/code/id-identity_rab/idmapper.cpp
+writing output... [ 85%] 6-furtherAvenues/code/id-identity_rab/idmapper.java
+writing output... [ 86%] 6-furtherAvenues/code/id-identity_rab/idreducer.cpp
+writing output... [ 87%] 6-furtherAvenues/code/id-identity_rab/idreducer.java
+writing output... [ 88%] 6-furtherAvenues/code/java/wcmapper.java
+writing output... [ 89%] 6-furtherAvenues/code/java/wcreducer.java
+writing output... [ 90%] 6-furtherAvenues/code/python3/concmapper.py
+writing output... [ 90%] 6-furtherAvenues/code/python3/concreducer.py
+writing output... [ 91%] 6-furtherAvenues/code/python3/idmapper.py
+writing output... [ 92%] 6-furtherAvenues/code/python3/idreducer.py
+writing output... [ 93%] 6-furtherAvenues/code/python3/indexmapper.py
+writing output... [ 94%] 6-furtherAvenues/code/python3/indexreducer.py
+writing output... [ 95%] 6-furtherAvenues/code/python3/wcmapper.py
+writing output... [ 95%] 6-furtherAvenues/code/python3/wcreducer.py
+writing output... [ 96%] 6-furtherAvenues/jobe-testing
+writing output... [ 97%] 6-furtherAvenues/mapreduce
+writing output... [ 98%] 6-furtherAvenues/other
+writing output... [ 99%] 6-furtherAvenues/toctree
+writing output... [100%] index
+
+generating indices... genindex done
+writing additional pages... search done
+copying images... [  1%] 0-0-front_matter/images/nsf.png
+copying images... [  2%] 0-0-front_matter/images/cc.png
+copying images... [  3%] 0-introduction/images/0-1.SharedMemoryMultiprocessor.png
+copying images... [  4%] 0-introduction/images/0-2.DistributedMemory.png
+copying images... [  5%] 0-introduction/images/0-3.HeterogeneousMultiprocessor.png
+copying images... [  6%] 0-introduction/images/0-4.PizzaAlgorithm0.png
+copying images... [  8%] 0-introduction/images/0-5.PizzaAlgorithm1a.png
+copying images... [  9%] 0-introduction/images/0-6.PizzaAlgorithm1b.png
+copying images... [ 10%] 0-introduction/images/0-7.PizzaAlgorithm1c.png
+copying images... [ 11%] 0-introduction/images/0-8.PizzaAlgorithm1d.png
+copying images... [ 12%] 0-introduction/images/0-9.PizzaTimings1.png
+copying images... [ 13%] 0-introduction/images/0-10.PizzaAlgorithm1e.png
+copying images... [ 14%] 0-introduction/images/0-11.PizzaAlgorithm1f.png
+copying images... [ 16%] 0-introduction/images/0-12.PizzaAlgorithm1g.png
+copying images... [ 17%] 0-introduction/images/0-13.PizzaAlgorithm1h.png
+copying images... [ 18%] 0-introduction/images/0-14.PizzaTimings2.png
+copying images... [ 19%] 0-introduction/images/0-15.PizzaSpeedups.png
+copying images... [ 20%] 0-introduction/images/0-16.PizzaEfficiency.png
+copying images... [ 21%] 0-introduction/images/0-17.AmdahlScenario1.png
+copying images... [ 22%] 0-introduction/images/0-18.AmdahlScenario2.png
+copying images... [ 24%] 0-introduction/images/0-19.AmdahlVsGustafson.png
+copying images... [ 25%] 0-introduction/images/0-20.PizzaAlgorithm1i.png
+copying images... [ 26%] 0-introduction/images/0-21.PizzaAlgorithm2a.png
+copying images... [ 27%] 0-introduction/images/0-22.PizzaAlgorithm2b.png
+copying images... [ 28%] 0-introduction/images/0-23.PizzaAlgorithm2c.png
+copying images... [ 29%] 0-introduction/images/0-24.PizzaAlgorithm3a.png
+copying images... [ 31%] 0-introduction/images/0-25.PizzaAlgorithm3b.png
+copying images... [ 32%] 0-introduction/images/0-26.PizzaAlgorithm3c.png
+copying images... [ 33%] 0-introduction/images/0-27.PizzaAlgorithm3d.png
+copying images... [ 34%] 0-introduction/images/0-28.ArrayConsecutive.png
+copying images... [ 35%] 0-introduction/images/0-29.ArrayNonConsecutive.png
+copying images... [ 36%] 0-introduction/images/0-30.CacheAwareness.png
+copying images... [ 37%] 0-introduction/images/0-31.CacheObliviousness.png
+copying images... [ 39%] 0-introduction/images/0-32.TwoDifferentPizzas.png
+copying images... [ 40%] 0-introduction/images/0-33.TwoDifferentPizzas-a.png
+copying images... [ 41%] 0-introduction/images/0-34.TwoDifferentPizzas-b.png
+copying images... [ 42%] 0-introduction/images/0-35.LeaderWorker.png
+copying images... [ 43%] 0-introduction/images/0-36.LeaderWorker-a.png
+copying images... [ 44%] 0-introduction/images/0-37.SharedQueue1.png
+copying images... [ 45%] 0-introduction/images/0-38.SharedQueue2.png
+copying images... [ 47%] 0-introduction/images/0-39.SummingPartialsLinearly.png
+copying images... [ 48%] 0-introduction/images/0-40.SummingPartialsLogarithmic.png
+copying images... [ 49%] 0-introduction/images/0-41.PizzaDependencyGraph.png
+copying images... [ 50%] 0-introduction/images/0-42.FunctionalDependencyGraph.png
+copying images... [ 51%] 0-introduction/images/0-43-RPi4-Annotated.png
+copying images... [ 52%] 0-introduction/images/0-44-Hrothgar.jpg
+copying images... [ 54%] 0-introduction/images/0-45-StarTopology.png
+copying images... [ 55%] 0-introduction/images/0-46-RPi-Cluster.jpg
+copying images... [ 56%] 0-introduction/images/0-47-Multi-Switch-Network.png
+copying images... [ 57%] 1-sharedMemory/images/proteinligand.jpg
+copying images... [ 58%] 1-sharedMemory/images/gamma_dist.png
+copying images... [ 59%] 1-sharedMemory/images/ForkJoin.png
+copying images... [ 60%] 1-sharedMemory/images/ForkJoin_SPMD.png
+copying images... [ 62%] 2-messagePassing/images/comm_world.png
+copying images... [ 63%] 2-messagePassing/images/single_forest_fire_simulation.png
+copying images... [ 64%] 2-messagePassing/images/forest_fire_simulation_with_multiple_trials_1_process.png
+copying images... [ 65%] 2-messagePassing/images/forest_fire_simulation_with_multiple_trials_in_parallel.png
+copying images... [ 66%] 2-messagePassing/images/Scatter_array.png
+copying images... [ 67%] 2-messagePassing/images/after_Scatter_array.png
+copying images... [ 68%] 2-messagePassing/images/pair_exchange.png
+copying images... [ 70%] 2-messagePassing/images/send_recv.png
+copying images... [ 71%] 2-messagePassing/images/ring.png
+copying images... [ 72%] 3-commonAlgorithms/selection/figs/timesteps.jpg
+copying images... [ 73%] 3-commonAlgorithms/selection/figs/timesteps-chart.jpg
+copying images... [ 74%] 4-cuda/images/MSI_3080_11.jpg
+copying images... [ 75%] 4-cuda/images/GPUDeviceArchitecture.png
+copying images... [ 77%] 4-cuda/images/CUDAProgrammingModel.png
+copying images... [ 78%] 4-cuda/images/1DGrid1DBlock.png
+copying images... [ 79%] 4-cuda/images/1D2BlocksDim.png
+copying images... [ 80%] 4-cuda/images/1DArrayMapping.png
+copying images... [ 81%] 4-cuda/images/1ThreadPerArrayElementVectorAdd.png
+copying images... [ 82%] 4-cuda/images/UMAdd-1block.png
+copying images... [ 83%] 4-cuda/images/stride_nblocks.png
+copying images... [ 85%] 4-cuda/images/scheduling_blocks.png
+copying images... [ 86%] 4-cuda/images/nostride_nblocks.png
+copying images... [ 87%] 5-applications/images/ex-0-x-win-draw.png
+copying images... [ 88%] 5-applications/images/ex-1-X-lose-draw.png
+copying images... [ 89%] 5-applications/images/ex-2-win-draw-colors.png
+copying images... [ 90%] 5-applications/images/ex-2a-win-draw-scores.png
+copying images... [ 91%] 5-applications/images/ex-3-draw-or-lose-colors.png
+copying images... [ 93%] 5-applications/images/ex-3a-draw-or-lose-scores.png
+copying images... [ 94%] 5-applications/images/ex-4-O-turn.png
+copying images... [ 95%] 5-applications/images/ex-4a-O-turn-scores.png
+copying images... [ 96%] 5-applications/images/fulltree.png
+copying images... [ 97%] 5-applications/images/parallel-tree.png
+copying images... [ 98%] 6-furtherAvenues/mapreduce_Figure1.jpg
+copying images... [100%] 6-furtherAvenues/mapreduce_Figure2.png
+
+copying downloadable files... [  5%] 5-applications/code/ttt-serial.c
+copying downloadable files... [ 11%] 5-applications/code/ttt-omp.c
+copying downloadable files... [ 16%] 6-furtherAvenues/code/python3/wcmapper.py
+copying downloadable files... [ 22%] 6-furtherAvenues/code/python3/wcreducer.py
+copying downloadable files... [ 27%] 6-furtherAvenues/code/cpp/wcmapper.cpp
+copying downloadable files... [ 33%] 6-furtherAvenues/code/cpp/wcreducer.cpp
+copying downloadable files... [ 38%] 6-furtherAvenues/code/c/wcmapper.c
+copying downloadable files... [ 44%] 6-furtherAvenues/code/c/wcreducer.c
+copying downloadable files... [ 50%] 6-furtherAvenues/code/java/wcmapper.java
+copying downloadable files... [ 55%] 6-furtherAvenues/code/java/wcreducer.java
+copying downloadable files... [ 61%] 6-furtherAvenues/code/id-identity/idmapper.py
+copying downloadable files... [ 66%] 6-furtherAvenues/code/id-identity/idreducer.py
+copying downloadable files... [ 72%] 6-furtherAvenues/code/id-identity/idmapper.cpp
+copying downloadable files... [ 77%] 6-furtherAvenues/code/id-identity/idreducer.cpp
+copying downloadable files... [ 83%] 6-furtherAvenues/code/id-identity/idmapper.java
+copying downloadable files... [ 88%] 6-furtherAvenues/code/id-identity/idreducer.java
+copying downloadable files... [ 94%] 6-furtherAvenues/mobydick.txt
+copying downloadable files... [100%] 6-furtherAvenues/mobydick.txt_loc
+
+copying static files... done
+copying extra files... done
+dumping search index in English (code: en)... done
+dumping object inventory... done
+build succeeded, 130 warnings.
+
+The HTML pages are in build/PDCBeginners.
+Deleteing Chapter / Subchapter info for PDCBeginners
+Warning - always use build --all to ensure chapter info is consistent!
+Updating Database for 0-0-front_matter
+Updating Database for 0-introduction
+Updating Database for 1-sharedMemory
+Updating Database for 2-messagePassing
+Updating Database for 3-commonAlgorithms
+Updating Database for 4-cuda
+Updating Database for 5-applications
+Updating Database for 6-furtherAvenues
+Committing changes
+Done, build successful
+
+====
+WARNING: while setting up extension runestone.lp: role 'docname' is already registered, it will be overridden
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/00spmd.py:11: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/00spmd.py:13: ERROR: Unexpected indentation.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/00spmd.py:18: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/01masterWorker.py:11: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/01masterWorker.py:13: ERROR: Unexpected indentation.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/01masterWorker.py:18: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/04messagePassingDeadlock.py:8: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/05messagePassing.py:9: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/05messagePassing.py:18: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/05messagePassing.py:20: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/06messagePassing2.py:9: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/06messagePassing2.py:18: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/06messagePassing2.py:20: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/07messagePassing3.py:9: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/07messagePassing3.py:18: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/08broadcast.py:9: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/08broadcast.py:18: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/09broadcastUserInput.py:9: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/09broadcastUserInput.py:19: ERROR: Unexpected indentation.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/09broadcastUserInput.py:24: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/11broadcastList.py:9: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/11broadcastList.py:18: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/12reduction.py:10: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/12reduction.py:18: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/13reductionList.py:10: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/13reductionList.py:18: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/16ScatterGather.py:10: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/2-cuda-model-dim3.rst:176: ERROR: Invalid divid 'tf-4.2-1'.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/2-cuda-model-dim3.rst:185: ERROR: Invalid divid 'tf-4.2-2'.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/3-cuda-thread-mapping.rst:179: ERROR: Invalid divid 'tf-4.3-2'.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/6-VectorAddTiming.rst:122: ERROR: Invalid divid 'mc-4.6-0'.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/6-VectorAddTiming.rst:191: ERROR: Invalid divid 'mc-4.6-1'.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/6-VectorAddTiming.rst:202: ERROR: Invalid divid 'tf-4.6-2'.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/6-VectorAddTiming.rst:213: ERROR: Invalid divid 'sa-4.6-3'.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/6-VectorAddTiming.rst:237: ERROR: Invalid divid 'tf-4.6-3'.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/2-vectorAdd/vectorAdd.cu:39: ERROR: Unexpected indentation.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/2-vectorAdd/vectorAdd.cu:40: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/3-UMVectorAdd/vectorAdd.cu:39: ERROR: Unexpected indentation.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/3-UMVectorAdd/vectorAdd.cu:40: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/4-UMVectorAdd-timing/vectorAdd.cu:91: ERROR: Unexpected indentation.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/4-UMVectorAdd-timing/vectorAdd.cu:92: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/4-UMVectorAdd-timing/vectorAdd_cudaTiming.cu:38: ERROR: Unexpected indentation.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/4-UMVectorAdd-timing/vectorAdd_cudaTiming.cu:39: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/toctree.rst:21: WARNING: toctree contains reference to nonexisting document '4-cuda/.. gpu'
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/jobe-testing.rst:346: ERROR: Invalid divid 'pdc-mpic++'.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/mapreduce.rst:618: WARNING: download file not readable: /srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/mobydick.txt_ln
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/0-0-front_matter/acknowledgements.rst: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/0-0-front_matter/copyright.rst: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/0-0-front_matter/title.rst: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/0-introduction/6.setup.rst: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/1-sharedMemory/code/dd_omp2.cpp: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/1-sharedMemory/code/dd_serial2.cpp: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/1-sharedMemory/code/dd_threads.cpp: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/1-sharedMemory/code/spmd.c: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/1-sharedMemory/performance.rst: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/00spmd.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/01masterWorker.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/04messagePassingDeadlock.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/05messagePassing.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/06messagePassing2.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/07messagePassing3.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/08broadcast.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/09broadcastUserInput.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/11broadcastList.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/12reduction.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/13reductionList.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/16ScatterGather.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/arrayAddition1.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/arrayAddition2.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/integration.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/populateArray.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/populateArrayGather.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/sendReceive.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/tryPopulateArray.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/3-commonAlgorithms/code/gcd.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/3-commonAlgorithms/code/gcdWithBlanks.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/3-commonAlgorithms/code/gcdWithBlanksSerial.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/3-commonAlgorithms/code/helloEx.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/3-commonAlgorithms/code/queueEx.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/3-commonAlgorithms/matmul.rst: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/3-commonAlgorithms/sieve.rst: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/3-commonAlgorithms/sorting.rst: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.1-device/Makefile: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.1-device/device_info.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.2-dim3/Makefile: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo1D1D.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo1D2D.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo2D2D.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.3-1DBlockPrint/Makefile: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.3-1DBlockPrint/print1Block.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.3-1DBlockPrint/print2Blocks.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.4-2DArrayMapping/Makefile: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.4-2DArrayMapping/printThreads-to-2DArray.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/2-vectorAdd/Makefile: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/2-vectorAdd/vectorAdd.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/3-UMVectorAdd/Makefile: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/3-UMVectorAdd/vectorAdd.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/4-UMVectorAdd-timing/Makefile: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/4-UMVectorAdd-timing/vectorAdd.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/4-UMVectorAdd-timing/vectorAdd_cudaTiming.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/5-applications/code/minimal-ttt.c: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/5-applications/code/ttt-omp.c: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/5-applications/code/ttt-serial.c: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/c/wcmapper.c: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/c/wcreducer.c: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/cpp/wcmapper.cpp: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/cpp/wcreducer.cpp: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/id-identity/idmapper.cpp: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/id-identity/idmapper.java: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/id-identity/idmapper.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/id-identity/idreducer.cpp: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/id-identity/idreducer.java: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/id-identity/idreducer.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/id-identity_rab/idmapper.cpp: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/id-identity_rab/idmapper.java: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/id-identity_rab/idreducer.cpp: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/id-identity_rab/idreducer.java: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/java/wcmapper.java: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/java/wcreducer.java: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/python3/concmapper.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/python3/concreducer.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/python3/idmapper.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/python3/idreducer.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/python3/indexmapper.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/python3/indexreducer.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/python3/wcmapper.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/python3/wcreducer.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/jobe-testing.rst: WARNING: document isn't included in any toctree
+Building with Runestone 6.5.4
+---> runestone.build
+git describe --long
+fatal: detected dubious ownership in repository at '/srv/web2py/applications/runestone/books/PDCBeginners'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /srv/web2py/applications/runestone/books/PDCBeginners
+
+Building into  ./build/PDCBeginners
+mkdir_p path('././build/PDCBeginners')
+mkdir_p path('./build/PDCBeginners')
+mkdir_p path('././build/PDCBeginners/doctrees')
+sphinx-build -b html -d ././build/PDCBeginners/doctrees -c . -a -E -Alogin_required=false -Aloglevel=0 -Acourse_title=PDCBeginners -Apython3=true -Adburl=postgresql://runestone:runestone@db/runestone_dev -Adefault_ac_lang=cpp -Ajobe_server=http://localhost:4000 -Aproxy_uri_runs=/jobe/index.php/restapi/runs/ -Aproxy_uri_files=/jobe/index.php/restapi/files/ -Adownloads_enabled=false -Aenable_chatcodes=false -Aallow_pairs=false -Adynamic_pages=False -Ause_services=false -Abasecourse=PDCBeginners -Acourse_id=PDCBeginners -Aappname=runestone -Acourse_url=http:localhost -Arunestone_version=6.5.4 -Abuild_info=unknown ./_sources ./build/PDCBeginners
+Running Sphinx v4.5.0
+Connecting to DB
+No custom CSS files
+No custom js files
+building [mo]: all of 0 po files
+building [html]: all source files
+updating environment: [new config] 121 added, 0 changed, 0 removed
+Resetting questions
+reading sources... [  0%] 0-0-front_matter/acknowledgements
+reading sources... [  1%] 0-0-front_matter/contributing
+reading sources... [  2%] 0-0-front_matter/copyright
+reading sources... [  3%] 0-0-front_matter/preface
+reading sources... [  4%] 0-0-front_matter/title
+reading sources... [  4%] 0-0-front_matter/toctree
+reading sources... [  5%] 0-introduction/0.computing
+reading sources... [  6%] 0-introduction/1.hardware
+reading sources... [  7%] 0-introduction/2.parallelComputing
+reading sources... [  8%] 0-introduction/3.performance
+reading sources... [  9%] 0-introduction/4.strategies
+reading sources... [  9%] 0-introduction/5.platforms
+reading sources... [ 10%] 0-introduction/6.setup
+reading sources... [ 11%] 0-introduction/toctree
+reading sources... [ 12%] 1-sharedMemory/code/dd_omp2.cpp
+Converted as reST using the C++ lexer.
+reading sources... [ 13%] 1-sharedMemory/code/dd_serial2.cpp
+Converted as reST using the C++ lexer.
+reading sources... [ 14%] 1-sharedMemory/code/dd_threads.cpp
+Converted as reST using the C++ lexer.
+reading sources... [ 14%] 1-sharedMemory/code/spmd.c
+Converted as reST using the C lexer.
+reading sources... [ 15%] 1-sharedMemory/drugdesign
+reading sources... [ 16%] 1-sharedMemory/firststeps
+reading sources... [ 17%] 1-sharedMemory/performance
+reading sources... [ 18%] 1-sharedMemory/preliminaries
+reading sources... [ 19%] 1-sharedMemory/racecond
+reading sources... [ 19%] 1-sharedMemory/reduction
+reading sources... [ 20%] 1-sharedMemory/toctree
+reading sources... [ 21%] 2-messagePassing/code/mpi4py/00spmd.py
+Converted as reST using the Python lexer.
+reading sources... [ 22%] 2-messagePassing/code/mpi4py/01masterWorker.py
+Converted as reST using the Python lexer.
+reading sources... [ 23%] 2-messagePassing/code/mpi4py/04messagePassingDeadlock.py
+Converted as reST using the Python lexer.
+reading sources... [ 23%] 2-messagePassing/code/mpi4py/05messagePassing.py
+Converted as reST using the Python lexer.
+reading sources... [ 24%] 2-messagePassing/code/mpi4py/06messagePassing2.py
+Converted as reST using the Python lexer.
+reading sources... [ 25%] 2-messagePassing/code/mpi4py/07messagePassing3.py
+Converted as reST using the Python lexer.
+reading sources... [ 26%] 2-messagePassing/code/mpi4py/08broadcast.py
+Converted as reST using the Python lexer.
+reading sources... [ 27%] 2-messagePassing/code/mpi4py/09broadcastUserInput.py
+Converted as reST using the Python lexer.
+reading sources... [ 28%] 2-messagePassing/code/mpi4py/11broadcastList.py
+Converted as reST using the Python lexer.
+reading sources... [ 28%] 2-messagePassing/code/mpi4py/12reduction.py
+Converted as reST using the Python lexer.
+reading sources... [ 29%] 2-messagePassing/code/mpi4py/13reductionList.py
+Converted as reST using the Python lexer.
+reading sources... [ 30%] 2-messagePassing/code/mpi4py/16ScatterGather.py
+Converted as reST using the Python lexer.
+reading sources... [ 31%] 2-messagePassing/code/mpi4py/arrayAddition1.py
+Converted as reST using the Python lexer.
+reading sources... [ 32%] 2-messagePassing/code/mpi4py/arrayAddition2.py
+Converted as reST using the Python lexer.
+reading sources... [ 33%] 2-messagePassing/code/mpi4py/integration.py
+Converted as reST using the Python lexer.
+reading sources... [ 33%] 2-messagePassing/code/mpi4py/populateArray.py
+Converted as reST using the Python lexer.
+reading sources... [ 34%] 2-messagePassing/code/mpi4py/populateArrayGather.py
+Converted as reST using the Python lexer.
+reading sources... [ 35%] 2-messagePassing/code/mpi4py/sendReceive.py
+Converted as reST using the Python lexer.
+reading sources... [ 36%] 2-messagePassing/code/mpi4py/tryPopulateArray.py
+Converted as reST using the Python lexer.
+reading sources... [ 37%] 2-messagePassing/firststeps
+reading sources... [ 38%] 2-messagePassing/forestfire
+reading sources... [ 38%] 2-messagePassing/improve
+reading sources... [ 39%] 2-messagePassing/performance
+reading sources... [ 40%] 2-messagePassing/sendAndReceive
+reading sources... [ 41%] 2-messagePassing/toctree
+reading sources... [ 42%] 3-commonAlgorithms/code/gcd.py
+Converted as reST using the Python lexer.
+reading sources... [ 42%] 3-commonAlgorithms/code/gcdWithBlanks.py
+Converted as reST using the Python lexer.
+reading sources... [ 43%] 3-commonAlgorithms/code/gcdWithBlanksSerial.py
+Converted as reST using the Python lexer.
+reading sources... [ 44%] 3-commonAlgorithms/code/helloEx.py
+Converted as reST using the Python lexer.
+reading sources... [ 45%] 3-commonAlgorithms/code/queueEx.py
+Converted as reST using the Python lexer.
+reading sources... [ 46%] 3-commonAlgorithms/matmul
+reading sources... [ 47%] 3-commonAlgorithms/selection
+reading sources... [ 47%] 3-commonAlgorithms/sharedq
+reading sources... [ 48%] 3-commonAlgorithms/sieve
+reading sources... [ 49%] 3-commonAlgorithms/sorting
+reading sources... [ 50%] 3-commonAlgorithms/toctree
+reading sources... [ 51%] 4-cuda/1-gpu-device
+reading sources... [ 52%] 4-cuda/2-cuda-model-dim3
+reading sources... [ 52%] 4-cuda/3-cuda-thread-mapping
+reading sources... [ 53%] 4-cuda/4-VectorAdd
+reading sources... [ 54%] 4-cuda/5-VectorAddUM
+reading sources... [ 55%] 4-cuda/6-VectorAddTiming
+reading sources... [ 56%] 4-cuda/code/cuda/1-basics/1.1-device/Makefile
+Converted as reST using the Makefile lexer.
+reading sources... [ 57%] 4-cuda/code/cuda/1-basics/1.1-device/device_info.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 57%] 4-cuda/code/cuda/1-basics/1.2-dim3/Makefile
+Converted as reST using the Makefile lexer.
+reading sources... [ 58%] 4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 59%] 4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo1D1D.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 60%] 4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo1D2D.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 61%] 4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo2D2D.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 61%] 4-cuda/code/cuda/1-basics/1.3-1DBlockPrint/Makefile
+Converted as reST using the Makefile lexer.
+reading sources... [ 62%] 4-cuda/code/cuda/1-basics/1.3-1DBlockPrint/print1Block.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 63%] 4-cuda/code/cuda/1-basics/1.3-1DBlockPrint/print2Blocks.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 64%] 4-cuda/code/cuda/1-basics/1.4-2DArrayMapping/Makefile
+Converted as reST using the Makefile lexer.
+reading sources... [ 65%] 4-cuda/code/cuda/1-basics/1.4-2DArrayMapping/printThreads-to-2DArray.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 66%] 4-cuda/code/cuda/2-vectorAdd/Makefile
+Converted as reST using the Makefile lexer.
+reading sources... [ 66%] 4-cuda/code/cuda/2-vectorAdd/vectorAdd.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 67%] 4-cuda/code/cuda/3-UMVectorAdd/Makefile
+Converted as reST using the Makefile lexer.
+reading sources... [ 68%] 4-cuda/code/cuda/3-UMVectorAdd/vectorAdd.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 69%] 4-cuda/code/cuda/4-UMVectorAdd-timing/Makefile
+Converted as reST using the Makefile lexer.
+reading sources... [ 70%] 4-cuda/code/cuda/4-UMVectorAdd-timing/vectorAdd.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 71%] 4-cuda/code/cuda/4-UMVectorAdd-timing/vectorAdd_cudaTiming.cu
+Converted as reST using the CUDA lexer.
+reading sources... [ 71%] 4-cuda/toctree
+reading sources... [ 72%] 5-applications/ai-minimax
+reading sources... [ 73%] 5-applications/code/minimal-ttt.c
+Converted as reST using the C lexer.
+reading sources... [ 74%] 5-applications/code/ttt-omp.c
+Converted as reST using the C lexer.
+reading sources... [ 75%] 5-applications/code/ttt-serial.c
+Converted as reST using the C lexer.
+reading sources... [ 76%] 5-applications/toctree
+reading sources... [ 76%] 6-furtherAvenues/code/c/wcmapper.c
+Converted as reST using the C lexer.
+reading sources... [ 77%] 6-furtherAvenues/code/c/wcreducer.c
+Converted as reST using the C lexer.
+reading sources... [ 78%] 6-furtherAvenues/code/cpp/wcmapper.cpp
+Converted as reST using the C++ lexer.
+reading sources... [ 79%] 6-furtherAvenues/code/cpp/wcreducer.cpp
+Converted as reST using the C++ lexer.
+reading sources... [ 80%] 6-furtherAvenues/code/id-identity/idmapper.cpp
+Converted as reST using the C++ lexer.
+reading sources... [ 80%] 6-furtherAvenues/code/id-identity/idmapper.java
+Converted as reST using the Java lexer.
+reading sources... [ 81%] 6-furtherAvenues/code/id-identity/idmapper.py
+Converted as reST using the Python lexer.
+reading sources... [ 82%] 6-furtherAvenues/code/id-identity/idreducer.cpp
+Converted as reST using the C++ lexer.
+reading sources... [ 83%] 6-furtherAvenues/code/id-identity/idreducer.java
+Converted as reST using the Java lexer.
+reading sources... [ 84%] 6-furtherAvenues/code/id-identity/idreducer.py
+Converted as reST using the Python lexer.
+reading sources... [ 85%] 6-furtherAvenues/code/id-identity_rab/idmapper.cpp
+Converted as reST using the C++ lexer.
+reading sources... [ 85%] 6-furtherAvenues/code/id-identity_rab/idmapper.java
+Converted as reST using the Java lexer.
+reading sources... [ 86%] 6-furtherAvenues/code/id-identity_rab/idreducer.cpp
+Converted as reST using the C++ lexer.
+reading sources... [ 87%] 6-furtherAvenues/code/id-identity_rab/idreducer.java
+Converted as reST using the Java lexer.
+reading sources... [ 88%] 6-furtherAvenues/code/java/wcmapper.java
+Converted as reST using the Java lexer.
+reading sources... [ 89%] 6-furtherAvenues/code/java/wcreducer.java
+Converted as reST using the Java lexer.
+reading sources... [ 90%] 6-furtherAvenues/code/python3/concmapper.py
+Converted as reST using the Python lexer.
+reading sources... [ 90%] 6-furtherAvenues/code/python3/concreducer.py
+Converted as reST using the Python lexer.
+reading sources... [ 91%] 6-furtherAvenues/code/python3/idmapper.py
+Converted as reST using the Python lexer.
+reading sources... [ 92%] 6-furtherAvenues/code/python3/idreducer.py
+Converted as reST using the Python lexer.
+reading sources... [ 93%] 6-furtherAvenues/code/python3/indexmapper.py
+Converted as reST using the Python lexer.
+reading sources... [ 94%] 6-furtherAvenues/code/python3/indexreducer.py
+Converted as reST using the Python lexer.
+reading sources... [ 95%] 6-furtherAvenues/code/python3/wcmapper.py
+Converted as reST using the Python lexer.
+reading sources... [ 95%] 6-furtherAvenues/code/python3/wcreducer.py
+Converted as reST using the Python lexer.
+reading sources... [ 96%] 6-furtherAvenues/jobe-testing
+reading sources... [ 97%] 6-furtherAvenues/mapreduce
+reading sources... [ 98%] 6-furtherAvenues/other
+reading sources... [ 99%] 6-furtherAvenues/toctree
+reading sources... [100%] index
+
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... done
+preparing documents... done
+writing output... [  0%] 0-0-front_matter/acknowledgements
+writing output... [  1%] 0-0-front_matter/contributing
+writing output... [  2%] 0-0-front_matter/copyright
+writing output... [  3%] 0-0-front_matter/preface
+writing output... [  4%] 0-0-front_matter/title
+writing output... [  4%] 0-0-front_matter/toctree
+writing output... [  5%] 0-introduction/0.computing
+writing output... [  6%] 0-introduction/1.hardware
+writing output... [  7%] 0-introduction/2.parallelComputing
+writing output... [  8%] 0-introduction/3.performance
+writing output... [  9%] 0-introduction/4.strategies
+writing output... [  9%] 0-introduction/5.platforms
+writing output... [ 10%] 0-introduction/6.setup
+writing output... [ 11%] 0-introduction/toctree
+writing output... [ 12%] 1-sharedMemory/code/dd_omp2.cpp
+writing output... [ 13%] 1-sharedMemory/code/dd_serial2.cpp
+writing output... [ 14%] 1-sharedMemory/code/dd_threads.cpp
+writing output... [ 14%] 1-sharedMemory/code/spmd.c
+writing output... [ 15%] 1-sharedMemory/drugdesign
+writing output... [ 16%] 1-sharedMemory/firststeps
+writing output... [ 17%] 1-sharedMemory/performance
+writing output... [ 18%] 1-sharedMemory/preliminaries
+writing output... [ 19%] 1-sharedMemory/racecond
+writing output... [ 19%] 1-sharedMemory/reduction
+writing output... [ 20%] 1-sharedMemory/toctree
+writing output... [ 21%] 2-messagePassing/code/mpi4py/00spmd.py
+writing output... [ 22%] 2-messagePassing/code/mpi4py/01masterWorker.py
+writing output... [ 23%] 2-messagePassing/code/mpi4py/04messagePassingDeadlock.py
+writing output... [ 23%] 2-messagePassing/code/mpi4py/05messagePassing.py
+writing output... [ 24%] 2-messagePassing/code/mpi4py/06messagePassing2.py
+writing output... [ 25%] 2-messagePassing/code/mpi4py/07messagePassing3.py
+writing output... [ 26%] 2-messagePassing/code/mpi4py/08broadcast.py
+writing output... [ 27%] 2-messagePassing/code/mpi4py/09broadcastUserInput.py
+writing output... [ 28%] 2-messagePassing/code/mpi4py/11broadcastList.py
+writing output... [ 28%] 2-messagePassing/code/mpi4py/12reduction.py
+writing output... [ 29%] 2-messagePassing/code/mpi4py/13reductionList.py
+writing output... [ 30%] 2-messagePassing/code/mpi4py/16ScatterGather.py
+writing output... [ 31%] 2-messagePassing/code/mpi4py/arrayAddition1.py
+writing output... [ 32%] 2-messagePassing/code/mpi4py/arrayAddition2.py
+writing output... [ 33%] 2-messagePassing/code/mpi4py/integration.py
+writing output... [ 33%] 2-messagePassing/code/mpi4py/populateArray.py
+writing output... [ 34%] 2-messagePassing/code/mpi4py/populateArrayGather.py
+writing output... [ 35%] 2-messagePassing/code/mpi4py/sendReceive.py
+writing output... [ 36%] 2-messagePassing/code/mpi4py/tryPopulateArray.py
+writing output... [ 37%] 2-messagePassing/firststeps
+writing output... [ 38%] 2-messagePassing/forestfire
+writing output... [ 38%] 2-messagePassing/improve
+writing output... [ 39%] 2-messagePassing/performance
+writing output... [ 40%] 2-messagePassing/sendAndReceive
+writing output... [ 41%] 2-messagePassing/toctree
+writing output... [ 42%] 3-commonAlgorithms/code/gcd.py
+writing output... [ 42%] 3-commonAlgorithms/code/gcdWithBlanks.py
+writing output... [ 43%] 3-commonAlgorithms/code/gcdWithBlanksSerial.py
+writing output... [ 44%] 3-commonAlgorithms/code/helloEx.py
+writing output... [ 45%] 3-commonAlgorithms/code/queueEx.py
+writing output... [ 46%] 3-commonAlgorithms/matmul
+writing output... [ 47%] 3-commonAlgorithms/selection
+writing output... [ 47%] 3-commonAlgorithms/sharedq
+writing output... [ 48%] 3-commonAlgorithms/sieve
+writing output... [ 49%] 3-commonAlgorithms/sorting
+writing output... [ 50%] 3-commonAlgorithms/toctree
+writing output... [ 51%] 4-cuda/1-gpu-device
+writing output... [ 52%] 4-cuda/2-cuda-model-dim3
+writing output... [ 52%] 4-cuda/3-cuda-thread-mapping
+writing output... [ 53%] 4-cuda/4-VectorAdd
+writing output... [ 54%] 4-cuda/5-VectorAddUM
+writing output... [ 55%] 4-cuda/6-VectorAddTiming
+writing output... [ 56%] 4-cuda/code/cuda/1-basics/1.1-device/Makefile
+writing output... [ 57%] 4-cuda/code/cuda/1-basics/1.1-device/device_info.cu
+writing output... [ 57%] 4-cuda/code/cuda/1-basics/1.2-dim3/Makefile
+writing output... [ 58%] 4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo.cu
+writing output... [ 59%] 4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo1D1D.cu
+writing output... [ 60%] 4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo1D2D.cu
+writing output... [ 61%] 4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo2D2D.cu
+writing output... [ 61%] 4-cuda/code/cuda/1-basics/1.3-1DBlockPrint/Makefile
+writing output... [ 62%] 4-cuda/code/cuda/1-basics/1.3-1DBlockPrint/print1Block.cu
+writing output... [ 63%] 4-cuda/code/cuda/1-basics/1.3-1DBlockPrint/print2Blocks.cu
+writing output... [ 64%] 4-cuda/code/cuda/1-basics/1.4-2DArrayMapping/Makefile
+writing output... [ 65%] 4-cuda/code/cuda/1-basics/1.4-2DArrayMapping/printThreads-to-2DArray.cu
+writing output... [ 66%] 4-cuda/code/cuda/2-vectorAdd/Makefile
+writing output... [ 66%] 4-cuda/code/cuda/2-vectorAdd/vectorAdd.cu
+writing output... [ 67%] 4-cuda/code/cuda/3-UMVectorAdd/Makefile
+writing output... [ 68%] 4-cuda/code/cuda/3-UMVectorAdd/vectorAdd.cu
+writing output... [ 69%] 4-cuda/code/cuda/4-UMVectorAdd-timing/Makefile
+writing output... [ 70%] 4-cuda/code/cuda/4-UMVectorAdd-timing/vectorAdd.cu
+writing output... [ 71%] 4-cuda/code/cuda/4-UMVectorAdd-timing/vectorAdd_cudaTiming.cu
+writing output... [ 71%] 4-cuda/toctree
+writing output... [ 72%] 5-applications/ai-minimax
+writing output... [ 73%] 5-applications/code/minimal-ttt.c
+writing output... [ 74%] 5-applications/code/ttt-omp.c
+writing output... [ 75%] 5-applications/code/ttt-serial.c
+writing output... [ 76%] 5-applications/toctree
+writing output... [ 76%] 6-furtherAvenues/code/c/wcmapper.c
+writing output... [ 77%] 6-furtherAvenues/code/c/wcreducer.c
+writing output... [ 78%] 6-furtherAvenues/code/cpp/wcmapper.cpp
+writing output... [ 79%] 6-furtherAvenues/code/cpp/wcreducer.cpp
+writing output... [ 80%] 6-furtherAvenues/code/id-identity/idmapper.cpp
+writing output... [ 80%] 6-furtherAvenues/code/id-identity/idmapper.java
+writing output... [ 81%] 6-furtherAvenues/code/id-identity/idmapper.py
+writing output... [ 82%] 6-furtherAvenues/code/id-identity/idreducer.cpp
+writing output... [ 83%] 6-furtherAvenues/code/id-identity/idreducer.java
+writing output... [ 84%] 6-furtherAvenues/code/id-identity/idreducer.py
+writing output... [ 85%] 6-furtherAvenues/code/id-identity_rab/idmapper.cpp
+writing output... [ 85%] 6-furtherAvenues/code/id-identity_rab/idmapper.java
+writing output... [ 86%] 6-furtherAvenues/code/id-identity_rab/idreducer.cpp
+writing output... [ 87%] 6-furtherAvenues/code/id-identity_rab/idreducer.java
+writing output... [ 88%] 6-furtherAvenues/code/java/wcmapper.java
+writing output... [ 89%] 6-furtherAvenues/code/java/wcreducer.java
+writing output... [ 90%] 6-furtherAvenues/code/python3/concmapper.py
+writing output... [ 90%] 6-furtherAvenues/code/python3/concreducer.py
+writing output... [ 91%] 6-furtherAvenues/code/python3/idmapper.py
+writing output... [ 92%] 6-furtherAvenues/code/python3/idreducer.py
+writing output... [ 93%] 6-furtherAvenues/code/python3/indexmapper.py
+writing output... [ 94%] 6-furtherAvenues/code/python3/indexreducer.py
+writing output... [ 95%] 6-furtherAvenues/code/python3/wcmapper.py
+writing output... [ 95%] 6-furtherAvenues/code/python3/wcreducer.py
+writing output... [ 96%] 6-furtherAvenues/jobe-testing
+writing output... [ 97%] 6-furtherAvenues/mapreduce
+writing output... [ 98%] 6-furtherAvenues/other
+writing output... [ 99%] 6-furtherAvenues/toctree
+writing output... [100%] index
+
+generating indices... genindex done
+writing additional pages... search done
+copying images... [  1%] 0-0-front_matter/images/nsf.png
+copying images... [  2%] 0-0-front_matter/images/cc.png
+copying images... [  3%] 0-introduction/images/0-1.SharedMemoryMultiprocessor.png
+copying images... [  4%] 0-introduction/images/0-2.DistributedMemory.png
+copying images... [  5%] 0-introduction/images/0-3.HeterogeneousMultiprocessor.png
+copying images... [  6%] 0-introduction/images/0-4.PizzaAlgorithm0.png
+copying images... [  8%] 0-introduction/images/0-5.PizzaAlgorithm1a.png
+copying images... [  9%] 0-introduction/images/0-6.PizzaAlgorithm1b.png
+copying images... [ 10%] 0-introduction/images/0-7.PizzaAlgorithm1c.png
+copying images... [ 11%] 0-introduction/images/0-8.PizzaAlgorithm1d.png
+copying images... [ 12%] 0-introduction/images/0-9.PizzaTimings1.png
+copying images... [ 13%] 0-introduction/images/0-10.PizzaAlgorithm1e.png
+copying images... [ 14%] 0-introduction/images/0-11.PizzaAlgorithm1f.png
+copying images... [ 16%] 0-introduction/images/0-12.PizzaAlgorithm1g.png
+copying images... [ 17%] 0-introduction/images/0-13.PizzaAlgorithm1h.png
+copying images... [ 18%] 0-introduction/images/0-14.PizzaTimings2.png
+copying images... [ 19%] 0-introduction/images/0-15.PizzaSpeedups.png
+copying images... [ 20%] 0-introduction/images/0-16.PizzaEfficiency.png
+copying images... [ 21%] 0-introduction/images/0-17.AmdahlScenario1.png
+copying images... [ 22%] 0-introduction/images/0-18.AmdahlScenario2.png
+copying images... [ 24%] 0-introduction/images/0-19.AmdahlVsGustafson.png
+copying images... [ 25%] 0-introduction/images/0-20.PizzaAlgorithm1i.png
+copying images... [ 26%] 0-introduction/images/0-21.PizzaAlgorithm2a.png
+copying images... [ 27%] 0-introduction/images/0-22.PizzaAlgorithm2b.png
+copying images... [ 28%] 0-introduction/images/0-23.PizzaAlgorithm2c.png
+copying images... [ 29%] 0-introduction/images/0-24.PizzaAlgorithm3a.png
+copying images... [ 31%] 0-introduction/images/0-25.PizzaAlgorithm3b.png
+copying images... [ 32%] 0-introduction/images/0-26.PizzaAlgorithm3c.png
+copying images... [ 33%] 0-introduction/images/0-27.PizzaAlgorithm3d.png
+copying images... [ 34%] 0-introduction/images/0-28.ArrayConsecutive.png
+copying images... [ 35%] 0-introduction/images/0-29.ArrayNonConsecutive.png
+copying images... [ 36%] 0-introduction/images/0-30.CacheAwareness.png
+copying images... [ 37%] 0-introduction/images/0-31.CacheObliviousness.png
+copying images... [ 39%] 0-introduction/images/0-32.TwoDifferentPizzas.png
+copying images... [ 40%] 0-introduction/images/0-33.TwoDifferentPizzas-a.png
+copying images... [ 41%] 0-introduction/images/0-34.TwoDifferentPizzas-b.png
+copying images... [ 42%] 0-introduction/images/0-35.LeaderWorker.png
+copying images... [ 43%] 0-introduction/images/0-36.LeaderWorker-a.png
+copying images... [ 44%] 0-introduction/images/0-37.SharedQueue1.png
+copying images... [ 45%] 0-introduction/images/0-38.SharedQueue2.png
+copying images... [ 47%] 0-introduction/images/0-39.SummingPartialsLinearly.png
+copying images... [ 48%] 0-introduction/images/0-40.SummingPartialsLogarithmic.png
+copying images... [ 49%] 0-introduction/images/0-41.PizzaDependencyGraph.png
+copying images... [ 50%] 0-introduction/images/0-42.FunctionalDependencyGraph.png
+copying images... [ 51%] 0-introduction/images/0-43-RPi4-Annotated.png
+copying images... [ 52%] 0-introduction/images/0-44-Hrothgar.jpg
+copying images... [ 54%] 0-introduction/images/0-45-StarTopology.png
+copying images... [ 55%] 0-introduction/images/0-46-RPi-Cluster.jpg
+copying images... [ 56%] 0-introduction/images/0-47-Multi-Switch-Network.png
+copying images... [ 57%] 1-sharedMemory/images/proteinligand.jpg
+copying images... [ 58%] 1-sharedMemory/images/gamma_dist.png
+copying images... [ 59%] 1-sharedMemory/images/ForkJoin.png
+copying images... [ 60%] 1-sharedMemory/images/ForkJoin_SPMD.png
+copying images... [ 62%] 2-messagePassing/images/comm_world.png
+copying images... [ 63%] 2-messagePassing/images/single_forest_fire_simulation.png
+copying images... [ 64%] 2-messagePassing/images/forest_fire_simulation_with_multiple_trials_1_process.png
+copying images... [ 65%] 2-messagePassing/images/forest_fire_simulation_with_multiple_trials_in_parallel.png
+copying images... [ 66%] 2-messagePassing/images/Scatter_array.png
+copying images... [ 67%] 2-messagePassing/images/after_Scatter_array.png
+copying images... [ 68%] 2-messagePassing/images/pair_exchange.png
+copying images... [ 70%] 2-messagePassing/images/send_recv.png
+copying images... [ 71%] 2-messagePassing/images/ring.png
+copying images... [ 72%] 3-commonAlgorithms/selection/figs/timesteps.jpg
+copying images... [ 73%] 3-commonAlgorithms/selection/figs/timesteps-chart.jpg
+copying images... [ 74%] 4-cuda/images/MSI_3080_11.jpg
+copying images... [ 75%] 4-cuda/images/GPUDeviceArchitecture.png
+copying images... [ 77%] 4-cuda/images/CUDAProgrammingModel.png
+copying images... [ 78%] 4-cuda/images/1DGrid1DBlock.png
+copying images... [ 79%] 4-cuda/images/1D2BlocksDim.png
+copying images... [ 80%] 4-cuda/images/1DArrayMapping.png
+copying images... [ 81%] 4-cuda/images/1ThreadPerArrayElementVectorAdd.png
+copying images... [ 82%] 4-cuda/images/UMAdd-1block.png
+copying images... [ 83%] 4-cuda/images/stride_nblocks.png
+copying images... [ 85%] 4-cuda/images/scheduling_blocks.png
+copying images... [ 86%] 4-cuda/images/nostride_nblocks.png
+copying images... [ 87%] 5-applications/images/ex-0-x-win-draw.png
+copying images... [ 88%] 5-applications/images/ex-1-X-lose-draw.png
+copying images... [ 89%] 5-applications/images/ex-2-win-draw-colors.png
+copying images... [ 90%] 5-applications/images/ex-2a-win-draw-scores.png
+copying images... [ 91%] 5-applications/images/ex-3-draw-or-lose-colors.png
+copying images... [ 93%] 5-applications/images/ex-3a-draw-or-lose-scores.png
+copying images... [ 94%] 5-applications/images/ex-4-O-turn.png
+copying images... [ 95%] 5-applications/images/ex-4a-O-turn-scores.png
+copying images... [ 96%] 5-applications/images/fulltree.png
+copying images... [ 97%] 5-applications/images/parallel-tree.png
+copying images... [ 98%] 6-furtherAvenues/mapreduce_Figure1.jpg
+copying images... [100%] 6-furtherAvenues/mapreduce_Figure2.png
+
+copying downloadable files... [  5%] 5-applications/code/ttt-serial.c
+copying downloadable files... [ 11%] 5-applications/code/ttt-omp.c
+copying downloadable files... [ 16%] 6-furtherAvenues/code/python3/wcmapper.py
+copying downloadable files... [ 22%] 6-furtherAvenues/code/python3/wcreducer.py
+copying downloadable files... [ 27%] 6-furtherAvenues/code/cpp/wcmapper.cpp
+copying downloadable files... [ 33%] 6-furtherAvenues/code/cpp/wcreducer.cpp
+copying downloadable files... [ 38%] 6-furtherAvenues/code/c/wcmapper.c
+copying downloadable files... [ 44%] 6-furtherAvenues/code/c/wcreducer.c
+copying downloadable files... [ 50%] 6-furtherAvenues/code/java/wcmapper.java
+copying downloadable files... [ 55%] 6-furtherAvenues/code/java/wcreducer.java
+copying downloadable files... [ 61%] 6-furtherAvenues/code/id-identity/idmapper.py
+copying downloadable files... [ 66%] 6-furtherAvenues/code/id-identity/idreducer.py
+copying downloadable files... [ 72%] 6-furtherAvenues/code/id-identity/idmapper.cpp
+copying downloadable files... [ 77%] 6-furtherAvenues/code/id-identity/idreducer.cpp
+copying downloadable files... [ 83%] 6-furtherAvenues/code/id-identity/idmapper.java
+copying downloadable files... [ 88%] 6-furtherAvenues/code/id-identity/idreducer.java
+copying downloadable files... [ 94%] 6-furtherAvenues/mobydick.txt
+copying downloadable files... [100%] 6-furtherAvenues/mobydick.txt_loc
+
+copying static files... done
+copying extra files... done
+dumping search index in English (code: en)... done
+dumping object inventory... done
+build succeeded, 130 warnings.
+
+The HTML pages are in build/PDCBeginners.
+Deleteing Chapter / Subchapter info for PDCBeginners
+Warning - always use build --all to ensure chapter info is consistent!
+Updating Database for 0-0-front_matter
+Updating Database for 0-introduction
+Updating Database for 1-sharedMemory
+Updating Database for 2-messagePassing
+Updating Database for 3-commonAlgorithms
+Updating Database for 4-cuda
+Updating Database for 5-applications
+Updating Database for 6-furtherAvenues
+Committing changes
+Done, build successful
+
+====
+WARNING: while setting up extension runestone.lp: role 'docname' is already registered, it will be overridden
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/00spmd.py:11: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/00spmd.py:13: ERROR: Unexpected indentation.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/00spmd.py:18: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/01masterWorker.py:11: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/01masterWorker.py:13: ERROR: Unexpected indentation.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/01masterWorker.py:18: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/04messagePassingDeadlock.py:8: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/05messagePassing.py:9: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/05messagePassing.py:18: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/05messagePassing.py:20: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/06messagePassing2.py:9: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/06messagePassing2.py:18: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/06messagePassing2.py:20: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/07messagePassing3.py:9: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/07messagePassing3.py:18: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/08broadcast.py:9: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/08broadcast.py:18: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/09broadcastUserInput.py:9: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/09broadcastUserInput.py:19: ERROR: Unexpected indentation.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/09broadcastUserInput.py:24: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/11broadcastList.py:9: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/11broadcastList.py:18: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/12reduction.py:10: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/12reduction.py:18: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/13reductionList.py:10: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/13reductionList.py:18: WARNING: Bullet list ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/16ScatterGather.py:10: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/2-cuda-model-dim3.rst:176: ERROR: Invalid divid 'tf-4.2-1'.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/2-cuda-model-dim3.rst:185: ERROR: Invalid divid 'tf-4.2-2'.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/3-cuda-thread-mapping.rst:179: ERROR: Invalid divid 'tf-4.3-2'.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/6-VectorAddTiming.rst:122: ERROR: Invalid divid 'mc-4.6-0'.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/6-VectorAddTiming.rst:191: ERROR: Invalid divid 'mc-4.6-1'.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/6-VectorAddTiming.rst:202: ERROR: Invalid divid 'tf-4.6-2'.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/6-VectorAddTiming.rst:213: ERROR: Invalid divid 'sa-4.6-3'.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/6-VectorAddTiming.rst:237: ERROR: Invalid divid 'tf-4.6-3'.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/2-vectorAdd/vectorAdd.cu:39: ERROR: Unexpected indentation.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/2-vectorAdd/vectorAdd.cu:40: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/3-UMVectorAdd/vectorAdd.cu:39: ERROR: Unexpected indentation.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/3-UMVectorAdd/vectorAdd.cu:40: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/4-UMVectorAdd-timing/vectorAdd.cu:91: ERROR: Unexpected indentation.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/4-UMVectorAdd-timing/vectorAdd.cu:92: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/4-UMVectorAdd-timing/vectorAdd_cudaTiming.cu:38: ERROR: Unexpected indentation.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/4-UMVectorAdd-timing/vectorAdd_cudaTiming.cu:39: WARNING: Block quote ends without a blank line; unexpected unindent.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/toctree.rst:21: WARNING: toctree contains reference to nonexisting document '4-cuda/.. gpu'
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/jobe-testing.rst:346: ERROR: Invalid divid 'pdc-mpic++'.
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/mapreduce.rst:618: WARNING: download file not readable: /srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/mobydick.txt_ln
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/0-0-front_matter/acknowledgements.rst: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/0-0-front_matter/copyright.rst: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/0-0-front_matter/title.rst: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/0-introduction/6.setup.rst: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/1-sharedMemory/code/dd_omp2.cpp: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/1-sharedMemory/code/dd_serial2.cpp: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/1-sharedMemory/code/dd_threads.cpp: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/1-sharedMemory/code/spmd.c: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/1-sharedMemory/performance.rst: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/00spmd.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/01masterWorker.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/04messagePassingDeadlock.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/05messagePassing.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/06messagePassing2.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/07messagePassing3.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/08broadcast.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/09broadcastUserInput.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/11broadcastList.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/12reduction.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/13reductionList.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/16ScatterGather.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/arrayAddition1.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/arrayAddition2.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/integration.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/populateArray.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/populateArrayGather.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/sendReceive.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/2-messagePassing/code/mpi4py/tryPopulateArray.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/3-commonAlgorithms/code/gcd.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/3-commonAlgorithms/code/gcdWithBlanks.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/3-commonAlgorithms/code/gcdWithBlanksSerial.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/3-commonAlgorithms/code/helloEx.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/3-commonAlgorithms/code/queueEx.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/3-commonAlgorithms/matmul.rst: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/3-commonAlgorithms/sieve.rst: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/3-commonAlgorithms/sorting.rst: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.1-device/Makefile: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.1-device/device_info.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.2-dim3/Makefile: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo1D1D.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo1D2D.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.2-dim3/dim3Demo2D2D.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.3-1DBlockPrint/Makefile: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.3-1DBlockPrint/print1Block.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.3-1DBlockPrint/print2Blocks.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.4-2DArrayMapping/Makefile: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/1-basics/1.4-2DArrayMapping/printThreads-to-2DArray.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/2-vectorAdd/Makefile: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/2-vectorAdd/vectorAdd.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/3-UMVectorAdd/Makefile: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/3-UMVectorAdd/vectorAdd.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/4-UMVectorAdd-timing/Makefile: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/4-UMVectorAdd-timing/vectorAdd.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/4-cuda/code/cuda/4-UMVectorAdd-timing/vectorAdd_cudaTiming.cu: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/5-applications/code/minimal-ttt.c: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/5-applications/code/ttt-omp.c: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/5-applications/code/ttt-serial.c: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/c/wcmapper.c: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/c/wcreducer.c: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/cpp/wcmapper.cpp: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/cpp/wcreducer.cpp: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/id-identity/idmapper.cpp: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/id-identity/idmapper.java: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/id-identity/idmapper.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/id-identity/idreducer.cpp: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/id-identity/idreducer.java: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/id-identity/idreducer.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/id-identity_rab/idmapper.cpp: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/id-identity_rab/idmapper.java: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/id-identity_rab/idreducer.cpp: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/id-identity_rab/idreducer.java: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/java/wcmapper.java: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/java/wcreducer.java: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/python3/concmapper.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/python3/concreducer.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/python3/idmapper.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/python3/idreducer.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/python3/indexmapper.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/python3/indexreducer.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/python3/wcmapper.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/code/python3/wcreducer.py: WARNING: document isn't included in any toctree
+/srv/web2py/applications/runestone/books/PDCBeginners/_sources/6-furtherAvenues/jobe-testing.rst: WARNING: document isn't included in any toctree
