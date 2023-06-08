@@ -13,17 +13,21 @@ Table of Contents
 .. toctree::
    :maxdepth: 2
 
-   front_matter/toctree.rst
+   0-0-front_matter/toctree.rst
 
-   introduction/toctree.rst
+   0-introduction/toctree.rst
 
-   sharedMemory/toctree.rst
+   1-sharedMemory/toctree.rst
 
-   messagePassing/toctree.rst
+   2-messagePassing/toctree.rst
 
-   commonAlgorithms/toctree.rst
+   3-commonAlgorithms/toctree.rst
 
-   furtherAvenues/toctree.rst
+   4-cuda/toctree.rst
+
+   5-applications/toctree.rst
+
+   6-furtherAvenues/toctree.rst
 
 
 To Cite:

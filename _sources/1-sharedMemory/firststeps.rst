@@ -57,7 +57,7 @@ Now *uncomment* the ``omp parallel pragma`` on line 8 and re-run the program.
     :answer_d: The strings ``During`` and ``After`` are each printed multiple times.
     :feedback_a: Did you remember to uncomment the pragma on line 8? Try again.
     :feedback_b: This is not correct. Try uncommenting the pragma and re-running the code!
-    :feedback_c: Correct! The string ``During`` is printed 4 times (do you know why?).
+    :feedback_c: Correct! The string ``During`` is printed multiple times (do you know why?).
     :feedback_d: Close, but not quite. Try uncommenting the pragma and re-running the code!
 
     What happens when you re-run the example?
@@ -66,7 +66,7 @@ The ``omp parallel pragma`` on line 8, when uncommented, tells the compiler to f
 (later you will see how this is done for a block of code). Next, the ``omp parallel pragma`` creates a team of threads and directs each 
 thread to run the line ``printf(\nDuring...)`` in parallel. 
 
-Thus, the string ``During`` is printed out a number of times that correspond to the number cores on the system (in this case, 4). Note that in OpenMP the 
+Thus, the string ``During`` is printed out a number of times that correspond to the number cores on the system. Note that in OpenMP the 
 join is implicit and does not require a pragma directive. 
 
 1.1.2 The SPMD Pattern
@@ -105,7 +105,7 @@ A programmer can access this unique id by calling the ``omp_get_thread_num()`` f
 ``omp_get_num_threads()`` function to provide the programmer the ability to see the total number of threads.
 On a single threaded program (like the one shown above), there is 1 total thread, with a thread id of ``0``.
 
-Consider what will happen when the pragma above is uncommented (recall that there are ``4`` total cores on the system).
+Consider what will happen when the pragma above is uncommented, given that there are ``4`` total cores on the system (there could be more than 4 on the system this will run on, so we are just using 4 as an example for now).
 What do you think the output would be?
 
 
@@ -149,8 +149,8 @@ Let's now run a version of the program with the ``omp parallel`` pragma uncommen
       return 0;
    }
 
-Running this program reveals two things. First, since there are 4 total cores on the system, the ``omp parallel``
-pragma generates a team of 4 threads, assigning each a unique id from 0 to 3. Each thread then runs the code 
+Running this program reveals two things. First, depending on the total cores on the system, the ``omp parallel``
+pragma generates a team of threads, assigning each a unique id. Each thread then runs the code 
 in the scope of the pragma (denoted by curly braces). The process can be visualized as follows:
 
 .. image:: images/ForkJoin_SPMD.png
@@ -161,7 +161,7 @@ the single thread 0 after all the threads have completed and join back to the ma
 
 .. mchoice:: sm_mc_spmd_2
     :correct: b
-    :answer_a: The hello messages always print in order (0 .. 3)
+    :answer_a: The hello messages always print in order (0 .. n-1, where n is the number of threads)
     :answer_b: The ordering of the hello messages is random and cannot be predicted.
     :answer_c: The hello messages always prints in a random order, but is consistent over multiple runs
     :feedback_a: Try running the program a few more times.

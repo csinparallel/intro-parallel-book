@@ -1,2 +1,5 @@
+build
 build/*
+published/*
+published
 sphinx_settings.json
