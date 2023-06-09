@@ -21,8 +21,6 @@ For NVIDA GPU cards, one software system to code in is CUDA (Compute Unified Dev
 .. toctree::
     :maxdepth: 2
 
-    .. gpu.rst
-
     1-gpu-device.rst
     2-cuda-model-dim3.rst
     3-cuda-thread-mapping.rst
