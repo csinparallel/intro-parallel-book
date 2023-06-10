@@ -51,8 +51,13 @@ Filename: *3-UMVectorAdd/vectorAdd.cu*
   :caption: Vector Addition CUDA Program (version 2 with managed data)
   :lines: 56-108
 
+For comparison, below are the two main programs side by side, with the previous version on the left and the preferred managed version on the right. Though you may not be able to read the text very well, from this you can see how using managed data simplifies the setup (top box on right vs. top two boxes on left) and teardown (bottom boxes on each side) of data movement and needs fewer lines of code.
+
+.. figure:: ./images/memcopy_vs_UM.png
+
+
 .. note::
-  The most important point about this example is that the data copying hasn't changed from the previous manual example: it's just being done for us.
+  The most important point about this example is that the data copying hasn't changed from the previous manual example on the left above: it's just being done for us.
 
 
 Build and run
@@ -95,6 +100,6 @@ What you know now is that this can be changed and the code still runs correctly.
 An Exercise
 ^^^^^^^^^^^
 
-For paractice writing a kernel function, you could try computing something different using each element of the arrays. For example, multiply each element in x by a constant and add another constant, placing the new computed value into array y at that element. Or you could get more sophisticated by using other math library functions, such as sqrt. Remember that you will need to verify whether the result is correct by updating the function that does this.
+For practice writing a kernel function, you could try computing something different using each element of the arrays. For example, multiply each element in x by a constant and add another constant, placing the new computed value into array y at that element. Or you could get more sophisticated by using other math library functions, such as sqrt. Remember that you will need to verify whether the result is correct by updating the function that does this.
 
 
