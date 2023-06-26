@@ -1,3 +1,5 @@
+/* demo program for 2D grid with 2D blocks */
+
 #include <stdio.h>
 
 // CUDA runtime
