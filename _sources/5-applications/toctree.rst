@@ -1,7 +1,7 @@
 CHAPTER 5: Applications
 ::::::::::::::::::::::::::::::::::::::::::
 
-Here we explore full applications and compare the implementations using shared memory and message passing.
+Here we explore full applications and compare the implementations using shared memory, message passing, or CUDA.
 
 
 
@@ -9,4 +9,5 @@ Here we explore full applications and compare the implementations using shared m
     :maxdepth: 2
 
     ai-minimax.rst
+    matrix-multiply.rst
 
