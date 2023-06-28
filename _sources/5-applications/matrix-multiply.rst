@@ -21,7 +21,7 @@ Software needed: HPC SDK from NVIDIA (`download here <https://developer.nvidia.c
 The problem
 ^^^^^^^^^^^
 
-There is a mathematical algorithm for multiplying two matrices, A and B, and creatng a matrix C. We can picture it like this:
+There is a mathematical algorithm for multiplying two matrices, A and B, and creating a matrix C. We can picture it like this:
 
 .. figure:: ./images/mm/AxB-C.png
 
@@ -42,7 +42,7 @@ Multiply each element at position i in the first vector by the element at positi
 
 This forms the basis for the matrix multiplication algorithm, where we will perform dot products per row in matrix A and column in matrix B, placing the single result value in the cell at the row, column of matrix C.
 
-A simple sequential algoirthm for square matrices of width and height size is as follows:
+A simple sequential algorithm for square matrices of width and height size is as follows:
 
 .. code-block:: c
 
@@ -127,7 +127,7 @@ The full code for the sequential program will appear later, along with an explan
 OpenMP version
 ===============
 
-The nature of this algorithm, which calculates cell values row-by-row and idenpendently of each other, lends itself very nicely to be parallelized. The values in the rows of A and the columns of B are only being read from, and each dot product calculation can be done independently- the order of the sequential algorithm's computations is not necessary.
+The nature of this algorithm, which calculates cell values row-by-row and independently of each other, lends itself very nicely to be parallelized. The values in the rows of A and the columns of B are only being read from, and each dot product calculation can be done independently- the order of the sequential algorithm's computations is not necessary.
 
 As an example of how we can use parallelism, suppose we chose two threads to compute the above example of the 4x4 matrices. In the following visualization, a thread 0 can be computing the blue values at the same time that thread 1 is computing the yellow values. It is easy to see how if the parallelization goes well, the work should get done in about half the time as the sequential version, with thread 0 computing the top half of the matrix C (rows 0, 1) and thread 1 computing the lower half (rows 2, 3).
 
@@ -157,7 +157,7 @@ For review of some concepts from shared memory in Chapter 1, try answering the f
     :feedback_b: Correct! In this example, each thread is performing the same task on a different unit of memory.
     :feedback_c: Actually, it is one of the options listed!
 
-    Refer back to Chapter 1, section 1.1.3 if you've forgotten what we mean by data parallelism and task parallelsim. Is this solution an example of data parallelism or task parallelism? 
+    Refer back to Chapter 1, section 1.1.3 if you've forgotten what we mean by data parallelism and task parallelism. Is this solution an example of data parallelism or task parallelism? 
 
 .. mchoice:: mm_mc_2
     :correct: c
@@ -165,8 +165,8 @@ For review of some concepts from shared memory in Chapter 1, try answering the f
     :answer_b: To make the code run faster
     :answer_c: Both
     :feedback_a: This is mostly correct- each thread is writing its own value into this variable, so each thread needs its own copy instead of a shared one. However, it turns out that it is useful to use that variable for another reason: there will be fewer writes to the array C if we compute the dot product first and then write the final value once.
-    :feedback_b:  In this example, each thread is writing to a different cell in array C over and over for its dot prodcut computation, so you noticed that it would be more efficient to use that tmp variable and eliminate some contention for writing to array C. However, once we use tmp like this, we then must ensure that it is private to avoid a race condition.
-    :feedback_c: Yes! In this example, each thread is writing to a different cell in array C over and over for its dot prodcut computation, so it is more efficient to use that tmp variable and eliminate some contention for writing to array C. However, once we use tmp like this, we then must ensure that it is private to avoid a race condition.
+    :feedback_b:  In this example, each thread is writing to a different cell in array C over and over for its dot product computation, so you noticed that it would be more efficient to use that tmp variable and eliminate some contention for writing to array C. However, once we use tmp like this, we then must ensure that it is private to avoid a race condition.
+    :feedback_c: Yes! In this example, each thread is writing to a different cell in array C over and over for its dot product computation, so it is more efficient to use that tmp variable and eliminate some contention for writing to array C. However, once we use tmp like this, we then must ensure that it is private to avoid a race condition.
 
     Why do we use the private variable tmp in the code above? 
 
@@ -175,7 +175,7 @@ CUDA version
 
 As we saw in the CUDA chapter, one model for CUDA GPU programming is to use one thread for every data element you are computing. In this case, that means setting up a grid of thread blocks to match these 2D matrices. We can then envision that every cell in matrix C can be computed at the same time with different threads.
 
-Before we delve inro the amtrix multiply example in CUDA, let's first look at a demonstration of how we can set up a 2D grid of 2D blocks of threads in CUDA.
+Before we delve into the matrix multiply example in CUDA, let's first look at a demonstration of how we can set up a 2D grid of 2D blocks of threads in CUDA.
 
 CUDA: Setting up 2D grid of 2D blocks of threads
 =================================================
@@ -215,7 +215,7 @@ The code and the program output can be visualized as follows (z values not shown
 .. figure:: ./images/mm/2DThreadMap.png
 
 .. note::
-    Note that in the program output above the output from the threads did not print in the order shown in the diagram (the upper left block of threads printed 3rd). This is an occurance you may recognize by now: there isn't a guaranteed ordering of when each thread will finish and print its results. 
+    Note that in the program output above the output from the threads did not print in the order shown in the diagram (the upper left block of threads printed 3rd). This is an occurrence you may recognize by now: there isn't a guaranteed ordering of when each thread will finish and print its results. 
 
 CUDA: mapping the threads to a matrix of data elements
 =======================================================
@@ -324,12 +324,12 @@ Note that after this we have three executable programs for serial, openMP, and C
 Experimenting with the programs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  
 
-In this section we will demonstrate a "way of work" that helps us ensure correctness of our parallel applications and how we can explore how well the program **scales** when we ncrease the **problem size**. In this case, we can consider the problem size to be the number of rows and columns of the square matrix.
+In this section we will demonstrate a "way of work" that helps us ensure correctness of our parallel applications and how we can explore how well the program **scales** when we increase the **problem size**. In this case, we can consider the problem size to be the number of rows and columns of the square matrix.
 
 First, verify correctness
 ============================
 
-In the CUDA chapter we introduced the concept of verifying whether the results we compute using a parallel implementation are what we expect. Sometimes we can do this by comparing the results from a sequential version known to be correct to the results from  the parallel version we are implementing, each with the same input. In the case of this example code above, we've chosen a couple of other tactics:
+In the CUDA chapter we introduced the concept of verifying whether the results we compute using a parallel implementation are what we expect. Sometimes we can do this by comparing the results from a sequential version known to be correct to the results from the parallel version we are implementing, each with the same input. In the case of this example code above, we've chosen a couple of other tactics:
 
 
 1. Like the CUDA chapter, there is a function called *verifyCorrect* that does a check of some of the values in the result matrix. We can do this knowing how the input matrices A and B were populated. Observe this function and convince yourself that the dot product for the last row is being calculated and compared to the value of each cell in that last row of the matrix.
@@ -394,7 +394,7 @@ The result of running this is as follows (note that it matches the picture above
     Total omp runtime 0.000077 seconds (0.077456 milliseconds)
     max error of last row matrix C values: 0.000000
 
-Note that the output from the *verifyCorrect* function is given in the last row of the output, telling us there was no difference between the values computed by matrix multiply and what we would expect by doing an indpendent calculation.
+Note that the output from the *verifyCorrect* function is given in the last row of the output, telling us there was no difference between the values computed by matrix multiply and what we would expect by doing an independent calculation.
 
 The OpenMP version of this code takes another command line argument as the second argument: number of threads. The third argument is now the verbose flag. To test the parallelism is correct, run this version with 2 threads like this:
 
@@ -415,7 +415,7 @@ Now that we can visually see that the output is correct, we can move forward wit
 Next, explore program performance
 ==================================
 
-The reason for using parallelization in an application like this is so that we can run larger and larger examples in a reasonable amount of time. We call this being able to **scale** a problem. This matrix multiply problem is an ideal case for for applying parallelism to increase its scalability because:
+The reason for using parallelization in an application like this is so that we can run larger and larger examples in a reasonable amount of time. We call this being able to **scale** a problem. This matrix multiply problem is an ideal case for applying parallelism to increase its scalability because:
 
 - The sequential version is O(N\ :sup:`3`) (see note above in problem statement), making even a modest example take quite a long time (we will try this below).
 
@@ -442,7 +442,7 @@ By 1024 you may already not like waiting for this program to complete. We have, 
 
 **Second, examine the speedup of the OpenMP version.** 
 
-In an ideal case, if we use 2 threads in the shared memory OpenMP implementation for a particular problem size, the time should be half of the sequential version. We can extend this idea: 4 threads should take one fourth of the time, eight threads one eighth, and so on. Another easy way to think of this is that for each set of threads 2, 4, 8, and 16, if there is little overhad and contention for resources among the threads, the time for each should be roughly half of the previous time. Let's try this out by running these cases:
+In an ideal case, if we use 2 threads in the shared memory OpenMP implementation for a particular problem size, the time should be half of the sequential version. We can extend this idea: 4 threads should take one fourth of the time, eight threads one eighth, and so on. Another easy way to think of this is that for each set of threads 2, 4, 8, and 16, if there is little overhead and contention for resources among the threads, the time for each should be roughly half of the previous time. Let's try this out by running these cases:
 
 .. code-block:: bash
 
@@ -475,7 +475,7 @@ In this small bit of Python code below, you can enter the times in milliseconds 
 .. note::
     What you should observe about the ability to obtain ideal speedup is that it diminishes as the number of threads increases. On many current CPUs with 8 cores or more, it may not pay to use many more than 8 cores for a particular problem, and it may even be less than 8 cores for some problem sizes.
 
-For practice, you could try the above exrcise with different problem sizes (smaller than 1024, like 512, and larger, like 2048, but you'll need to be patient.)
+For practice, you could try the above exercise with different problem sizes (smaller than 1024, like 512, and larger, like 2048, but you'll need to be patient.)
 
 When trying these examples, you may also notice some times are not consistent. We often take several time measurements and use the mean or the average, or even throw out a high and low value when experimenting and reporting on the speedup of an implementation.
 

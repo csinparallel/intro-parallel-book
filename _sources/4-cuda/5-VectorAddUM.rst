@@ -1,9 +1,9 @@
 4.5 Vector Addition example with CUDA Unified Memory
 -----------------------------------------------------
 
-NVIDIA GPUS are now capable of making it easier to manage the memory copying for us with a feature called **unifed memory**. Recently, this is often referred to as **CUDA managed data**, to signify that the data in memory and its movement (if needed) is managed for the programmer.
+NVIDIA GPUS are now capable of making it easier to manage the memory copying for us with a feature called **unified memory**. Recently, this is often referred to as **CUDA managed data**, to signify that the data in memory and its movement (if needed) is managed for the programmer.
 
-Unified Memory works on any NVIDIA GPU with SM architecture, or compute capability, of 3.0 or higher. Recall when we first examined a device's information, the first line of output from the device_info program gives us  information like this:
+Unified Memory works on any NVIDIA GPU with SM architecture, or compute capability, of 3.0 or higher. Recall when we first examined a device's information, the first line of output from the device_info program gives us information like this:
 
      with Compute 8.6 capability
 
@@ -94,7 +94,7 @@ Note the default block size (threads per block) used in the code. You can try in
 
    ./vectorAdd 128
 
-What you know now is that this can be changed and the code still runs correctly. In the next section we will introduce how to time our code so that we can determine if changes like this have any affect on the code's performance.
+What you know now is that this can be changed and the code still runs correctly. In the next section we will introduce how to time our code so that we can determine if changes like this have any effect on the code's performance.
 
 
 An Exercise

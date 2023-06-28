@@ -25,7 +25,7 @@ First let's describe in words what the first version of the CUDA code needs to d
 7. Check that the computation ran correctly.
 8. Free memory on the device and the host.
 
-New indispensible additions to the code
+New indispensable additions to the code
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In a previous section (4.2 near the end), we mentioned that it is useful to check for errors that could be introduced into the code. This is true for both CUDA library calls used in the host code or functions you write for the device. CUDA provides some ways to enable you to examine errors that have occurred so that you can debug them. Observe a new macro provided at the top of the following example program file, then look further on in main to observe how it is used to check for problems that code on the device might have and report information about them.
@@ -111,5 +111,5 @@ Exercises
 
 4.4-1. Try using different block sizes of 128 and 512 to be certain that the code is still correct.
 
-4.4-2. If you are ambitious, you could try changing the command line arguments (if you are familiar with this) to include a length for the arrays.  Or more simply,change the code to change te size of the array, N, as shown early in the main function. This is useful to verify the code is still correct. Later we will see that it is useful for trying different problem sizes to see how the code performs.
+4.4-2. If you are ambitious, you could try changing the command line arguments (if you are familiar with this) to include a length for the arrays.  Or more simply, change the code to change the size of the array, N, as shown early in the main function. This is useful to verify the code is still correct. Later we will see that it is useful for trying different problem sizes to see how the code performs.
 

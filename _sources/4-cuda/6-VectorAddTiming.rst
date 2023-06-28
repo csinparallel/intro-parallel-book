@@ -52,7 +52,7 @@ Pay particular attention to the for loop and how index and stride are set up. Co
 Using multiple blocks of threads
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Using mulriple blocks of threads in a 1D grid is the most effective way to use an NVIDIA GPU card, since each block will map to a different streaming multiprocessor. Recall this figure from section 4-2:
+Using multiple blocks of threads in a 1D grid is the most effective way to use an NVIDIA GPU card, since each block will map to a different streaming multiprocessor. Recall this figure from section 4-2:
 
 .. figure:: ./images/CUDAProgrammingModel.png
   
@@ -72,7 +72,7 @@ Note that if we increase our array size, for example by doubling it to 64, yet k
 .. note:: 
   One could argue that the above depiction is not strictly true. The CUDA block scheduler on many devices has gotten really good at making the 'stride' version of the code with a fixed grid size run as fast or faster than the following example. You will likely observe this when you run it. It may not be true for other applications, however, so you always need to check and test like we are doing here.
 
-  The reason for this is that every core in an SM can actually run multiple threads simultaneously. So the hardware scheduler can assign blocks to run simulataneously on an SM, apparently as efficiently as if the blocks were spread across all SMs, at least for this example and for higher-end GPU cards. So our picture in Figure 4-Y is too simple for modern NVIDIA GPU devices when it comes to scheduling the running threads. The runing of the threads is more like Figure 4-12.
+  The reason for this is that every core in an SM can actually run multiple threads simultaneously. So the hardware scheduler can assign blocks to run simultaneously on an SM, apparently as efficiently as if the blocks were spread across all SMs, at least for this example and for higher-end GPU cards. So our picture in Figure 4-Y is too simple for modern NVIDIA GPU devices when it comes to scheduling the running threads. The running of the threads is more like Figure 4-12.
 
 .. figure:: ./images/scheduling_blocks.png
 
@@ -88,13 +88,13 @@ We provide this example because you will likely see code examples written like t
 Variable grid size method 
 =========================
 
-As the arrays become larger or smaller for a given problem you are working on or you choose a different number of threads per block (a useful experiment to try for any card you are using), it is preferable to use the array size and the block size to compute the needed 1D grid size. 
+As the arrays become larger or smaller for a given problem you are working on, or you choose a different number of threads per block (a useful experiment to try for any card you are using), it is preferable to use the array size and the block size to compute the needed 1D grid size. 
 
   Though the execution time of this and the previous method may be similar, this method is a useful way to think about CUDA programs: create all the threads you need and map every thread to a particular index in the array.
 
-For example, in the case in Figure 4-11, we looked at doubling the size of the array, but keeping the same number of blocks of threads. Now let's suppose that we compute a new grid size (blocks per 1D grid) based on the array size and number of threads per block. in this case, we would have the situation given in Figure 4-13. From this, note that we have only one color for the threads because all of the calculations can be done in parallel.
+For example, in the case in Figure 4-11, we looked at doubling the size of the array, but keeping the same number of blocks of threads. Now let's suppose that we compute a new grid size (blocks per 1D grid) based on the array size and number of threads per block. In this case, we would have the situation given in Figure 4-13. From this, note that we have only one color for the threads because all of the calculations can be done in parallel.
 
-So as the problem size (lngth of the array in this case) grows, we should be able to take full advantage of the architecture.
+So as the problem size (length of the array in this case) grows, we should be able to take full advantage of the architecture.
 
 
 .. figure:: ./images/nostride_nblocks.png
@@ -122,7 +122,7 @@ Look through this code carefully and answer this question.
 .. mchoice:: mc-4.6-0
    :answer_a: It is valid and will run using a 1D grid of 128 blocks of 100 threads each.
    :answer_b: It is valid and will run using a 1D grid of 1000 blocks of 128 threads each.
-   :answer_c: It is invlaid.
+   :answer_c: It is invalid.
    :correct: b
    :feedback_a: Look at the case of one block of 256 threads.
    :feedback_b: Yes! The grid size as an integer can be used and is the first argument.
@@ -186,7 +186,7 @@ Some typical output looks like this:
   Parallel time on 131072 blocks of 256 threads = 64.726000 milliseconds
   Max error: 0
 
-Let's consider what you see from this by answering the folowing questions.
+Let's consider what you see from this by answering the following questions.
 
 .. mchoice:: mc-4.6-1
    :answer_a: GPU cores are faster than CPU cores.
@@ -224,7 +224,7 @@ You can also experiment with trying a smaller or larger block size, by running l
    ./vectorAdd 512
 
 .. note::
-  An important point about the design og the NVIDIA cards is that **the block size should be a multiple of 32** and that for today's cards, experiments seem to show that **block sizes of 128, 256, or 512 are preferred choices** for the design of the hardware.
+  An important point about the design of the NVIDIA cards is that **the block size should be a multiple of 32** and that for today's cards, experiments seem to show that **block sizes of 128, 256, or 512 are preferred choices** for the design of the hardware.
 
 For further experimentation you could try an array size of 67108864, which is double the default, using different block sizes. The array size is a second argument, like this:
 
@@ -238,7 +238,7 @@ This case brings up an interesting observation that you can make for this partic
    :answer_a: True.
    :answer_b: False.
    :correct: a
-   :feedback_a: Yes! In this case, the simple algorithm is O(N), so this makes sense for the sequential version on the CPU or one GPU core. What's also useful is that it is still stue using thousands of cores, which could cause overhead, but not enough to hurt us in this case.
+   :feedback_a: Yes! In this case, the simple algorithm is O(N), so this makes sense for the sequential version on the CPU or one GPU core. What's also useful is that it is still using thousands of cores, which could cause overhead, but not enough to hurt us in this case.
    :feedback_b: Try running each case with the same block size a few more times to determine if it really is true.
 
    When we double the size of our problem, the code takes roughly twice the time to run for each case.
@@ -261,9 +261,9 @@ Exercises for Further Exploration
 
 2. Another exercise is to consider when the 5th method, using one thread id per array index and calculate the number of blocks, could fail. Though likely a rare case, it is worth thinking about. To do it, go back to the information about your device and determine the maximum number of blocks allowed in a grid.
 
-3. For case 4, expriment with changing the fixed number of blocks. Is there any case where the time is consistently better or worse than the case where we calculate the number of blocks in the grid based on N and the block size?
+3. For case 4, experiment with changing the fixed number of blocks. Is there any case where the time is consistently better or worse than the case where we calculate the number of blocks in the grid based on N and the block size?
 
-4. There is an example provided in our github repository where CUDA library functions are used for timing the code instead of C timing functions on the host. If you want to explore this example, you can see how CUDA has also provided mechanisms for timing code that can sometimes be useful for adding timing to sophisticated kernel or device functions.
+4. There is an example provided in our GitHub repository where CUDA library functions are used for timing the code instead of C timing functions on the host. If you want to explore this example, you can see how CUDA has also provided mechanisms for timing code that can sometimes be useful for adding timing to sophisticated kernel or device functions.
 
 
 References

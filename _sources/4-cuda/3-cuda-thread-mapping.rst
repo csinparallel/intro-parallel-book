@@ -3,7 +3,7 @@
 
 In the last section we mentioned that the key new idea in CUDA programming is that the programmer is responsible for:
 
-1. setting up up the grid of blocks of threads and 
+1. setting up the grid of blocks of threads and 
 2. determining a mapping of those threads to elements in 1D, 2D, or 3D arrays.
 
 We briefly saw task 1 (setting up grids with blocks) in the previous section, through the use of the dim3 data structure. Now we will examine more examples using dim3, then combine that with task 2, which is to map the threads within the blocks within the grid to data elements in arrays.
@@ -75,7 +75,7 @@ Lines 8 and 9 of the code above set up a 1D grid containing 2 blocks of 8 thread
 Mapping a 1D grid of 1D thread blocks to an array
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In many cases where we have a 1 deimensional array of data values, our primary goal in CUDA programming is to have each thread work on one element of the array. The CUDA model provides a fairly straightforward way to map a thread to a unique value, beginning at 0, to use as an index into the array.
+In many cases where we have a 1 dimensional array of data values, our primary goal in CUDA programming is to have each thread work on one element of the array. The CUDA model provides a fairly straightforward way to map a thread to a unique value, beginning at 0, to use as an index into the array.
 
 
 Filename: *1-basics/1.3-1DBlockPrint/print1Block.cu*
@@ -172,7 +172,7 @@ Exercises
 .. shortanswer:: ex-4-3-1
    :optional:
 
-    Try a few more more blocks
+    Try a few more blocks
     Try changing the code for print2Blocks.cu to use more than 2 blocks, such as 8 (don't try too large because of all the printing that will happen). 
     What do you observe about the numbering for each thread?
   

@@ -3,3 +3,4 @@ build/*
 published/*
 published
 sphinx_settings.json
+.vscode/settings.json

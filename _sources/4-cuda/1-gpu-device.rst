@@ -42,7 +42,7 @@ Filename: *1-basics/1.1-device/device_info.cu*
   :lines: 1-20
 
 
-The details of the function called in main and an additional one can be found in the code file. You can choose to look at those details or treat them as a 'black box', knowing that they use CUDA library funtions to obtain information about your GPU.
+The details of the function called in main and an additional one can be found in the code file. You can choose to look at those details or treat them as a 'black box', knowing that they use CUDA library functions to obtain information about your GPU.
 
 This is how we typically compile this code using the NVIDIA compiler, called nvcc:
 
@@ -93,7 +93,7 @@ NVIDIA has changed the design of their card architecture many times as they make
   
   In this case, we can change the flag when compiling to -arch=compute_86
 
-The machine containing the CPU and the GPU is referred to as the **host** machine. The GPU is referred to as the **device**, which is usually connected in a PCI-e bus on the motherboard. The memory on the host machine is separate from the memory on the GPU, meaning that any data you need for computation on the GPU must be moved from the host memory to the GPU device memory before executing comutations.
+The machine containing the CPU and the GPU is referred to as the **host** machine. The GPU is referred to as the **device**, which is usually connected in a PCI-e bus on the motherboard. The memory on the host machine is separate from the memory on the GPU, meaning that any data you need for computation on the GPU must be moved from the host memory to the GPU device memory before executing computations.
 
 The main differences between a standard CPU architecture and GPU architectures is as follows:
 

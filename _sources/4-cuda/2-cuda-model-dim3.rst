@@ -15,7 +15,7 @@ The dim3 data structure and the CUDA programming model
 
 The key new idea in CUDA programming is that the programmer is responsible for:
 
-1. setting up up the grid of blocks of threads and 
+1. setting up the grid of blocks of threads and 
 2. determining a mapping of those threads to elements in 1D, 2D, or 3D arrays.
 
 We will start with some code illustrating the first task, then look at the second task later.
@@ -30,7 +30,7 @@ Given the design of the GPU device shown in Figure 4-2, the CUDA programming mod
 
   Figure 4-3. The CUDA Programming Model
 
-The CUDA design is to enable three dimansions for both blocks and grids, to make it easier to set up thread mapping to data elements in 1D, 2D, or 3D arrays. This does add complexity, but once you get the hang of it, setting up the mapping isn't too difficult. However it can sometimes be prone to errors, so you have to check your code carefully.
+The CUDA design is to enable three dimensions for both blocks and grids, to make it easier to set up thread mapping to data elements in 1D, 2D, or 3D arrays. This does add complexity, but once you get the hang of it, setting up the mapping isn't too difficult. However it can sometimes be prone to errors, so you have to check your code carefully.
 
 The CUDA library and compiler have a special built-in data structure called *dim3* that programmers can use to declare the dimensions of the grid containing block(s) of threads. As its name implies, it is used to set up 3 dimensions: x, y, and z. Let's look at our first simple example of this.
 
@@ -43,7 +43,7 @@ Filename: *1-basics/1.2-dim3/dim3Demo.cu*
   :caption: dim3Demo.cu main function
   :lines: 28-50
 
-For this first example it is helpful to examine each line of this code and read the comments. Line 8 declares a varible called *gridDim* of type dim3. In this case, the x dimension is specified as 1, and the y and z dimansions automatially default to 1. This is designed to be used to have a grid with a single block of threads in it. Line 9 declares a second variable of type dim3, called *blockDim*, whose x dimension is 8,and its y and z dimensions have defulted to 1. This is designed to create a block of 8 threads.
+For this first example it is helpful to examine each line of this code and read the comments. Line 8 declares a variable called *gridDim* of type dim3. In this case, the x dimension is specified as 1, and the y and z dimensions automatically default to 1. This is designed to be used to have a grid with a single block of threads in it. Line 9 declares a second variable of type dim3, called *blockDim*, whose x dimension is 8,and its y and z dimensions have defaulted to 1. This is designed to create a block of 8 threads.
 
 On line 16 of main above we call the *printDims* function, which looks like this:
 
@@ -63,7 +63,7 @@ For this example, what will be printed is this:
 Executing code on the GPU device
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Line 19 of the main code above illustrates how we execute a function on the GPU device. In CUDA nomeclature, these are called device *kernel* functions.
+Line 19 of the main code above illustrates how we execute a function on the GPU device. In CUDA nomenclature, these are called device *kernel* functions.
 
 .. note:: The defining feature of calling a kernel function from the host code in a CUDA program is the use of `<<<` after the name of the function, followed by the grid dimensions, a comma, and the block dimensions, then an ending `>>>` before the parameters to be sent to the function in the standard parentheses.
 
@@ -129,7 +129,7 @@ The important points to note here are:
 - numbering of x, y, and z coordinates of the location of a block in a grid begins with zero, and
 - similarly, the numbering of x, y, z coordinates of a thread within a block starts with zero.
 
-In visual terms, look at Figure 4-4 below. We have for simplicity defined a 1D grid containing a single block, and the pertinent values for each thread as it executes are blockIdx.x and threadIdx.x. The sqiggly arrows are a convention used to indicate a thread running on a core in the device.
+In visual terms, look at Figure 4-4 below. We have for simplicity defined a 1D grid containing a single block, and the pertinent values for each thread as it executes are blockIdx.x and threadIdx.x. The squiggly arrows are a convention used to indicate a thread running on a core in the device.
 
 .. figure:: ./images/1DGrid1DBlock.png
 
