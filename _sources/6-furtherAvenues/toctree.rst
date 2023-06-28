@@ -12,4 +12,4 @@ This book gives you just a taste of parallelism. However, if you are looking to 
 
     mapreduce.rst
     other.rst
-    jobe-testing.rst
+..    jobe-testing.rst
